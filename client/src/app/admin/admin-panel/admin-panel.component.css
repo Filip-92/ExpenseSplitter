@@ -1,0 +1,9 @@
+@media screen and (max-width: 800px) {
+    h2 {
+        margin-top: -40px !important;
+    }
+
+    #tabs {
+        font-size: 12px !important;
+    }
+}

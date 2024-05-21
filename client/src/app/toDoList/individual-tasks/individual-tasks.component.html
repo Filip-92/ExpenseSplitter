@@ -1,0 +1,50 @@
+<h3>Dodaj zadanie</h3>
+
+    <form [formGroup]='toDoListScheduleForm' (ngSubmit)="toDoListScheduleForm.valid && addTask()" autocomplete="off">
+        <div class="row mt-3">
+            <div class="col-4">
+                <app-date-input [formControl]='toDoListScheduleForm.controls["taskDate"]' 
+                [label]='"Data"' autocomplete="off"></app-date-input>
+            </div>
+            <div class="col-4">
+                <app-text-input [formControl]='toDoListScheduleForm.controls["name"]' 
+                [label]='"Zadanie"' [type]='"text"' autocomplete="off"></app-text-input>
+            </div>
+        </div>
+        <div class="form-group text-center mt-3">
+            <button [disabled]='!toDoListScheduleForm.valid' class="btn btn-success mr-2" type="submit">Dodaj</button>
+            <button class="btn btn-default mr-2" id="cancel" (click)="cancel()" type="button">Anuluj</button>
+        </div>
+    </form>
+    
+    <div class="text-center" class="mb-5">
+        <h2 class="mt-5 mb-3">Filtruj zadania</h2>
+        <form [formGroup]='toDoListTimespanForm' (ngSubmit)="toDoListTimespanForm.valid && filterTasks()" autocomplete="off">
+            <div class="row">
+                <div class="col-4">
+                    <app-date-input [formControl]='toDoListTimespanForm.controls["from"]' 
+                    [label]='"Data od"' autocomplete="off"></app-date-input>
+                </div>
+                <div class="col-4">
+                    <app-date-input [formControl]='toDoListTimespanForm.controls["to"]' 
+                    [label]='"Data do"' autocomplete="off"></app-date-input>
+                </div>
+                <div class="col-3">
+                    <button class="btn btn-info" type="submit">Filtruj</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div *ngFor="let task of tasks">
+        <div class="card">
+            <div class="row">
+                <div class="col-3 text-center">{{task.name}}</div>
+                <div class="col-3 text-right"><i class="fa fa-calendar mr-2"></i>{{task.taskDate | date:'yyyy-MM-dd'}}</div>
+                <div class="col-3 text-right"><input type="checkbox" [checked]="task.isDone" value="{{task.isDone}}" (click)="closeTask(task.id)" /></div>
+                <div class="col-3">
+                    <i class="fa fa-pencil mr-3" (click)="openEditTaskModal(task)"></i>
+                    <i class="fa fa-trash" (click)="removeTask(task.id)"></i>
+                </div>
+            </div>
+        </div> 
+    </div>    

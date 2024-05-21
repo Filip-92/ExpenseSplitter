@@ -1,0 +1,16 @@
+<div class="card">
+    <div class="row mb-3">
+        <div class="col-2" style="font-size: 18px; font-weight: 800;">
+            <div class="mt-3">RAZEM: {{expensesSum}} </div>
+        </div>
+        <div *ngFor="let contributor of contributors" class="col-3 mt-2">
+            <div style="border: solid 1px white;">
+                {{contributor.username}}
+            </div>
+            <app-summarical-expenses [username]="contributor.username" [category]="category" [contributors]="contributors"></app-summarical-expenses>
+        </div>
+    </div>
+    <form [formGroup]='closeCategoryForm' style="border: 1px solid whitesmoke;">
+        Rozliczone? <input type="checkbox" [checked]="category.isClosed" value="{{category.isClosed}}" (click)="closeCategory()" />
+    </form>
+</div>

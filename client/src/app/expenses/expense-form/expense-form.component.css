@@ -1,0 +1,32 @@
+input[type=number], input[type=text] {
+    height: 40px;
+    width: 80%;
+    border-radius: 8px;
+    background-color: gray;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+textarea {
+    border-radius: 8px;
+    background-color: gray;
+    margin-bottom: -15px !important;
+    color: whitesmoke !important;
+}
+
+::placeholder {
+    color: whitesmoke;
+}
+
+input {
+    color: whitesmoke !important;
+}
+
+.btn {
+    height: 50px;
+}
+
+.card {
+    background-color: black;
+    border: solid 1px white;
+}

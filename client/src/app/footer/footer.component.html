@@ -1,0 +1,13 @@
+<div class="footer mt-2" style="padding-top: 20px !important;">
+    <a (click)="contactFormToggle()">Formularz kontaktowy</a>
+    <span style="margin-left: 10px; margin-right: 10px;"> | </span>
+    <a href="/about">Polityka prywatności</a>
+    <br>
+    <app-contact-form *ngIf="contactFormMode"   #scrollMe 
+    [scrollTop]="scrollMe.scrollHeight"></app-contact-form>
+</div>
+
+
+
+
+

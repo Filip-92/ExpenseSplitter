@@ -1,0 +1,27 @@
+.calendar {
+    position: relative;
+}
+  
+.calendar i{
+    position: absolute;
+    left: 15px;
+    top: 40px;
+    color: gray;
+}
+
+input {
+    background-color: gray;
+    color: whitesmoke;
+}
+
+input::placeholder {
+    color: white !important;
+}
+
+input:focus {
+    background-color: gray;
+}
+
+label {
+    color: whitesmoke;
+}

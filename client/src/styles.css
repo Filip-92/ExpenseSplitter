@@ -1,0 +1,36 @@
+body.dark-mode {
+  background-color: #2d3436;
+  color: #dfe6e9;
+}
+
+body.dark-mode > .card {
+  background-color: #2d3436;
+  color: #dfe6e9;
+}
+
+body.light-mode {
+  background-color: #dfe6e9;
+  color: #2d3436;
+}
+
+body.light-mode > .card {
+  background-color: #dfe6e9;
+  color: #2d3436;
+}
+
+hr.light-mode {
+  color: black !important;
+}
+
+.card.light-mode {
+  background-color: whitesmoke !important;
+}
+
+body:not(.dark-mode-preloading) {
+  transition: all 0.3s linear;
+}
+
+.fa-sun-o:hover, .fa-moon-o:hover {
+  cursor: pointer;
+  color: yellow;
+}

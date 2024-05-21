@@ -1,0 +1,40 @@
+<div class="text-right mr-2">
+    <span id="close" (click)="close()">X</span> 
+</div>
+<div class="container" style="border: solid 1px white;">
+    <div class="text-center mt-3">
+        <p>Kto płacił: {{expense.whoPaid}}</p>
+        <p>Wydatek: {{expense.name}} - {{expense.amount}}</p>
+    </div>
+    <form [formGroup]='spendingsForm' class="text-center p-3" (ngSubmit)="addSpendings()">
+        <div>
+            <div>
+                <p>Kto się zrzuca:</p>
+            </div>
+        </div>
+        <div *ngFor="let contributor of contributors" class="text-left" (change)="onChange(contributor.username)">
+            <div>
+                <input type="checkbox" value="{{contributor.username}}" /> {{contributor.username}}
+            </div>
+        </div>
+        <div class="row">
+            <select formControlName='splitter' class="mt-2 text-center">
+                <option value='' disabled>Wybierz</option>
+                <option value='0'>Po równo</option>
+                <option value='1'>Niestandardowo</option>
+            </select> 
+        </div>
+
+        <div *ngIf="selected_contributors.length > 0">
+            <div *ngFor="let contributor of selected_contributors">
+                <div *ngIf="spendingsForm.value['splitter'] === '0'">
+                    {{contributor}} do zapłaty {{round(expense.amount/(selected_contributors.length))}}
+                </div>
+                <div *ngIf="spendingsForm.value['splitter'] === '1'">
+                    {{contributor}} do zapłaty <input type="number" #email (change)="onKeyUp(contributor, email.value)" placeholder="Kwota"/>
+                </div>
+            </div>
+        </div>
+        <button class="btn btn-success mt-3">Dodaj</button>
+    </form>
+</div>

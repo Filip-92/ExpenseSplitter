@@ -1,0 +1,19 @@
+input[type=text] {
+    background-color: gray;
+    color: whitesmoke;
+}
+
+select {
+    background-color: gray;
+    color: whitesmoke;
+}
+
+#modalBody {
+    margin-left: 100px;
+}
+
+@media screen and (max-width: 1000px) {
+    #modalBody {
+        margin-left: 50px;
+    }
+}

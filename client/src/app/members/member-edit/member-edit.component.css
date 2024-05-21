@@ -1,0 +1,112 @@
+.img-thumbnail {
+    margin: 25px;
+    width: 85%;
+    height: 85%;
+}
+
+@media screen and (min-width: 1000px) {
+  #avatar {
+    width: 200px !important;
+  }
+}
+
+.card-body {
+    padding: 0 25px;
+}
+
+.card-footer {
+    padding: 10px 15px;
+    background-color: #fff;
+    border-top: none;
+}
+
+hr {
+    border-color: whitesmoke !important;
+    margin-bottom: 20px;
+}
+
+input[type="password"] {
+    background-color: gray;
+    color: whitesmoke;
+}
+
+.card-img-top {
+  max-height: 300px;
+  max-width: 220px;
+}
+
+#helicopter {
+  height: 15px;
+  color: white !important;
+  margin-right: 10px;
+  margin-left: -5px;
+  margin-bottom: 2px;
+}
+
+  /* width */
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+
+  #silver, #golden {
+    max-height: 50px;
+  }
+
+  #badges {
+    margin-left: 20px;
+  }
+
+  @media screen and (max-width: 1000px) {
+    #silver, #golden {
+      max-height: 40px !important;
+    }
+  }
+
+  @media screen and (max-width: 700px) {
+  
+    .card-body {
+      margin-left: -20px !important;
+      margin-top: -20px !important;
+    }
+
+    ::-webkit-scrollbar {
+      width: 2px;
+    }
+  }
+
+  @media screen and (max-width: 800px) {
+    #attributes {
+      font-size: 12px !important;
+    }
+
+    h3, h4, h5 {
+      word-break: break-all;
+    }
+
+    h3 {
+      font-size: 16px;
+    }
+
+    #background {
+      margin-top: -50px !important;
+    }
+
+    #tabs {
+      font-size: 10px !important;
+      width: auto;
+    }
+  }
+
+  #reject {
+    margin-bottom: 15px !important;
+  }

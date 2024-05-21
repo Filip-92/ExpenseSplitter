@@ -1,0 +1,40 @@
+<div class="card">
+    <div class="card-body"
+        #scrollMe
+        style="overflow: scroll; height: 535px;"
+        [scrollTop]="scrollMe.scrollHeight"
+    >
+        <div *ngIf="messages?.length === 0">
+            Brak wiadomości... przywitaj się z użytkownikiem <span style="color: orange;">{{username}}</span>
+        </div>
+
+        <ul 
+            *ngIf="messages.length > 0" 
+            class="chat">
+            <li *ngFor="let message of messages">
+                <app-message [message]="message" [username]="username"></app-message>
+            </li>
+        </ul>
+    </div>
+
+    <div class="card-footer">
+        <form #messageForm="ngForm" (ngSubmit)="sendMessage()" autocomplete="off">
+            <div class="input-group">
+                <input 
+                    name="messageContent"
+                    required
+                    [(ngModel)]="messageContent"
+                    type="text" 
+                    class="form-control input-sm" 
+                    placeholder="Wyślij wiadomość prywatną">
+                <div class="input-group-append">
+                    <button [disabled]="!messageForm.valid || loading" class="btn btn-primary" type="submit"><i class="fa fa-paper-plane mr-2"></i> Wyślij
+                        <i *ngIf="loading" class="fa fa-spinner fa-spin"></i>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- <app-message [message]="message" *ngIf="editToggle"></app-message> -->
+</div>

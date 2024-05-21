@@ -1,0 +1,23 @@
+input[type=text] {
+    height: 50px;
+    background-color: gray;
+    margin-top: 30px;
+    margin-bottom: 5px;
+}
+
+::placeholder {
+    color: whitesmoke;
+}
+
+input {
+    color: whitesmoke !important;
+}
+
+.form-control {
+    color: whitesmoke;
+}
+
+#close:hover {
+   cursor: pointer;
+   color: black; 
+}

@@ -1,0 +1,141 @@
+.img-thumbnail {
+    margin: 25px;
+    width: 85%;
+    height: 85%;
+}
+
+@media screen and (min-width: 1000px) {
+  #avatar {
+    width: 200px !important;
+  }
+}
+
+.card-body {
+    padding: 0 25px;
+}
+
+.card-img-top {
+  max-height: 300px;
+  max-width: 220px;
+}
+
+#likeButton {
+  border-radius: 50%;
+  background-color: red !important;
+  margin-bottom: 0px !important;
+  border: 2px solid white;
+}
+
+@media screen and (min-width: 1000px) {
+  #likeButton:hover {
+    background-color: rgb(47, 221, 24) !important;
+    color: red !important;
+  }
+}
+
+hr {
+  border-color: white;
+}
+
+.text-center {
+  background-color: rgb(56, 56, 56) !important;
+}
+
+tabset {
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+
+#background {
+  background-color: rgb(56, 56, 56) !important;
+}
+
+#customButton {
+  color: white;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  min-width: 70px;
+  border: 1px solid yellow;
+  border-radius: 5px;
+}
+
+#customButton:hover {
+  color: red;
+  text-decoration: none;
+}
+
+.card-footer {
+    padding: 10px 15px;
+    background-color: gray;
+    border-top: none;
+}
+
+  /* width */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+
+  #likeButton {
+    margin-left: 10px !important;
+  }
+
+  #golden, #silver {
+    max-height: 50px !important;
+  }
+
+  #badges {
+    margin-left: 20px;
+  }
+
+  @media screen and (max-width: 1000px) {
+    #golden, #silver {
+      max-height: 40px !important;
+    }
+  }
+
+  img {
+    max-width: 600px !important;
+  }
+
+  @media screen and (max-width: 1000px) {
+  
+    .card-body {
+      margin-left: -20px !important;
+      margin-top: -20px !important;
+    }
+
+    ::-webkit-scrollbar {
+      width: 2px;
+    }
+
+    #attributes {
+      font-size: 12px !important;
+    }
+
+    h3, h4, h5 {
+      word-break: break-all;
+    }
+
+    #comments {
+      font-size: 18px;
+    }
+
+    #tabs {
+      font-size: 12px !important;
+    }
+
+    #likeButton {
+      margin-left: 5px !important;
+    }
+}

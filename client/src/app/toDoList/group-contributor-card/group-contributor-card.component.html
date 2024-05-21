@@ -1,0 +1,7 @@
+<i class="fa fa-pencil ml-3 mr-2" (click)="editToggle()" title="Edycja"></i>
+<div *ngIf="edit" class="mb-3">
+    <form #editContributorForm="ngForm" (ngSubmit)="editContributorForm.valid && editContributor()" autocomplete="off">
+        <input type="text" [(ngModel)]="contributor.username" name="first" placeholder="{{contributor.username}}">
+        <button [disabled]="!editContributorForm?.dirty || contributor?.username?.length <= 0 || contributor?.username?.length > 32 || contributor?.username?.length < 4" class="btn btn-success ml-3" type="submit">Edytuj</button>
+    </form>
+</div>

@@ -1,0 +1,25 @@
+.img-circle {
+    max-height: 50px;
+}
+
+.btn-primary {
+    min-width: 200px;
+}
+
+@media screen and (max-width: 800px) {
+    .container {
+        margin-top: -40px !important;
+    }
+
+    .row {
+        margin-left: -50px !important;
+    }
+}
+
+#message {
+    word-break: break-all;
+}
+
+i:hover {
+    color: red;
+}

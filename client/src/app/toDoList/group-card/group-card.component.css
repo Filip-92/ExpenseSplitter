@@ -1,0 +1,42 @@
+input[type=text] {
+    height: 40px;
+    border-radius: 8px;
+    background-color: gray;
+    margin-left: auto;
+    margin-right: auto;
+    color: whitesmoke;
+}
+
+::placeholder {
+    color: whitesmoke;
+}
+
+#group:hover {
+    cursor: pointer;
+    color: red;
+}
+
+.fa-pencil:hover {
+    cursor: pointer;
+    color: green;
+}
+
+.fa-trash:hover {
+    cursor: pointer;
+    color: red;
+}
+
+#goTo {
+    padding: 5px;
+   border: 1px solid whitesmoke; 
+}
+
+#goTo:hover {
+    cursor: pointer;
+    color: green;
+    border: 1px solid green;
+}
+
+a {
+    text-decoration: none;
+}

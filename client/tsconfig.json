@@ -1,0 +1,27 @@
+/* To learn more about this file see: https://angular.io/config/tsconfig. */
+{
+  "compileOnSave": false,
+  "files": [
+    "../src/main.ts", // added ../ to reflect current file structure
+    "../src/polyfills.ts"
+  ],
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "../API/dist/out-tsc",
+    "sourceMap": true,
+    "declaration": false,
+    "downlevelIteration": true,
+    "experimentalDecorators": true,
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "target": "ES2022",
+    "strict": false,
+    "module": "es2020",
+    "lib": [
+      "es2019",
+      "es2018",
+      "dom"
+    ],
+    "useDefineForClassFields": false
+  }
+}

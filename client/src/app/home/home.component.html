@@ -1,0 +1,62 @@
+<app-dark-mode-toggle></app-dark-mode-toggle>
+<div class="container">
+    <div *ngIf="!registerMode" style='text-align: center;'>
+        <p class="lead">Podziel swoje wydatki lub zorganizuj swoje zadania z innymi.<span *ngIf="(accountService.currentUser$ | async) === null">.. musisz jedynie się zalogować!</span></p>
+        <div class="text-center" *ngIf="(accountService.currentUser$ | async) === null">
+            <button class="btn btn-info btn-lg">Learn more</button>
+        </div>
+    </div>
+
+    <div *ngIf="registerMode" class="container mb-5">
+        <div class="row justify-content-center">
+            <div class="col-4">
+                <app-register (cancelRegister)="cancelRegisterMode($event)"></app-register>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="text-center mt-5">
+    <div class="card slide-right">
+        <a  *ngIf="accountService.currentUser$ | async" routerLink="/expenses">
+            <img src="././assets/split_bills_c1.png" alt=""> 
+            <div class="mt-3 mb-3">Podziel się wydatkami</div>
+        </a>
+        <div *ngIf="(accountService.currentUser$ | async) === null" >
+            <img src="././assets/split_bills_c1.png" alt=""> 
+            <div class="mt-3 mb-3" id="openNav" (click)="openNav()">Podziel się wydatkami</div>
+        </div>
+    </div>
+</div>
+
+<div class="text-center mt-5">
+    <div class="card slide-left">
+        <a  *ngIf="accountService.currentUser$ | async" routerLink="/to-do-list">
+            <img src="././assets/organise.jpg" alt=""> 
+            <div class="mt-3 mb-3">Zorganizuj swój dzień</div>
+        </a>
+        <div *ngIf="(accountService.currentUser$ | async) === null" >
+            <img src="././assets/organise.jpg" alt=""> 
+            <div class="mt-3 mb-3" id="openNav" (click)="openNav()">Zorganizuj swój dzień</div>
+        </div>
+    </div>
+</div>
+
+<hr class="mt-5">
+<div class="text-center">Zobacz inne moje aplikacje</div>
+<hr>
+
+<div class="text-center mt-5 mb-5">
+    <div class="card slide-right">
+        <a href="https://ddmemes.com.pl">
+            <img src="././assets/logo (gimp - new).png" alt=""> 
+            <div class="mt-3 mb-3">Daily Dose of Memes</div>
+        </a>
+    </div>
+</div>
+
+<div *ngIf="display">
+    <app-nav [displayBoolean]="display"></app-nav>
+</div>
+
+

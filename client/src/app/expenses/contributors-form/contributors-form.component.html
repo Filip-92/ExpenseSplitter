@@ -1,0 +1,30 @@
+<div class="mb-4" style="border-top: 1px solid white;"></div>
+<div class="text-center"> 
+    <p>Dodaj do grupy:</p>
+    <form *ngIf="!alreadyAdded" [formGroup]='addYourselfForm' (ngSubmit)="addContributor(addYourselfForm.value)">
+        <button class="btn btn-success" type="submit">Dodaj siebie</button>
+    </form>
+</div>
+
+<form [formGroup]='contributorForm' (ngSubmit)="contributorForm.valid && addContributor(contributorForm.value)" class="text-center row p-3">
+    <div class="col-9">
+        <input type="text" class="mb-2" [formControl]='contributorForm?.controls["username"]' placeholder="Wpisz nazwę użytkownika"/>
+        <input type="text" [formControl]='contributorForm?.controls["email"]' placeholder="Wpisz adres email"/>
+    </div>
+    <button class="btn btn-success ml-2 col-2" id="addAnnoun" type="submit" [disabled]="!contributorForm?.valid">Dodaj użytkownika</button>
+</form>
+<div class="text-center">
+    <div *ngIf="contributorForm?.controls['username'].errors?.maxlength" class="text-danger">
+        Nazwa wydatku zbyt długa
+    </div>
+    <div *ngIf="contributorForm?.controls['username'].errors?.required && contributorForm?.controls['username'].touched" class="text-danger">
+        Nazwa użytkownika jest wymagana
+    </div>
+    <div *ngIf="contributorForm?.controls['email'].errors?.required && contributorForm?.controls['email'].touched" class="text-danger">
+        Email jest wymagany
+    </div>
+    <div *ngIf="contributorForm?.controls['email'].errors?.pattern && contributorForm?.controls['email'].touched" class="text-danger">
+        Podaj prawidłowy adres email
+    </div>
+</div>
+

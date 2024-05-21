@@ -1,0 +1,8 @@
+<div class="card">
+    <div class="row">
+        <div class="col-3 text-center">{{task.name}}</div>
+        <div class="col-3 text-right"><i class="fa fa-calendar mr-2"></i>{{task.taskDate | date:'yyyy-MM-dd'}}</div>
+        <div class="col-3 text-right"><input type="checkbox" [checked]="task.isDone" value="{{task.isDone}}" (click)="closeTask()" /></div>
+        <div class="col-3"><i class="fa fa-trash"></i></div>
+    </div>
+</div> 

@@ -1,0 +1,78 @@
+input[type=text] {
+    height: 40px;
+    border-radius: 8px;
+    background-color: gray;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.card {
+    padding-bottom: 10px;
+}
+
+::placeholder {
+    color: whitesmoke;
+}
+
+img {
+    max-height: 200px;
+    padding-top: 10px;
+}
+
+input {
+    color: whitesmoke !important;
+}
+
+#category:hover {
+    cursor: pointer;
+    color: red;
+}
+
+@media screen and (max-width: 700px) {
+
+    .row {
+        font-size: 12px !important;
+    }
+}
+
+i:hover {
+    color: red;
+    cursor: pointer;
+}
+
+#tag {
+    margin-top: 20px !important;
+    margin-bottom: 20px !important;
+    background-color: rgb(91, 86, 86);
+}
+
+#tag:hover {
+    cursor: pointer;
+    background-color: red;
+}
+
+#tag:active {
+    background-color: red;
+}
+
+@media screen and (max-width: 1000px) {
+    #tags {
+        width: 500px !important;
+    }
+}
+
+.fa-pencil:hover {
+    color: rgb(23, 161, 23) !important;
+}
+
+#tabs {
+    border: 1px solid white; 
+    padding: 5px; 
+    border-radius: 8px;
+}
+
+#tabs:hover {
+    cursor: pointer;
+    border: 1px solid red;
+    color: red;
+}

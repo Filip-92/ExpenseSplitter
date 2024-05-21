@@ -1,0 +1,33 @@
+.frame {
+    width: 600px;
+    border: 3px solid #ccc;
+    background: #3a3636;
+    margin: auto;
+    padding: 20px 15px;
+  }
+
+img {
+    width: 550px;
+}
+
+#refresh {
+  border: 1px solid yellow;
+  color: red;
+  padding: 5px;
+  width: 80px !important;
+  border-radius: 10px;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+#refresh:hover {
+  cursor: pointer;
+  color: yellow;
+  border: 1px solid red;
+}
+
+@media screen and (max-width: 1000px) {
+  img {
+    width: 350px;
+}
+}

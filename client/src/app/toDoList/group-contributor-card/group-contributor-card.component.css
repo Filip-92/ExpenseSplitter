@@ -1,0 +1,28 @@
+input[type=text] {
+    height: 30px;
+    width: 60%;
+    border-radius: 8px;
+    background-color: gray;
+    color: whitesmoke;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+::placeholder {
+    color: whitesmoke;
+}
+
+.card {
+    background-color: black;
+    margin-bottom: 5px;
+}
+
+.fa-pencil:hover {
+    cursor: pointer;
+    color: green;
+}
+
+.fa-trash:hover {
+    cursor: pointer;
+    color: red;
+}

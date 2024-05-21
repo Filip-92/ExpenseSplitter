@@ -1,0 +1,37 @@
+img {
+    max-width: 50px;
+}
+
+input[type=text] {
+    background-color: gray;
+    color: whitesmoke;
+}
+
+select {
+    background-color: gray;
+    color: whitesmoke;
+}
+
+input[type=text]::placeholder {
+    color: whitesmoke;
+}
+
+#searchUser input[type=text] {
+    width: 300px;
+    height: 40px;
+}
+
+@media screen and (max-width: 800px) {
+    button {
+        font-size: 12px !important;
+        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    }
+
+    #split {
+        word-break: break-all;
+    }
+
+    #searchUser input[type=text] {
+        width: 250px !important;
+    }
+}

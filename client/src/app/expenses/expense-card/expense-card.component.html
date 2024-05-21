@@ -1,0 +1,27 @@
+<div class="card">
+    <div class="row">
+        <div class="col-2 pb-2">
+            <div>Wydatek</div>
+            <div>{{expense.name}} : {{expense.amount}}</div>
+            <app-table-button [expense]="expense" [category]="category" [contributors]="contributors"></app-table-button>      
+        </div>
+        <div *ngIf="!more" class="text-center col-9 mt-3">
+            <div *ngIf="contributors?.length === spendings?.length && expense?.amount === round(sum)" style="color: green;">Rozdzielone</div>
+            <div *ngIf="contributors?.length !== spendings?.length || expense?.amount !== round(sum)" style="color: yellow;">Do rozdzielenia</div>
+            <i class="fa fa-arrow-down mr-2" (click)="showMore()"> Więcej</i>
+        </div>
+        <div *ngFor="let contributor of contributors" class="col-2 mt-2">
+            <div style="border: solid 1px white;" *ngIf="more">
+                {{contributor.username}}
+            </div>
+            <div class="mt-3 text-center" *ngIf="more">
+                <app-expense-column [category]="category" [expense]="expense" [username]="contributor.username"></app-expense-column>
+            </div>
+        </div>
+        <div *ngIf="more" class="col-2 mt-3">
+            <div *ngIf="(contributors?.length + 1) === spendings?.length && expense?.amount === round(sum)" style="color: green;">Rozliczone</div>
+            <div *ngIf="(contributors?.length + 1) !== spendings?.length || expense?.amount !== round(sum)" style="color: yellow;">Do rozliczenia</div>
+            <i class="fa fa-arrow-up mr-2" (click)="showMore()"> Mniej</i>
+        </div>
+    </div>
+</div>

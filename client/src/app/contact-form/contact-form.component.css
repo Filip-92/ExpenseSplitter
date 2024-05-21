@@ -1,0 +1,47 @@
+@media only screen and (max-width: 600px) {
+    .contact {
+        margin-top: 10px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+  }
+
+input, select {
+    background-color: gray;
+    color: whitesmoke !important;
+}
+
+textarea {
+    background-color: gray;
+    vertical-align: top !important;
+    display: flex;
+    color: white !important;
+}
+
+::placeholder {
+    background-color: gray;
+    color: whitesmoke;
+}
+
+.border-light {
+    border-radius: 8px 8px 8px 8px;
+}
+
+.form-control {
+    background-color: gray;
+}
+
+.fa {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 5px;
+    font-size: 20px;
+    width: 40px;
+    text-align: center;
+    text-decoration: none;
+  }
+
+.fa-facebook {
+    background: #3B5998;
+    color: white;
+  }

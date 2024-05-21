@@ -1,0 +1,10 @@
+<div id="spinner" *ngIf="innerWidth >= 768">
+    <ngx-spinner size="medium" [type]="'ball-atom'" [fullScreen]="false"></ngx-spinner>
+</div>
+
+<div id="spinner" *ngIf="innerWidth < 768">
+    <ngx-spinner size="small" [type]="'ball-atom'" [fullScreen]="false"></ngx-spinner>
+</div>
+
+
+

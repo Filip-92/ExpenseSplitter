@@ -1,0 +1,42 @@
+.notification {
+    border-top: 1px solid whitesmoke;
+    border-bottom: 1px solid whitesmoke;
+    font-size: 12px;
+}
+
+img {
+    max-height: 70px;
+}
+
+a {
+    color: white;
+}
+
+a:hover {
+    color: greenyellow;
+}
+
+i:hover {
+    color: red !important;
+    cursor: pointer !important;
+}
+
+i {
+    color: whitesmoke !important;
+    margin-left: -20px !important;
+    font-size: 16px !important;
+}
+
+#deleteAll:hover {
+    cursor: pointer;
+    color: red;
+}
+
+#scroll {
+    min-height: 100px;
+    max-height: 500px;
+}
+
+#loading {
+    min-height: 150px !important;
+}

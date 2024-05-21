@@ -1,0 +1,9 @@
+.rounded-circle {
+    max-height: 50px;
+}
+
+@media screen and (max-width: 1000px) {
+    .btn {
+        font-size: 12px !important;
+    }
+  }

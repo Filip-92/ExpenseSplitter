@@ -1,0 +1,9 @@
+.btn-default {
+    border: 1px solid white;
+}
+
+.btn-default:hover {
+    color: red;
+    cursor: pointer;
+    border-color: red;
+}

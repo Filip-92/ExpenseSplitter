@@ -1,0 +1,66 @@
+img {
+  width: 60%;
+  padding: 10px;
+}
+
+.card {
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.slide-right {
+  animation: 3s slide-right;
+}
+@keyframes slide-right {
+  from {
+    margin-left: -100%;
+  }
+  to {
+    margin-left: 20%;
+  }
+}
+
+.slide-left {
+  animation: 3s slide-left;
+}
+@keyframes slide-left {
+  from {
+    margin-right: -100%;
+  }
+  to {
+    margin-right: 20%;
+  }
+}
+
+.slide-bottom {
+  animation: 3s slide-bottom;
+}
+@keyframes slide-bottom {
+  from {
+    margin-bottom: -100%;
+  }
+  to {
+    margin-bottom: 20%;
+  }
+}
+
+hr {
+  color: white;
+  background-color: white;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+a:hover {
+  cursor: pointer;
+  color: red;
+}
+
+#openNav:hover {
+  cursor: pointer;
+  color: red;
+}

@@ -1,0 +1,14 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    min-height: 80vh;
+}
+
+@media screen and (min-width: 2400px) {
+    .container {
+        min-width: 1800px !important;
+        font-size: 32px !important;
+    }
+
+}
+

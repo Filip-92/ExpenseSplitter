@@ -1,0 +1,102 @@
+input[type=text] {
+    height: 40px;
+    border-radius: 8px;
+    background-color: gray;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+textarea {
+    border-radius: 8px;
+    background-color: gray;
+    margin-bottom: -15px !important;
+    color: whitesmoke !important;
+}
+
+::placeholder {
+    color: whitesmoke;
+}
+
+input {
+    color: whitesmoke !important;
+}
+
+#content {
+    display: none;
+}
+
+#subject {
+    display: none;
+}
+
+@media screen and (max-width: 700px) {
+
+    #message {
+        display: none;
+    }
+
+    #topic {
+        display: none;
+    }
+
+    #content {
+        margin-top: 10px;
+        display: inline;
+    }
+
+    #subject {
+        display: inline;
+    }
+
+    #messageContent {
+        margin-top: 10px;
+    }
+
+    .row {
+        font-size: 12px !important;
+    }
+}
+
+#addAnnoun {
+    font-size: 13px !important;
+}
+
+@media screen and (max-width: 1000px) {
+    .btn {
+        font-size: 10px !important;
+    }
+
+    #addAnnoun {
+        font-size: 10px !important;
+    }
+}
+
+i:hover {
+    color: red;
+    cursor: pointer;
+}
+
+#tag {
+    margin-top: 20px !important;
+    margin-bottom: 20px !important;
+    background-color: rgb(91, 86, 86);
+}
+
+#tag:hover {
+    cursor: pointer;
+    background-color: red;
+}
+
+#tag:active {
+    background-color: red;
+}
+
+@media screen and (max-width: 1000px) {
+    #tags {
+        width: 500px !important;
+    }
+}
+
+.fa-pencil:hover {
+    color: rgb(23, 161, 23) !important;
+}

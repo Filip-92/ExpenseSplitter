@@ -1,0 +1,11 @@
+<div>
+    Zapłaciła: {{round(expenses)}}
+</div>
+<div style="border-bottom: 1px solid white;">
+    Do zapłaty: {{round(spendingsSum)}}
+</div>
+<div *ngFor="let contributor of contributors" >
+    <div *ngIf="username !== contributor.username">
+        <app-debt-card [category]="category" [whoPaid]="username" [whoOwes]="contributor.username"></app-debt-card>
+    </div>
+</div>

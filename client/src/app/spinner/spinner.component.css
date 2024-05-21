@@ -1,0 +1,15 @@
+#spinner {
+    position: fixed;
+    bottom: 100px !important;
+    right: 100px !important;
+}
+
+@media screen and (max-width: 1000px) {
+    #spinner {
+        position: fixed !important;
+        bottom: 50px !important;
+        right: 50px !important;
+        size: small !important;
+        z-index: 99 !important;
+    }
+}

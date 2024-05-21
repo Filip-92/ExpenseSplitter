@@ -1,0 +1,97 @@
+<form [formGroup]='registerForm' (ngSubmit)="registerForm.valid && register()" *ngIf="!registrationComplete" autocomplete="off">
+    <h2 class="text-center text-primary">Rejestracja</h2>
+    <hr>
+
+    <div class="form-group text-center">
+        <label class="control-label" style="margin-right: 10px;">Jestem: </label>
+        <select formControlName='gender' id="gender">
+            <option value='male'>Mężczyzną</option>
+            <option value='female'>Kobietą</option>
+            <option value='other'>Helikopterem bojowym</option>
+        </select>
+    </div>
+
+    <div class="row" id="inputs">
+        <div class="col-1 col-md-1" style="margin-top: 5px;">
+            <i class="fa fa-envelope"></i>
+        </div>
+        <div class="col-11 col-md-11">
+            <app-text-input [formControl]='registerForm.controls["email"]' 
+            [label]='"Email użytkownika"' type='"email"' autocomplete="off"></app-text-input>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-1 col-md-1" style="margin-top: 5px;">
+            <i class="fa fa-user"></i>
+        </div>
+        <div class="col-11 col-md-11">
+            <app-text-input [formControl]='registerForm.controls["username"]' 
+            [label]='"Nazwa użytkownika"' [type]='"text"' autocomplete="off"></app-text-input>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-1 col-md-1" style="margin-top: 5px;">
+            <i class="fa fa-calendar"></i>
+        </div>
+        <div class="col-11 col-md-11">
+            <app-date-input [formControl]='registerForm.controls["dateOfBirth"]' 
+            [label]='"Data urodzenia"' [maxDate]='maxDate' autocomplete="off"></app-date-input>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-1 col-md-1" style="margin-top: 5px;">
+            <i class="fa fa-eye" (click)="showPassword()" *ngIf="togglePassword"></i>
+            <i class="fa fa-eye-slash" (click)="showPassword()" *ngIf="!togglePassword"></i>
+        </div>
+        <div class="col-11 col-md-11">
+            <div style="display: inline;"><app-text-input [formControl]='registerForm.controls["password"]' 
+            [label]='"Hasło"' [type]='type' autocomplete="off"></app-text-input></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-1 col-md-1" style="margin-top: 5px;">
+            <i class="fa fa-key"></i>
+        </div>
+        <div class="col-11 col-md-11">
+            <app-text-input [formControl]='registerForm.controls["confirmPassword"]' 
+            [label]='"Potwierdź hasło"' [type]='"password"' autocomplete="off"></app-text-input>
+        </div>
+    </div>
+
+    <div id="token">
+        <div class="row mt-1 mb-2">
+            <div class="col-sm-12 mb-2">
+                <re-captcha id="recaptcha" name="recaptcha" [formControl]='registerForm.controls["recaptcha"]' required 
+                [class.is-invalid]="registerForm?.controls.recaptcha?.invalid && (registerForm?.controls.recaptcha?.dirty || registerForm?.controls.recaptcha?.touched)"></re-captcha>
+                <div *ngIf="registerForm?.controls.recaptcha?.errors && (registerForm?.controls.recaptcha?.dirty || registerForm?.controls.recaptcha?.touched)" class="invalid-feedback">
+                <div *ngIf="registerForm?.controls.recaptcha?.errors?.['required']">To pole jest wymagane</div>
+                </div>
+            </div>
+            </div>
+            <div class="row">
+            <!-- <div class="col-sm-12 mb-2">
+                <button type="button" class="btn btn-sm btn-primary" (click)="send(form)">Send</button>
+            </div> -->
+        </div>
+    </div>
+ 
+    <div style="margin-left: 60px !important">
+        <span>
+            <input type="checkbox" [formControl]='registerForm.controls["statute"]' id="statute" name="statute" value="true" class="mr-2" style="float:left !important;">
+            Zapoznałem się z <a href="/regulamin" target="_blank" id="statuteLink" style="color: rgb(5, 95, 174);">Regulaminem</a></span>
+    </div>
+
+        <div class="row" *ngIf="validationErrors.length > 0">
+            <ul class="text-danger">
+                <li *ngFor="let error of validationErrors">
+                    {{error}}
+                </li>
+            </ul>
+        </div>
+
+    <div class="form-group text-center mt-3">
+        <button [disabled]='!registerForm.valid' class="btn btn-success mr-2" type="submit"><i class="fa fa-user-plus mr-2"></i>Zarejestruj</button>
+        <button class="btn btn-default mr-2" id="cancel" (click)="cancel()" type="button">Anuluj</button>
+    </div>
+    <hr>
+</form>

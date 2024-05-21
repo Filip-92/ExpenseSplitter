@@ -1,0 +1,26 @@
+<div class="container mt-3" style="border-top: 1px solid white;">
+    <br>
+    Dodaj wydatek:
+    <form [formGroup]='expensesForm' (ngSubmit)="expensesForm.valid && addExpense()" class="text-center row p-3">
+        <div class="col-9">
+            <input type="text" class="mb-2" [formControl]='expensesForm?.controls["name"]' placeholder="Wpisz rodzaj wydatku"/>
+            <input type="number" [formControl]='expensesForm?.controls["amount"]' placeholder="Wpisz wysokość wydatku"/>
+        </div>
+        <button class="btn btn-success ml-2 col-2" type="submit" [disabled]="!expensesForm?.valid">Dodaj wydatek</button>
+        <div *ngIf="expensesForm?.controls['name'].errors?.maxlength" class="text-danger">
+            Nazwa wydatku zbyt długa
+        </div>
+        <div *ngIf="expensesForm?.controls['amount'].errors?.required && expensesForm?.controls['amount'].touched" class="text-danger">
+            Pole jest wymagane
+        </div>
+        <div class="card col-6 mt-5 mb-3" style="margin-left: auto; margin-right: auto;">
+            Kto płacił?
+            <div>
+                <span *ngFor="let contributor of contributors">
+                    <input type="radio" id="images" name="whoPaid" value="{{contributor.username}}" formControlName='whoPaid' class="mr-1">
+                    <label for="{{contributor.username}}" class="mr-2">{{contributor.username}}</label>
+                </span>
+            </div>
+        </div>
+    </form>
+</div>

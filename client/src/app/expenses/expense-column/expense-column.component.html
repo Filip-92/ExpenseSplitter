@@ -1,0 +1,6 @@
+
+<div class="text-center">
+    <div *ngFor="let spending of spendings">
+        <div *ngIf="spending.whoOwes === username">{{round(spending.amount) || 0}}</div>
+    </div>
+</div>

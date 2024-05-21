@@ -1,0 +1,32 @@
+<div class="form-group text-center">
+    <input 
+        [class.is-invalid]="ngControl.touched && ngControl.invalid"
+        type={{type}} 
+        class="form-control" 
+        [formControl]="ngControl.control"
+        placeholder={{label}}>
+    <div *ngIf="ngControl.control.errors?.required" class="invalid-feedback">Wpisz {{label}}</div>
+    <div *ngIf="ngControl.control.errors?.pattern && (type==='password' || label === 'Hasło')" class="invalid-feedback text-left ml-5">
+        Zachowaj odpowiednie formatowanie<br>
+        Hasło musi zawierać co najmniej:
+        <ul>
+            <li>8 znaków</li>
+            <li>1 cyfrę</li>
+            <li>zarówno małe i duże litery</li>
+            <li>1 znak specjalny ($@$!%*?&_/)</li>
+        </ul>
+    </div>
+    <div *ngIf="ngControl.control.errors?.pattern && type==='text' && label === 'Nazwa użytkownika'" class="invalid-feedback">
+        Nie używaj polskich znaków ani znaków specjalnych
+    </div>
+    <div *ngIf="ngControl.control.errors?.pattern && type!=='password' && type!=='text'" class="invalid-feedback">Podaj właściwy adres email</div>
+    <div *ngIf="ngControl.control.errors?.minlength" class="invalid-feedback">
+        {{label}} musi zawierać co najmniej {{ngControl.control.errors.minlength['requiredLength']}} <span *ngIf="ngControl.control.errors.minlength['requiredLength'] === 4">znaki</span><span *ngIf="ngControl.control.errors.minlength['requiredLength'] !== 4">znaków</span>
+    </div>
+    <div *ngIf="ngControl.control.errors?.maxlength" class="invalid-feedback">
+        {{label}} musi zawierać co najwyżej {{ngControl.control.errors.maxlength['requiredLength']}} <span *ngIf="ngControl.control.errors.maxlength['requiredLength'] === 32">znaki</span><span *ngIf="ngControl.control.errors.maxlength['requiredLength'] !== 32">znaków</span>
+    </div>
+    <div *ngIf="ngControl.control.errors?.isMatching" class="invalid-feedback">
+        Hasła nie pasują
+    </div>
+</div>

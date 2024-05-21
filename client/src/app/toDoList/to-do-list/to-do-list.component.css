@@ -1,0 +1,31 @@
+#cancel {
+    border: 1px solid white;
+  }
+
+  #cancel:hover {
+    color: red;
+    border: 1px solid red;
+  }
+
+  .fa-trash:hover {
+    cursor: pointer;
+    color: red;
+  }
+
+  .fa-pencil:hover {
+    cursor: pointer;
+    color: green;
+  }
+
+  #tabs {
+    border: 1px solid white; 
+    padding: 5px; 
+    border-radius: 8px;
+}
+
+#tabs:hover {
+    cursor: pointer;
+    border: 1px solid red;
+    color: red;
+}
+

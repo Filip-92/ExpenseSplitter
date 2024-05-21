@@ -1,0 +1,26 @@
+input[type=text] {
+    height: 40px;
+    background-color: gray;
+    width: 70%;
+    color: whitesmoke;
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+
+::placeholder {
+    color: whitesmoke;
+}
+
+#close:hover {
+    cursor: pointer;
+    color: red;
+}
+
+#cancel {
+    border: 1px solid white;
+}
+
+#cancel:hover {
+    color: red;
+    border: 1px solid red;
+}

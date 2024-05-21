@@ -1,0 +1,20 @@
+<div class="card">
+    <div class="row">
+        <div class="col-4 text-center">
+            <span id="category" (click)="showMore()">{{category.name}}</span>
+        </div>
+        <div class="col-3">
+            <img src="{{category.photoUrl}}" alt="">
+        </div>
+        <div class="col-4 text-right">
+            <i class="fa fa-photo mr-3" (click)="openCategoryPhotoModal(category)"> Photo</i>
+            <i class="fa fa-trash mr-3" (click)="removeCategory(category.id)"> Usuń</i>
+            <i class="fa fa-pencil mr-3" (click)="openCategoryNameUpdateModal(category)" [attr.data-target]="'#'+category?.id"> Edytuj</i>
+        </div>
+    </div>
+    <div *ngIf="more">
+        <app-contributors-form [category]="category" [user]="user"></app-contributors-form>
+        <app-expense-form [category]="category"></app-expense-form>
+        <app-table [category]="category"></app-table>
+    </div>
+</div>

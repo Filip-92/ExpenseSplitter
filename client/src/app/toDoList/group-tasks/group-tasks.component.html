@@ -1,0 +1,32 @@
+<div class="text-center">
+    <button class="btn btn-success mb-3 text-center" (click)="addNew()">
+        Dodaj grupę
+    </button>
+</div>
+
+<div class="row mb-3 text-center" style="border-top: 1px solid white;">
+    <div class="col-12 mb-3" *ngIf="addNewGroup">
+        <h3 class="mb-3 mt-3">Dodaj grupę</h3>
+        <form [formGroup]='addGroupForm' (ngSubmit)="addGroupForm.valid && addGroup()" class="text-center column">
+            <div>
+                <input type="text" [formControl]='addGroupForm.controls["name"]' placeholder="Wpisz nazwę tagu" class="col-7"/>
+                <button class="btn btn-success ml-2 col-2" id="addAnnoun" type="submit" [disabled]="!addGroupForm.valid">Dodaj kategorię</button>
+            </div>
+            <div *ngIf="addGroupForm.controls['name'].errors?.maxlength" class="text-danger">
+                Nazwa grupy zbyt długa
+            </div>
+            <div *ngIf="addGroupForm.controls['name'].touched && !addGroupForm.controls['name'].dirty" class="text-danger">
+                Nazwa grupy jest wymagana
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="mb-3" id="tags">
+    <div class="mb-3" *ngFor="let group of groups" style="line-height: 2.5;">
+        <app-group-card [group]="group"></app-group-card>
+    </div>
+    <div *ngIf="groups?.length <= 0" class="mt-5">
+        Brak kategorii
+    </div>
+</div>
