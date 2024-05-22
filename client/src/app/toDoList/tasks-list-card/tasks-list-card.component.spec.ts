@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GroupViewComponent } from './group-view.component';
+import { TasksListCardComponent } from './tasks-list-card.component';
 
-describe('GroupViewComponent', () => {
-  let component: GroupViewComponent;
-  let fixture: ComponentFixture<GroupViewComponent>;
+describe('TasksListCardComponent', () => {
+  let component: TasksListCardComponent;
+  let fixture: ComponentFixture<TasksListCardComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ GroupViewComponent ]
+      declarations: [ TasksListCardComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(GroupViewComponent);
+    fixture = TestBed.createComponent(TasksListCardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

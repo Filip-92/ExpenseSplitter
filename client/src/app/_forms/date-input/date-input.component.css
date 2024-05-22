@@ -9,16 +9,16 @@
     color: gray;
 }
 
-input {
+input[type=text] {
     background-color: gray;
     color: whitesmoke;
 }
 
-input::placeholder {
+input[type=text]::placeholder {
     color: white !important;
 }
 
-input:focus {
+input[type=text]:focus {
     background-color: gray;
 }
 

@@ -1,0 +1,9 @@
+.fa-pencil:hover {
+    cursor: pointer;
+    color: green;
+}
+
+.fa-trash:hover {
+    cursor: pointer;
+    color: red;
+}

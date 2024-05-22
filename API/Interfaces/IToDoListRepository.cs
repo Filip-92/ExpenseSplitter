@@ -16,5 +16,6 @@ namespace API.Interfaces
         Task<TasksGroup> GetGroupById(int id);
         Task<IEnumerable<ToDoListContributors>> GetGroupContributors(int id);
         Task<ToDoListContributors> GetContributorById(int id);
+        Task<IEnumerable<ToDoListTasks>> GetToDoListGroupTasks(int groupId);
     }
 }

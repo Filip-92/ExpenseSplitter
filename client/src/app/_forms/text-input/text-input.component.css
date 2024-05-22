@@ -1,6 +1,6 @@
-input {
+input[type=text] {
     background-color: gray;
-    color: white;
+    color: white !important;
 }
 
 input::placeholder {

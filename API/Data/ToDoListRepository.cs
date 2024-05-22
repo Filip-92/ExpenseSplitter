@@ -33,7 +33,7 @@ namespace API.Data
         {
             return await _context.ToDoListTasks
                         .IgnoreQueryFilters()
-                        .Where(m => m.Username == username)
+                        .Where(m => m.Username == username && m.GroupId == null)
                         .ToListAsync();
         }
 
@@ -41,7 +41,7 @@ namespace API.Data
         {
             return await _context.ToDoListTasks
                         .IgnoreQueryFilters()
-                        .Where(m => m.Username == username && m.TaskDate.Date >= from.Date.Date && m.TaskDate <= to.Date)
+                        .Where(m => m.Username == username && m.GroupId == null && m.TaskDate.Date >= from.Date.Date && m.TaskDate <= to.Date)
                         .ToListAsync();
         }
 
@@ -74,6 +74,14 @@ namespace API.Data
             return await _context.ToDoListContributors
                 .IgnoreQueryFilters()
                 .SingleOrDefaultAsync(x => x.Id == id);
+        }
+
+        public async Task<IEnumerable<ToDoListTasks>> GetToDoListGroupTasks(int groupId)
+        {
+            return await _context.ToDoListTasks
+                        .IgnoreQueryFilters()
+                        .Where(m => m.GroupId == groupId)
+                        .ToListAsync();
         }
 
     }

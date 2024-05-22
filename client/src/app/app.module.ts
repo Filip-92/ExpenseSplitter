@@ -95,13 +95,14 @@ import { TaskCardComponent } from './toDoList/task-card/task-card.component';
 import { EditTaskModalComponent } from './modals/edit-task-modal/edit-task-modal.component';
 import { IndividualTasksComponent } from './toDoList/individual-tasks/individual-tasks.component';
 import { GroupTasksComponent } from './toDoList/group-tasks/group-tasks.component';
-import { GroupViewComponent } from './toDoList/group-view/group-view.component';
 import { GroupContributorsFormComponent } from './toDoList/group-contributors-form/group-contributors-form.component';
 import { GroupContributorCardComponent } from './toDoList/group-contributor-card/group-contributor-card.component';
 import { GroupTaskCardComponent } from './toDoList/group-task-card/group-task-card.component';
 import { GroupEditModalComponent } from './modals/group-edit-modal/group-edit-modal.component';
 import { CategoryCardComponent } from './expenses/category-card/category-card.component';
 import { GroupCardComponent } from './toDoList/group-card/group-card.component';
+import { GroupTaskCardFormComponent } from './toDoList/task-card-form/task-card-form.component';
+import { TasksListCardComponent } from './toDoList/tasks-list-card/tasks-list-card.component';
 
 @NgModule({
   declarations: [
@@ -167,13 +168,14 @@ import { GroupCardComponent } from './toDoList/group-card/group-card.component';
     EditTaskModalComponent,
     IndividualTasksComponent,
     GroupTasksComponent,
-    GroupViewComponent,
     GroupContributorsFormComponent,
     GroupContributorCardComponent,
     GroupTaskCardComponent,
     GroupEditModalComponent,
     CategoryCardComponent,
-    GroupCardComponent
+    GroupCardComponent,
+    GroupTaskCardFormComponent,
+    TasksListCardComponent
   ],
   imports: [
     BrowserModule,
@@ -218,6 +220,8 @@ import { GroupCardComponent } from './toDoList/group-card/group-card.component';
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true},
     {provide: NavComponent, useClass: NavComponent, multi: true},
+    {provide: IndividualTasksComponent, useClass: IndividualTasksComponent, multi: true},
+    {provide: GroupTaskCardComponent, useClass: GroupTaskCardComponent, multi: true},
     {provide: LOCALE_ID, useValue: "pl", useFactory: (sessionService) => sessionService.getLocale()},
     {
       provide: RECAPTCHA_SETTINGS,

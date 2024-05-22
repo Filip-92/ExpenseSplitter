@@ -44,7 +44,7 @@ export class IndividualTasksComponent {
   }
 
   cancel() {
-    this.cancelRegister.emit(false);
+    this.toDoListScheduleForm.reset();
   }
 
   addTask() {

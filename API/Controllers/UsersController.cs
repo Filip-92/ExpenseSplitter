@@ -544,7 +544,7 @@ namespace API.Controllers
 
         // ToDoList
         [HttpGet("get-to-do-list")]
-        public async Task<ActionResult> GetToDoList()
+        public async Task<ActionResult> GetToDoListTasks()
         {
             var user = await _unitOfWork.UserRepository.GetUserByUsernameAsync(User.GetUsername());
 
@@ -615,6 +615,16 @@ namespace API.Controllers
             var contributors = await _unitOfWork.ToDoListRepository.GetGroupContributors(groupId);
 
             return Ok(contributors);
+        }
+
+        [HttpGet("get-to-do-list-group-tasks/{groupId}")]
+        public async Task<ActionResult> GetToDoListGroupTasks(int groupId)
+        {
+            var user = await _unitOfWork.UserRepository.GetUserByUsernameAsync(User.GetUsername());
+
+            var tasks = await _unitOfWork.ToDoListRepository.GetToDoListGroupTasks(groupId);
+
+            return Ok(tasks);
         }
     }
 }

@@ -42,6 +42,10 @@ export class ToDoListService {
     return this.http.get<any>(this.baseUrl + 'users/get-groups');
   }
 
+  getGroup(id: number) {
+    return this.http.get<any>(this.baseUrl + 'toDoList/display-group/' + id);
+  }
+
   removeGroup(groupId: number) {
     return this.http.post(this.baseUrl + 'toDoList/remove-group/' + groupId, {});
   }
@@ -65,6 +69,11 @@ export class ToDoListService {
   updateContributor(contributor: any) {
     return this.http.put(this.baseUrl + 'toDoList/update-contributor/' + contributor.id, contributor, {});
   }
+
+  getToDoListGroupTasks(groupId: number) {
+    return this.http.get<any>(this.baseUrl + 'users/get-to-do-list-group-tasks/' + groupId, {});
+  }
+
 
   
 }

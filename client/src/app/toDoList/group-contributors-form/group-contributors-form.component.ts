@@ -30,19 +30,19 @@ export class GroupContributorsFormComponent {
 
   ngOnInit(): void {
     this.initializeForm();
-    this.getGroupContributors(this.group.id);
+    this.getGroupContributors(this.group?.id);
   }
 
   initializeForm() {
     this.addYourselfForm = this.fb.group({
       username: [this.user.username, []],
       email: [this.user.email, []],
-      groupId: [this.group.id]
+      groupId: [this.group?.id]
     }),
     this.contributorForm = this.fb.group({
       username: ['', [Validators.required, Validators.maxLength(20)]],
       email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-z]{2,4}$')]],
-      groupId: [this.group.id]
+      groupId: [this.group?.id]
     })
   }
 
@@ -50,7 +50,7 @@ export class GroupContributorsFormComponent {
     this.toDoListServ.addContributor(form).subscribe(response => {
       this.toastr.success('Pomyślnie dodano wydatek');
       this.contributorForm.reset();
-      this.getGroupContributors(this.group.id);
+      this.getGroupContributors(this.group?.id);
       this.initializeForm();
     }, error => {
       this.validationErrors = error;

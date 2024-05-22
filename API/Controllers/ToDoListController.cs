@@ -42,7 +42,8 @@ namespace API.Controllers
                 Id = toDoListTasksDto.Id,
                 Name = toDoListTasksDto.Name,
                 TaskDate = toDoListTasksDto.TaskDate,
-                Username = user.UserName
+                Username = user.UserName,
+                GroupId = toDoListTasksDto.GroupId
             };
 
             user.ToDoListTasks.Add(toDoListTask);
@@ -115,6 +116,16 @@ namespace API.Controllers
             }
 
             return BadRequest("Problem z dodawaniem grupy");
+        }
+
+        [HttpGet("display-group/{groupId}")]
+        public async Task<ActionResult> GetGroup(int groupId)
+        {
+            var group = await _unitOfWork.ToDoListRepository.GetGroupById(groupId);
+
+            if (group == null) return NotFound("Could not find group");
+
+            return Ok(group);
         }
 
         [HttpPost("remove-group/{groupId}")]
@@ -213,6 +224,5 @@ namespace API.Controllers
 
             return BadRequest("Nie udało się edytować wariata");
         }
-
     }
 }
