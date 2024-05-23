@@ -103,6 +103,7 @@ import { CategoryCardComponent } from './expenses/category-card/category-card.co
 import { GroupCardComponent } from './toDoList/group-card/group-card.component';
 import { GroupTaskCardFormComponent } from './toDoList/task-card-form/task-card-form.component';
 import { TasksListCardComponent } from './toDoList/tasks-list-card/tasks-list-card.component';
+import { GroupTasksFilterComponent } from './toDoList/group-tasks-filter/group-tasks-filter.component';
 
 @NgModule({
   declarations: [
@@ -175,7 +176,8 @@ import { TasksListCardComponent } from './toDoList/tasks-list-card/tasks-list-ca
     CategoryCardComponent,
     GroupCardComponent,
     GroupTaskCardFormComponent,
-    TasksListCardComponent
+    TasksListCardComponent,
+    GroupTasksFilterComponent
   ],
   imports: [
     BrowserModule,

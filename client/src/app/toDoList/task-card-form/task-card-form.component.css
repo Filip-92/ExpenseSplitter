@@ -1,0 +1,8 @@
+#cancel {
+    border: 1px solid white;
+}
+
+#cancel:hover {
+    cursor: pointer;
+    color: red;
+}

@@ -10,7 +10,9 @@ namespace API.Interfaces
     public interface IToDoListRepository
     {
         Task<IEnumerable<ToDoListTasks>> GetToDoListTasks(string username);
+        Task<IEnumerable<ToDoListTasks>> GetDailyToDoListTasks(string username, DateTime currentDate);
         Task<IEnumerable<ToDoListTasks>> GetTasksFilter(string username, DateTime from, DateTime to);
+        Task<IEnumerable<ToDoListTasks>> GetGroupTasksFilter(DateTime from, DateTime to, int groupId);
         Task<ToDoListTasks> GetTaskById(int id);
         Task<IEnumerable<TasksGroup>> GetGroups(string username);
         Task<TasksGroup> GetGroupById(int id);

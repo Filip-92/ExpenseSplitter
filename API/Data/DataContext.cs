@@ -31,6 +31,7 @@ namespace API.Data
         public DbSet<ToDoListTasks> ToDoListTasks { get; set; }
         public DbSet<TasksGroup> TasksGroups { get; set; }
         public DbSet<ToDoListContributors> ToDoListContributors { get; set; }
+        public DbSet<Comment> Comments { get; set; }
         public DbSet<Connection> Connections { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -85,6 +86,8 @@ namespace API.Data
             builder.Entity<TasksGroup>();
 
             builder.Entity<ToDoListContributors>();
+            
+            builder.Entity<Comment>();
 
             builder.ApplyUtcDateTimeConverter();
         }

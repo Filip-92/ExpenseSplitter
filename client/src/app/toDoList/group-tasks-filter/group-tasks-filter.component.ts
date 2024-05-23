@@ -1,7 +1,6 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
-import { EditTaskModalComponent } from '../../modals/edit-task-modal/edit-task-modal.component';
 import { DatePipe } from '@angular/common';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
@@ -9,13 +8,14 @@ import { AccountService } from '../../_services/account.service';
 import { ToDoListService } from '../../_services/to-do-list.service';
 
 @Component({
-  selector: 'app-individual-tasks',
-  templateUrl: './individual-tasks.component.html',
-  styleUrls: ['./individual-tasks.component.css']
+  selector: 'app-group-tasks-filter',
+  templateUrl: './group-tasks-filter.component.html',
+  styleUrls: ['./group-tasks-filter.component.css']
 })
-export class IndividualTasksComponent {
+export class GroupTasksFilterComponent {
   @Output() cancelRegister = new EventEmitter();
   @Input() tasks: any;
+  @Input() id: number;
   toDoListScheduleForm: UntypedFormGroup;
   toDoListTimespanForm: UntypedFormGroup;
   validationErrors: string[] = [];
@@ -35,7 +35,8 @@ export class IndividualTasksComponent {
   initializeForm() {
     this.toDoListScheduleForm = this.fb.group({
       taskDate: ['', Validators.required],
-      name: ['', Validators.required]
+      name: ['', Validators.required],
+      groupdId: [this.id]
     }),
     this.toDoListTimespanForm = this.fb.group({
       from: [this.currentDate],
@@ -52,7 +53,7 @@ export class IndividualTasksComponent {
   }
 
   filterTasks() {
-    this.toDoListServ.filterTasks(this.datePipe.transform(this.toDoListTimespanForm.value.from, 'yyyy-MM-dd'), this.datePipe.transform(this.toDoListTimespanForm.value.to, 'yyyy-MM-dd')).subscribe(response => {
+    this.toDoListServ.filterGroupTasks(this.datePipe.transform(this.toDoListTimespanForm.value.from, 'yyyy-MM-dd'), this.datePipe.transform(this.toDoListTimespanForm.value.to, 'yyyy-MM-dd'), this.id).subscribe(response => {
       this.tasks = response;
       this.filterTasksBool = true;
       //this.initializeForm();
@@ -66,5 +67,6 @@ export class IndividualTasksComponent {
       this.tasks = tasks;
     })
   }
+
 
 }

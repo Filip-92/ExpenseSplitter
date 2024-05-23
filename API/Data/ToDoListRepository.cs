@@ -37,12 +37,50 @@ namespace API.Data
                         .ToListAsync();
         }
 
-        public async Task<IEnumerable<ToDoListTasks>> GetTasksFilter(string username, DateTime from, DateTime to)
+        public async Task<IEnumerable<ToDoListTasks>> GetDailyToDoListTasks(string username, DateTime currentDate)
         {
             return await _context.ToDoListTasks
                         .IgnoreQueryFilters()
-                        .Where(m => m.Username == username && m.GroupId == null && m.TaskDate.Date >= from.Date.Date && m.TaskDate <= to.Date)
+                        .Where(m => m.Username == username && m.GroupId == null && m.TaskDate.Date == currentDate.Date.Date)
                         .ToListAsync();
+        }
+
+        public async Task<IEnumerable<ToDoListTasks>> GetTasksFilter(string username, DateTime from, DateTime to)
+        {
+            if (from.Date.Date != to.Date.Date)
+            {
+                return await _context.ToDoListTasks
+                    .IgnoreQueryFilters()
+                    .Where(m => m.Username == username && m.GroupId == null && m.TaskDate.Date >= from.Date.Date && m.TaskDate.Date <= to.Date.Date)
+                    .ToListAsync();
+            }
+            else
+            {
+                return await _context.ToDoListTasks
+                    .IgnoreQueryFilters()
+                    .Where(m => m.Username == username && m.GroupId == null && m.TaskDate.Date == from.Date.Date)
+                    .ToListAsync();
+            }
+
+        }
+
+        public async Task<IEnumerable<ToDoListTasks>> GetGroupTasksFilter(DateTime from, DateTime to, int groupId)
+        {
+            if (from.Date.Date != to.Date.Date)
+            {
+                return await _context.ToDoListTasks
+                    .IgnoreQueryFilters()
+                    .Where(m => m.GroupId == groupId && m.TaskDate.Date >= from.Date.Date && m.TaskDate.Date <= to.Date.Date)
+                    .ToListAsync();
+            }
+            else
+            {
+                return await _context.ToDoListTasks
+                    .IgnoreQueryFilters()
+                    .Where(m => m.GroupId == groupId && m.TaskDate.Date == from.Date.Date)
+                    .ToListAsync();
+            }
+
         }
 
         public async Task<TasksGroup> GetGroupById(int id)

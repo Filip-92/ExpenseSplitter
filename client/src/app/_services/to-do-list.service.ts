@@ -18,8 +18,16 @@ export class ToDoListService {
     return this.http.get<any>(this.baseUrl + 'users/get-to-do-list');
   }
 
+  getDailyToDoListTasks(currentDate: any) {
+    return this.http.get<any>(this.baseUrl + 'users/get-daily-to-do-list/' + currentDate.replace('T', ' '), {});
+  }
+
   filterTasks(from: any, to: any) {
     return this.http.get<any>(this.baseUrl + 'users/get-tasks-filter/' + from.replace('T', ' ') + '/' + to.replace('T', ' '), {});
+  }
+
+  filterGroupTasks(from: any, to: any, id: number) {
+    return this.http.get<any>(this.baseUrl + 'users/get-group-tasks-filter/' + from.replace('T', ' ') + '/' + to.replace('T', ' ') + '/' + id, {});
   }
 
   removeTask(taskId: number) {
@@ -74,6 +82,8 @@ export class ToDoListService {
     return this.http.get<any>(this.baseUrl + 'users/get-to-do-list-group-tasks/' + groupId, {});
   }
 
-
+  addComment(model: any, taskId: number) {
+    return this.http.post(this.baseUrl + 'toDoList/add-comment/' + taskId, model);
+  }
   
 }

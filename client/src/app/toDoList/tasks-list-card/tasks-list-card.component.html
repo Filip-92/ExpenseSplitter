@@ -1,13 +1,20 @@
-<div *ngFor="let task of tasks">
-    <div class="card">
-        <div class="row">
-            <div class="col-3 text-center">{{task?.name}}</div>
-            <div class="col-3 text-right"><i class="fa fa-calendar mr-2"></i>{{task?.taskDate | date:'yyyy-MM-dd'}}</div>
-            <div class="col-3 text-right"><input type="checkbox" [checked]="task?.isDone" value="{{task?.isDone}}" (click)="closeTask(task)" /></div>
-            <div class="col-3">
-                <i class="fa fa-pencil mr-3" (click)="openEditTaskModal(task)" title="Edytuj"></i>
-                <i class="fa fa-trash" (click)="removeTask(task?.id)" title="Usuń"></i>
+<div *ngIf="!filterTasksBool">
+    <h3>Zadania na dzisiaj - {{currentDate | date: 'dd MMMM yyyy'}}</h3>
+    <div *ngIf="tasks?.length > 0" class="mt-5">
+        <div *ngFor="let task of tasks">
+            <div *ngIf="(task.taskDate | date:'yyyy-MM-dd') === (currentDate | date:'yyyy-MM-dd')">
+                <app-task-card [task]="task"></app-task-card>
             </div>
-        </div>
-    </div> 
-</div>  
+        </div>  
+    </div>
+</div>
+
+<h3 class="mt-5">Wszystkie zadania</h3>
+<div *ngIf="tasks?.length > 0" class="mt-5">
+    <div *ngFor="let task of tasks">
+        <app-task-card [task]="task"></app-task-card>
+    </div>  
+</div>
+<div *ngIf="tasks?.length <= 0 || tasks === null" class="text-center">
+    <h4 class="mb-4">Brak zadań w danym zakresie czasu</h4>
+</div>

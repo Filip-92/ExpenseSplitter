@@ -19,56 +19,20 @@ export class ToDoListComponent {
   toDoListScheduleForm: UntypedFormGroup;
   toDoListTimespanForm: UntypedFormGroup;
   validationErrors: string[] = [];
+  dailyTasks: any;
   tasks: any;
   currentDate = new Date();
   group: boolean;
   
-  constructor(public accountService: AccountService, private toastr: ToastrService, 
-    private fb: UntypedFormBuilder, private router: Router, private toDoListServ: ToDoListService,
-    private datePipe: DatePipe, private modalServ: NgbModal) { 
+  constructor(public accountService: AccountService, private toDoListServ: ToDoListService, private datePipe: DatePipe) { 
 
     }
 
   ngOnInit(): void {
-    this.initializeForm();
     this.getToDoListTasks();
+    //this.getDailyToDoListTasks();
   }
 
-  initializeForm() {
-    this.toDoListScheduleForm = this.fb.group({
-      taskDate: ['', Validators.required],
-      name: ['', Validators.required]
-    }),
-    this.toDoListTimespanForm = this.fb.group({
-      from: [this.currentDate],
-      to: [this.currentDate]
-    })
-  }
-
-  cancel() {
-    this.cancelRegister.emit(false);
-  }
-
-  addTask() {
-    this.toDoListServ.addToDoListTask(this.toDoListScheduleForm.value).subscribe(response => {
-      this.toastr.success('Pomyślnie dodano zadanie');
-      this.toDoListScheduleForm.reset();
-      this.getToDoListTasks();
-      this.initializeForm();
-    }, error => {
-      this.validationErrors = error;
-    })
-  }
-
-  filterTasks() {
-    this.toDoListServ.filterTasks(this.datePipe.transform(this.toDoListTimespanForm.value.from, 'yyyy-MM-dd'), this.datePipe.transform(this.toDoListTimespanForm.value.to, 'yyyy-MM-dd')).subscribe(response => {
-      console.log(this.toDoListTimespanForm)
-      this.tasks = response;
-      //this.initializeForm();
-    }, error => {
-      this.validationErrors = error;
-    })
-  }
 
   getToDoListTasks() {
     this.toDoListServ.getToDoListTasks().subscribe(tasks => {
@@ -76,25 +40,11 @@ export class ToDoListComponent {
     })
   }
 
-  closeTask(taskId: number) {
-    this.toDoListServ.closeTask(taskId).subscribe(() => {
-    }, error => {
-      this.validationErrors = error;
-    })
-  }
-
-  removeTask(taskId: number) {
-    this.toDoListServ.removeTask(taskId).subscribe(() => {
-      this.tasks.splice(this.tasks.findIndex(p => p.id === taskId), 1);
-    })
-    this.getToDoListTasks();
-  }
-
-  openEditTaskModal(task: any) {
-    const modalRef = this.modalServ.open(EditTaskModalComponent);
-    modalRef.componentInstance.task = task;
-    modalRef.componentInstance.modalRef = modalRef;
-  }
+  // getDailyToDoListTasks() {
+  //   this.toDoListServ.getDailyToDoListTasks(this.datePipe.transform(this.currentDate, 'yyyy-MM-dd')).subscribe(tasks => {
+  //     this.dailyTasks = tasks;
+  //   })
+  // }
 
   changeTab() {
     this.group = !this.group;

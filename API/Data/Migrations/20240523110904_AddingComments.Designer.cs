@@ -4,6 +4,7 @@ using API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20240523110904_AddingComments")]
+    partial class AddingComments
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -228,16 +231,10 @@ namespace API.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("AppUserId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Content")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("TaskId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ToDoListTasksId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Uploaded")
@@ -247,10 +244,6 @@ namespace API.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AppUserId");
-
-                    b.HasIndex("ToDoListTasksId");
 
                     b.ToTable("Comment");
                 });
@@ -790,17 +783,6 @@ namespace API.Data.Migrations
                     b.Navigation("AppUser");
                 });
 
-            modelBuilder.Entity("API.Entities.Comment", b =>
-                {
-                    b.HasOne("API.Entities.AppUser", null)
-                        .WithMany("Comments")
-                        .HasForeignKey("AppUserId");
-
-                    b.HasOne("API.Entities.ToDoListTasks", null)
-                        .WithMany("Comments")
-                        .HasForeignKey("ToDoListTasksId");
-                });
-
             modelBuilder.Entity("API.Entities.Connection", b =>
                 {
                     b.HasOne("API.Entities.Group", null)
@@ -979,8 +961,6 @@ namespace API.Data.Migrations
 
                     b.Navigation("CategoryPhotos");
 
-                    b.Navigation("Comments");
-
                     b.Navigation("Contributors");
 
                     b.Navigation("Expenses");
@@ -1027,11 +1007,6 @@ namespace API.Data.Migrations
             modelBuilder.Entity("API.Entities.TasksGroup", b =>
                 {
                     b.Navigation("Contributors");
-                });
-
-            modelBuilder.Entity("API.Entities.ToDoListTasks", b =>
-                {
-                    b.Navigation("Comments");
                 });
 #pragma warning restore 612, 618
         }

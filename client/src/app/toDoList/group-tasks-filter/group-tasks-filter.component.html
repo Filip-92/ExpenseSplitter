@@ -1,4 +1,4 @@
-<app-task-card-form></app-task-card-form>
+<app-task-card-form [id]="id"></app-task-card-form>
 
 <div class="text-right" id="filter" (click)="toggleFilter()">Filtruj</div>
 <div class="text-center" class="mb-5" *ngIf="filter">
@@ -19,6 +19,5 @@
         </div>
     </form>
 </div>
- 
-<app-tasks-list-card [tasks]="tasks" [filterTasksBool]="filterTasksBool"></app-tasks-list-card>
 
+<app-tasks-list-card [tasks]="tasks" [filterTasksBool]="filterTasksBool"></app-tasks-list-card>

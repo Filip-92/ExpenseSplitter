@@ -553,12 +553,31 @@ namespace API.Controllers
             return Ok(tasks);
         }
 
+        [HttpGet("get-daily-to-do-list/{currentDate}")]
+        public async Task<ActionResult> GetDailyToDoListTasks(DateTime currentDate)
+        {
+            var user = await _unitOfWork.UserRepository.GetUserByUsernameAsync(User.GetUsername());
+
+            var tasks = await _unitOfWork.ToDoListRepository.GetDailyToDoListTasks(user.UserName, currentDate);
+
+            return Ok(tasks);
+        }
+
         [HttpGet("get-tasks-filter/{from}/{to}")]
         public async Task<ActionResult> GetTasksFilter(DateTime from, DateTime to)
         {
             var user = await _unitOfWork.UserRepository.GetUserByUsernameAsync(User.GetUsername());
 
             var tasks = await _unitOfWork.ToDoListRepository.GetTasksFilter(user.UserName, from, to);
+
+            return Ok(tasks);
+        }
+
+        [HttpGet("get-group-tasks-filter/{from}/{to}/{groupId}")]
+        public async Task<ActionResult> GetGroupTasksFilter(DateTime from, DateTime to, int groupId)
+        {
+
+            var tasks = await _unitOfWork.ToDoListRepository.GetGroupTasksFilter(from, to, groupId);
 
             return Ok(tasks);
         }

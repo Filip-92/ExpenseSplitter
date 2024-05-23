@@ -1,7 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { AccountService } from '../../_services/account.service';
@@ -24,8 +24,8 @@ export class GroupTaskCardFormComponent {
   group: boolean;
 
   constructor(public accountService: AccountService, private toastr: ToastrService, 
-    private fb: UntypedFormBuilder, private router: Router, private toDoListServ: ToDoListService,
-    private datePipe: DatePipe, private modalServ: NgbModal, private indivTaskComp: IndividualTasksComponent,
+    private fb: UntypedFormBuilder, private route: ActivatedRoute, private toDoListServ: ToDoListService,
+    private indivTaskComp: IndividualTasksComponent,
   private groupTaskComp: GroupTaskCardComponent) { 
 
     }
@@ -35,6 +35,7 @@ export class GroupTaskCardFormComponent {
   }
 
   initializeForm() {
+    this.id = +this.route?.snapshot?.paramMap?.get('id');
     this.toDoListScheduleForm = this.fb.group({
       taskDate: ['', Validators.required],
       name: ['', Validators.required],

@@ -11,3 +11,8 @@
 #invisible {
     display: none;
 }
+
+#add:hover {
+    cursor: pointer;
+    color: greenyellow;
+}

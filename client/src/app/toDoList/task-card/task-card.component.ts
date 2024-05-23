@@ -3,8 +3,12 @@ import { AccountService } from '../../_services/account.service';
 import { ToastrService } from 'ngx-toastr';
 import { ToDoListService } from '../../_services/to-do-list.service';
 import { Router } from '@angular/router';
-import { UntypedFormBuilder } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { DatePipe } from '@angular/common';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { EditTaskModalComponent } from '../../modals/edit-task-modal/edit-task-modal.component';
+import { GroupTaskCardComponent } from '../group-task-card/group-task-card.component';
+import { IndividualTasksComponent } from '../individual-tasks/individual-tasks.component';
 
 @Component({
   selector: 'app-task-card',
@@ -13,11 +17,15 @@ import { DatePipe } from '@angular/common';
 })
 export class TaskCardComponent {
   @Input() task: any;
+  @Input() id: number;
   validationErrors: string[] = [];
+  commentField: boolean;
+  commentForm: UntypedFormGroup;
+  currentDate = new Date();
 
-  constructor(public accountService: AccountService, private toastr: ToastrService, 
-    private fb: UntypedFormBuilder, private router: Router, private toDoListServ: ToDoListService,
-    private datePipe: DatePipe) { 
+  constructor(public accountService: AccountService, private toDoListServ: ToDoListService,
+    private modalServ: NgbModal, private indivTaskComp: IndividualTasksComponent,
+    private groupTaskComp: GroupTaskCardComponent, private fb: UntypedFormBuilder, private toastr: ToastrService) { 
 
     }
 
@@ -28,11 +36,48 @@ export class TaskCardComponent {
     })
   }
 
-  // removeCategory() {
-  //   this.toDoListServ.removeTask(this.task.id).subscribe(() => {
-  //     this.category.splice(this.category.findIndex(p => p.id === categoryId), 1);
-  //   })
-  //   this.getCategories();
-  // }
+  removeTask(taskId: number) {
+    this.toDoListServ.removeTask(taskId).subscribe(() => {
+      this.indivTaskComp.tasks.splice(this.indivTaskComp.tasks.findIndex(p => p.id === taskId), 1);
+    })
+    if (this.id === undefined) {
+      this.indivTaskComp.getToDoListTasks();
+    } else {
+      this.groupTaskComp.getToDoListGroupTasks(this?.id);
+    }
+  }
+
+  openEditTaskModal(task: any) {
+    const modalRef = this.modalServ.open(EditTaskModalComponent);
+    modalRef.componentInstance.task = task;
+    modalRef.componentInstance.modalRef = modalRef;
+  }
+
+  commentToggle() {
+    this.commentField = !this.commentField;
+    this.initializeForm();
+  }
+  
+  initializeForm() {
+    this.commentForm = this.fb.group({
+      content: ['', Validators.required],
+      uploaded: [this.currentDate]
+    })
+  }
+
+  addComment(taskId: number) {
+      this.toDoListServ.addComment(this.commentForm.value, taskId).subscribe(response => {
+        this.toastr.success('Pomyślnie dodano komentarz');
+        this.commentForm.reset();
+      }, error => {
+        this.validationErrors = error;
+      })
+
+  }
+
+  cancel() {
+    this.commentForm.reset();
+    this.commentField = false;
+  }
 
 }

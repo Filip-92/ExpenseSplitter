@@ -32,6 +32,7 @@ namespace API.Helpers
             CreateMap<ToDoListTasks, ToDoListTasksDto>();
             CreateMap<TasksGroup, TasksGroupDto>();
             CreateMap<ToDoListContributors, ToDoListContributorsDto>();
+            CreateMap<Comment, CommentDto>();
             CreateMap<ContactForm, ContactFormDto>();
             CreateMap<Notifications, NotificationDto>();
             CreateMap<MemberUpdateDto, AppUser>();

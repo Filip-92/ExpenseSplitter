@@ -15,7 +15,7 @@ export class GroupTaskCardComponent {
   contributors: any;
   tasks: any;
   validationErrors: string[] = [];
-
+  addToGroup: boolean;
 
   constructor(private route: ActivatedRoute, private toDoListServ: ToDoListService, private modalServ: NgbModal) {}
 
@@ -61,6 +61,10 @@ export class GroupTaskCardComponent {
     const modalRef = this.modalServ.open(EditTaskModalComponent);
     modalRef.componentInstance.task = task;
     modalRef.componentInstance.modalRef = modalRef;
+  }
+
+  addToGroupToggle() {
+    this.addToGroup = !this.addToGroup;
   }
 
 }

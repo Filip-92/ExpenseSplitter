@@ -1,12 +1,15 @@
 <h4>Grupa: {{group?.name}}</h4>
 
-<div id="invisible">{{group.name}}</div>
-<app-group-contributors-form [group]="group"></app-group-contributors-form>
+<div id="invisible">{{group?.name}}</div>
+<hr style="border: 1px solid whitesmoke;">
+<h4 (click)="addToGroupToggle()" id="add">Dodaj do grupy</h4>
+<app-group-contributors-form *ngIf="addToGroup" [group]="group"></app-group-contributors-form>
 
 <hr style="border: 1px solid white;">
 
 <div class="text-center">
-    <app-task-card-form [id]="id"></app-task-card-form>
+    
 </div>
 
-<app-tasks-list-card [tasks]="tasks"></app-tasks-list-card>
+<app-group-tasks-filter [tasks]="tasks" [id]="group?.id"></app-group-tasks-filter>
+

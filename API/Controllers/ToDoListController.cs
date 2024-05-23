@@ -224,5 +224,30 @@ namespace API.Controllers
 
             return BadRequest("Nie udało się edytować wariata");
         }
+
+         [HttpPost("add-comment/{taskId}")]
+        public async Task<ActionResult<Comment>> AddComment(CommentDto commentDto, int taskId)
+        {
+            var user = await _unitOfWork.UserRepository.GetUserByUsernameAsync(User.GetUsername());
+
+            var comment = new Comment
+            {
+                Id = commentDto.Id,
+                Content = commentDto.Content,
+                Username = user.UserName.ToLower(),
+                Uploaded = commentDto.Uploaded,
+                TaskId = taskId
+            };
+
+            user.Comments.Add(comment);
+
+            if (await _unitOfWork.Complete())
+            {
+                return CreatedAtRoute("GetUser", new { username = user.UserName }, _mapper.Map<CommentDto>(comment));
+            }
+
+            return BadRequest("Problem z dodawaniem komentarza");
+        }
+
     }
 }

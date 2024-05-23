@@ -18,7 +18,9 @@ import { IndividualTasksComponent } from '../individual-tasks/individual-tasks.c
 export class TasksListCardComponent {
   @Input() tasks: any;
   @Input() id: number;
+  @Input() filterTasksBool: boolean;
   validationErrors: string[] = [];
+  currentDate = new Date();
 
   constructor(public accountService: AccountService, private toDoListServ: ToDoListService,
     private modalServ: NgbModal, private indivTaskComp: IndividualTasksComponent,

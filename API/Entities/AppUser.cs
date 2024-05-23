@@ -26,6 +26,7 @@ namespace API.Entities
             ToDoListTasks = new List<ToDoListTasks>();
             TasksGroups = new List<TasksGroup>();
             ToDoListContributors = new List<ToDoListContributors>();
+            Comments = new List<Comment>();
         }
         public DateTime DateOfBirth { get; set; }
         public DateTime Created { get; set; } = DateTime.Now.AddHours(8);
@@ -42,6 +43,7 @@ namespace API.Entities
         public ICollection<ToDoListTasks> ToDoListTasks { get; set;}
         public ICollection<TasksGroup> TasksGroups { get; set;}
         public ICollection<ToDoListContributors> ToDoListContributors { get; set; }
+        public ICollection<Comment> Comments { get; set; }
         public ICollection<Notifications> Notifications { get; set; }
         public ICollection<Message> MessagesSent { get; set; }
         public ICollection<Message> MessagesReceived { get; set; }

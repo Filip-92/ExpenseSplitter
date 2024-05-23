@@ -1,8 +1,21 @@
 <div class="card">
     <div class="row">
-        <div class="col-3 text-center">{{task.name}}</div>
-        <div class="col-3 text-right"><i class="fa fa-calendar mr-2"></i>{{task.taskDate | date:'yyyy-MM-dd'}}</div>
-        <div class="col-3 text-right"><input type="checkbox" [checked]="task.isDone" value="{{task.isDone}}" (click)="closeTask()" /></div>
-        <div class="col-3"><i class="fa fa-trash"></i></div>
+        <div class="col-3 text-center">{{task?.name}}</div>
+        <div class="col-3 text-right"><i class="fa fa-calendar mr-2"></i>{{task?.taskDate | date:'yyyy-MM-dd'}}</div>
+        <div class="col-3 text-right"><input type="checkbox" [checked]="task?.isDone" value="{{task?.isDone}}" (click)="closeTask()" /></div>
+        <div class="col-3">
+            <i class="fa fa-pencil mr-3" (click)="openEditTaskModal(task)" title="Edytuj"></i>
+            <i class="fa fa-trash mr-3" (click)="removeTask(task?.id)" title="Usuń"></i>
+            <i class="fa fa-comment" (click)="commentToggle()"></i>
+        </div>
+    </div>
+    <div *ngIf="commentField" class="text-center mt-3">
+        <form [formGroup]='commentForm' (ngSubmit)="commentForm.valid && addComment(task?.id)" autocomplete="off">
+            <input type="text" placeholder="Dodaj komentarz" [formControl]='commentForm.controls["content"]' >
+            <div class="form-group text-center mt-3">
+                <button [disabled]='!commentForm.valid' class="btn btn-success mr-2" type="submit"><i class="fa fa-comment mr-2"></i>Dodaj</button>
+                <button class="btn btn-default mr-2" id="cancel" (click)="cancel()" type="button">Anuluj</button>
+            </div>
+        </form>
     </div>
 </div> 
