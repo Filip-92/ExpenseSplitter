@@ -629,8 +629,6 @@ namespace API.Controllers
         [HttpGet("get-group-contributors/{groupId}")]
         public async Task<ActionResult> GetGroupContributors(int groupId)
         {
-            //var user = await _unitOfWork.UserRepository.GetUserByUsernameAsync(User.GetUsername());
-
             var contributors = await _unitOfWork.ToDoListRepository.GetGroupContributors(groupId);
 
             return Ok(contributors);
@@ -639,11 +637,10 @@ namespace API.Controllers
         [HttpGet("get-to-do-list-group-tasks/{groupId}")]
         public async Task<ActionResult> GetToDoListGroupTasks(int groupId)
         {
-            var user = await _unitOfWork.UserRepository.GetUserByUsernameAsync(User.GetUsername());
-
             var tasks = await _unitOfWork.ToDoListRepository.GetToDoListGroupTasks(groupId);
 
             return Ok(tasks);
         }
+
     }
 }

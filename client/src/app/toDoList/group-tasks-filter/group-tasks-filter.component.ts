@@ -30,6 +30,7 @@ export class GroupTasksFilterComponent {
 
   ngOnInit(): void {
     this.initializeForm();
+    //this.getToDoListGroupTasks(this.id);
   }
 
   initializeForm() {
@@ -62,8 +63,8 @@ export class GroupTasksFilterComponent {
     })
   }
 
-  getToDoListTasks() {
-    this.toDoListServ.getToDoListTasks().subscribe(tasks => {
+  getToDoListGroupTasks(id: number) {
+    this.toDoListServ.getToDoListGroupTasks(id).subscribe(tasks => {
       this.tasks = tasks;
     })
   }

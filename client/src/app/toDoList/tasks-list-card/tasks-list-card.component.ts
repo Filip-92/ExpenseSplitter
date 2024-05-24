@@ -24,7 +24,7 @@ export class TasksListCardComponent {
 
   constructor(public accountService: AccountService, private toDoListServ: ToDoListService,
     private modalServ: NgbModal, private indivTaskComp: IndividualTasksComponent,
-    private groupTaskComp: GroupTaskCardComponent) { 
+    private groupTaskCardComp: GroupTaskCardComponent) { 
 
     }
 
@@ -39,10 +39,10 @@ export class TasksListCardComponent {
     this.toDoListServ.removeTask(taskId).subscribe(() => {
       this.tasks.splice(this.tasks.findIndex(p => p.id === taskId), 1);
     })
-    if (this.id === undefined) {
+    if (this.id === undefined || this.id === 0) {
       this.indivTaskComp.getToDoListTasks();
     } else {
-      this.groupTaskComp.getToDoListGroupTasks(this?.id);
+      this.groupTaskCardComp.getToDoListGroupTasks(this?.id);
     }
   }
 

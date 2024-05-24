@@ -85,5 +85,9 @@ export class ToDoListService {
   addComment(model: any, taskId: number) {
     return this.http.post(this.baseUrl + 'toDoList/add-comment/' + taskId, model);
   }
-  
+
+  getTaskComments(taskId: number) {
+    return this.http.get<any>(this.baseUrl + 'toDoList/get-comments/' + taskId, {});
+  }
+
 }

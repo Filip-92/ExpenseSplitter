@@ -249,5 +249,14 @@ namespace API.Controllers
             return BadRequest("Problem z dodawaniem komentarza");
         }
 
+        [HttpGet("get-comments/{taskId}")]
+        [AllowAnonymous]
+        public async Task<ActionResult> GetComments(int taskId)
+        {
+            var comments = await _unitOfWork.ToDoListRepository.GetComments(taskId);
+
+            return Ok(comments);
+        }
+
     }
 }

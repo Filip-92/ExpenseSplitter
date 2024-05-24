@@ -17,6 +17,7 @@ import { GroupTaskCardComponent } from '../group-task-card/group-task-card.compo
 })
 export class GroupTaskCardFormComponent {
   @Input() id: number;
+  @Input() tasks: any;
   toDoListScheduleForm: UntypedFormGroup;
   toDoListTimespanForm: UntypedFormGroup;
   validationErrors: string[] = [];
@@ -25,8 +26,7 @@ export class GroupTaskCardFormComponent {
 
   constructor(public accountService: AccountService, private toastr: ToastrService, 
     private fb: UntypedFormBuilder, private route: ActivatedRoute, private toDoListServ: ToDoListService,
-    private indivTaskComp: IndividualTasksComponent,
-  private groupTaskComp: GroupTaskCardComponent) { 
+    private indivTaskComp: IndividualTasksComponent, private groupTaskComp: GroupTaskCardComponent) { 
 
     }
 
@@ -55,7 +55,7 @@ export class GroupTaskCardFormComponent {
     this.toDoListServ.addToDoListTask(this.toDoListScheduleForm.value).subscribe(response => {
       this.toastr.success('Pomyślnie dodano zadanie');
       this.toDoListScheduleForm.reset();
-      if (this.id === undefined) {
+      if (this.id === undefined || this.id === 0) {
         this.indivTaskComp.getToDoListTasks();
       } else {
         this.groupTaskComp.getToDoListGroupTasks(this.id);

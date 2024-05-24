@@ -18,6 +18,6 @@ namespace API.Entities
         public string Username { get; set; }
         public bool IsDone { get; set; }
         public int? GroupId { get; set; }
-        public ICollection<Comment> Comments{ get; set; }
+        public ICollection<Comment> Comments { get; set; }
     }
 }

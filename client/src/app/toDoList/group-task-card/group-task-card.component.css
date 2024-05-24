@@ -12,7 +12,12 @@
     display: none;
 }
 
-#add:hover {
-    cursor: pointer;
-    color: greenyellow;
+.btn-info {
+    background-color: black !important;
+    border: 1px solid black;
+}
+
+.btn-info:hover {
+    color: red;
+    border: 1px solid white;
 }

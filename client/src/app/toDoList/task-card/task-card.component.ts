@@ -18,16 +18,22 @@ import { IndividualTasksComponent } from '../individual-tasks/individual-tasks.c
 export class TaskCardComponent {
   @Input() task: any;
   @Input() id: number;
+  tasks: any;
   validationErrors: string[] = [];
   commentField: boolean;
   commentForm: UntypedFormGroup;
   currentDate = new Date();
+  comments: any;
 
   constructor(public accountService: AccountService, private toDoListServ: ToDoListService,
-    private modalServ: NgbModal, private indivTaskComp: IndividualTasksComponent,
-    private groupTaskComp: GroupTaskCardComponent, private fb: UntypedFormBuilder, private toastr: ToastrService) { 
+    private modalServ: NgbModal, private indivTaskComp: IndividualTasksComponent, private groupTaskComp: GroupTaskCardComponent,
+     private fb: UntypedFormBuilder, private toastr: ToastrService) { 
 
     }
+
+  ngOnInit(): void {
+    this.getTaskComments(this.task.id);
+  }
 
   closeTask() {
     this.toDoListServ.closeTask(this.task).subscribe(() => {
@@ -38,12 +44,16 @@ export class TaskCardComponent {
 
   removeTask(taskId: number) {
     this.toDoListServ.removeTask(taskId).subscribe(() => {
-      this.indivTaskComp.tasks.splice(this.indivTaskComp.tasks.findIndex(p => p.id === taskId), 1);
+      if (this.id === undefined) {
+        this.indivTaskComp?.tasks?.splice(this.indivTaskComp?.tasks?.findIndex(p => p.id === taskId), 1);
+      } else {
+        this.groupTaskComp?.tasks?.splice(this.groupTaskComp?.tasks?.findIndex(p => p.id === taskId), 1);
+      }
     })
-    if (this.id === undefined) {
-      this.indivTaskComp.getToDoListTasks();
+    if (this.id === undefined || this.id === 0) {
+      this.indivTaskComp?.getToDoListTasks();
     } else {
-      this.groupTaskComp.getToDoListGroupTasks(this?.id);
+      this.groupTaskComp?.getToDoListGroupTasks(this.id);
     }
   }
 
@@ -73,6 +83,12 @@ export class TaskCardComponent {
         this.validationErrors = error;
       })
 
+  }
+
+  getTaskComments(id: number) {
+    this.toDoListServ.getTaskComments(id).subscribe(comments => {
+      this.comments = comments;
+    })
   }
 
   cancel() {

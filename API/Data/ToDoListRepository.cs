@@ -33,7 +33,7 @@ namespace API.Data
         {
             return await _context.ToDoListTasks
                         .IgnoreQueryFilters()
-                        .Where(m => m.Username == username && m.GroupId == null)
+                        .Where(m => m.Username == username && (m.GroupId == null || m.GroupId == 0))
                         .ToListAsync();
         }
 
@@ -41,7 +41,7 @@ namespace API.Data
         {
             return await _context.ToDoListTasks
                         .IgnoreQueryFilters()
-                        .Where(m => m.Username == username && m.GroupId == null && m.TaskDate.Date == currentDate.Date.Date)
+                        .Where(m => m.Username == username && (m.GroupId == null || m.GroupId == 0) && m.TaskDate.Date == currentDate.Date.Date)
                         .ToListAsync();
         }
 
@@ -51,14 +51,14 @@ namespace API.Data
             {
                 return await _context.ToDoListTasks
                     .IgnoreQueryFilters()
-                    .Where(m => m.Username == username && m.GroupId == null && m.TaskDate.Date >= from.Date.Date && m.TaskDate.Date <= to.Date.Date)
+                    .Where(m => m.Username == username && (m.GroupId == null || m.GroupId == 0) && m.TaskDate.Date >= from.Date.Date && m.TaskDate.Date <= to.Date.Date)
                     .ToListAsync();
             }
             else
             {
                 return await _context.ToDoListTasks
                     .IgnoreQueryFilters()
-                    .Where(m => m.Username == username && m.GroupId == null && m.TaskDate.Date == from.Date.Date)
+                    .Where(m => m.Username == username && (m.GroupId == null || m.GroupId == 0) && m.TaskDate.Date == from.Date.Date)
                     .ToListAsync();
             }
 
@@ -119,6 +119,22 @@ namespace API.Data
             return await _context.ToDoListTasks
                         .IgnoreQueryFilters()
                         .Where(m => m.GroupId == groupId)
+                        .ToListAsync();
+        }
+
+        public async Task<IEnumerable<CommentDto>> GetComments(int taskId)
+        {
+            return await _context.Comments
+                        .IgnoreQueryFilters()
+                        .Where(m => m.TaskId == taskId)
+                        .Select(u => new CommentDto
+                        {
+                            Id = u.Id,
+                            TaskId = u.TaskId,
+                            Username = u.Username,
+                            Content = u.Content,
+                            Uploaded = u.Uploaded,
+                        })
                         .ToListAsync();
         }
 

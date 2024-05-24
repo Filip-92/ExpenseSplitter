@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ToDoListService } from '../../_services/to-do-list.service';
 import { EditTaskModalComponent } from '../../modals/edit-task-modal/edit-task-modal.component';
@@ -10,10 +10,10 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./group-task-card.component.css']
 })
 export class GroupTaskCardComponent {
+  @Input() tasks: any;
   id: number = +this.route?.snapshot?.paramMap?.get('id');
   group: any;
   contributors: any;
-  tasks: any;
   validationErrors: string[] = [];
   addToGroup: boolean;
 
@@ -52,7 +52,7 @@ export class GroupTaskCardComponent {
 
   removeTask(taskId: number) {
     this.toDoListServ.removeTask(taskId).subscribe(() => {
-      this.tasks.splice(this.tasks.findIndex(p => p.id === taskId), 1);
+      this.tasks?.splice(this.tasks?.findIndex(p => p.id === taskId), 1);
     })
     this.getToDoListGroupTasks(this.id);
   }
