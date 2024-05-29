@@ -19,9 +19,12 @@
             </div>
         </div>
         <div *ngIf="more" class="col-2 mt-3">
-            <div *ngIf="(contributors?.length + 1) === spendings?.length && expense?.amount === round(sum)" style="color: green;">Rozliczone</div>
-            <div *ngIf="(contributors?.length + 1) !== spendings?.length || expense?.amount !== round(sum)" style="color: yellow;">Do rozliczenia</div>
+            <div *ngIf="contributors?.length === spendings?.length && expense?.amount === round(sum)" style="color: green;">Rozliczone</div>
+            <div *ngIf="contributors?.length !== spendings?.length || expense?.amount !== round(sum)" style="color: yellow;">Do rozliczenia</div>
             <i class="fa fa-arrow-up mr-2" (click)="showMore()"> Mniej</i>
+        </div>
+        <div *ngIf="more" class="col-2" style="margin-top: auto; margin-bottom: auto;">
+            <i class="fa fa-trash" (click)="removeExpense(expense.id)" title="Usuń"></i>
         </div>
     </div>
 </div>

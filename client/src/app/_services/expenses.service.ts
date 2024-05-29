@@ -38,6 +38,10 @@ export class ExpensesService {
     return this.http.post(this.baseUrl + 'expenses/add-expense-amount', model);
   }
 
+  removeExpense(expenseId: any) {
+    return this.http.post(this.baseUrl + 'expenses/remove-expense/' + expenseId, {});
+  }
+
   getCategoryExpenses(categoryId: number) {
     return this.http.get<Category>(this.baseUrl + 'users/get-expenses/' + categoryId, {});
   }

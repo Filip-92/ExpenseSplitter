@@ -211,5 +211,14 @@ namespace API.Controllers
         {
             return await _userManager.Users.AnyAsync(x => x.Email == email);
         }
+
+        [HttpGet("get-user-photo/{username}")]
+        public async Task<ActionResult> GetUserPhoto(string username)
+        {
+            var user = await _unitOfWork.UserRepository.GetUserByUsernameAsync(username);
+            var photo = await _unitOfWork.UserRepository.GetUserPhoto(user.Id);
+
+            return Ok(photo);
+        }
     }
 } 

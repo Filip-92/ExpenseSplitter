@@ -1,7 +1,7 @@
 <div class="card">
     <div class="row">
         <div class="col-4 text-left">
-            <a id="goTo" routerLink="/to-do-list/{{group.id}}/{{convertText(group.name)}}" class="mr-5">Idź do</a>
+            <a id="goTo" routerLink="/to-do-list/{{group.id}}/{{convertText(group.name)}}" class="ml-3 mr-5">Idź do</a>
             <span id="group" (click)="showMore()">{{group.name}}<i *ngIf="more" class="fa fa-arrow-up ml-2"></i><i *ngIf="!more" class="fa fa-arrow-down ml-2"></i></span>
         </div>
         <div class="col-3">

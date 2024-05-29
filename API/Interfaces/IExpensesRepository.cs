@@ -13,6 +13,7 @@ namespace API.Interfaces
         Task<IEnumerable<Category>> GetClosedCategories(string username);
         Task<Category> GetCategoryById(int id);
         Task<IEnumerable<Expenses>> GetCategoryExpenses(int id);
+        Task<Expenses> GetExpenseById(int id);
         Task<IEnumerable<Contributors>> GetCategoryContributors(int id);
         Task<IEnumerable<Expenses>> GetContributorExpenses(int id, string username);
         Task<IEnumerable<Expenses>> GetContributorExpensesSum(int id, string username);

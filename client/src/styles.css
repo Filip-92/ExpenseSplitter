@@ -1,11 +1,24 @@
 body.dark-mode {
-  background-color: #2d3436;
+  background-color: #364144;
   color: #dfe6e9;
 }
 
-body.dark-mode > .card {
-  background-color: #2d3436;
+body.dark-mode .card {
+  border: 1px solid white;
+  background-color: black;
   color: #dfe6e9;
+}
+
+body.dark-mode .sidemenu-item:hover {
+  color: red;
+}
+
+body.dark-mode #modeToggle:hover {
+  color: red !important;
+}
+
+body.dark-mode #modeToggle .fa-moon-o:hover {
+  color: yellow !important;
 }
 
 body.light-mode {
@@ -13,17 +26,88 @@ body.light-mode {
   color: #2d3436;
 }
 
-body.light-mode > .card {
-  background-color: #dfe6e9;
-  color: #2d3436;
+body.light-mode #hr {
+  color: black !important;
+  background-color: black !important;
 }
 
-hr.light-mode {
+body.light-mode .card {
+  border: 1px solid black !important;
+  background-color: white !important;
+  color: #2d3436 !important;
+  font-weight: 700;
+}
+
+body.light-mode .sidebar {
+  background-color: #6c757d !important;
+}
+
+body.light-mode .sidemenu-item {
+  border: 1px solid black;
+  background-color: white !important;
+}
+
+body.light-mode .sidemenu-item:hover {
+  border: 1px solid red;
+  background-color: rgb(158, 158, 158) !important;
+  color: white;
+}
+
+body.light-mode .navbar {
+  background-color: #6c757d !important;
+  color: black;
+}
+
+body.light-mode .navbar .fa {
   color: black !important;
 }
 
-.card.light-mode {
-  background-color: whitesmoke !important;
+body.light-mode #modeToggle {
+  color: black !important;
+}
+
+body.light-mode #modeToggle:hover {
+  color: red !important;
+}
+
+body.light-mode .navbar .fa:hover {
+  color: red !important;
+}
+
+body.light-mode .fa-sun:hover {
+  color: yellow !important;
+}
+
+body.light-mode .fa-trash:hover {
+  color: red !important;
+}
+
+body.dark-mode .fa-photo:hover {
+  color: orange !important;
+}
+
+body.light-mode .fa-photo:hover {
+  color: orange !important;
+}
+
+body.light-mode #toggle .navbar-toggler-icon {
+  color: black !important;
+}
+
+body.light-mode a {
+  color: #2d3436 !important;
+}
+
+body.light-mode a:hover {
+  color: red !important;
+}
+
+body.light-mode i {
+  color: black !important;
+}
+
+body.light-mode #logo {
+  background-image: url('././assets/resources-512.webp');
 }
 
 body:not(.dark-mode-preloading) {

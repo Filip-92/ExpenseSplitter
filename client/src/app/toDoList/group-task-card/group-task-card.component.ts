@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ToDoListService } from '../../_services/to-do-list.service';
 import { EditTaskModalComponent } from '../../modals/edit-task-modal/edit-task-modal.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-group-task-card',
@@ -17,7 +18,9 @@ export class GroupTaskCardComponent {
   validationErrors: string[] = [];
   addToGroup: boolean;
 
-  constructor(private route: ActivatedRoute, private toDoListServ: ToDoListService, private modalServ: NgbModal) {}
+  constructor(private route: ActivatedRoute, private toDoListServ: ToDoListService, private modalServ: NgbModal,
+    private _location: Location
+  ) {}
 
   ngOnInit() {
     this.getGroup(this.id);
@@ -29,6 +32,10 @@ export class GroupTaskCardComponent {
     this.toDoListServ.getGroup(id).subscribe(group => {
       this.group = group;
     })
+  }
+
+  backClicked() {
+    this._location.back();
   }
 
   getGroupContributors(id: number) {

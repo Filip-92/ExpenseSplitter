@@ -1,12 +1,9 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { AccountService } from '../../_services/account.service';
-import { ToastrService } from 'ngx-toastr';
-import { Router } from '@angular/router';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ToDoListService } from '../../_services/to-do-list.service';
 import { DatePipe } from '@angular/common';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { EditTaskModalComponent } from '../../modals/edit-task-modal/edit-task-modal.component';
+import { Location } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-to-do-list',
@@ -16,20 +13,22 @@ import { EditTaskModalComponent } from '../../modals/edit-task-modal/edit-task-m
 })
 export class ToDoListComponent {
   @Output() cancelRegister = new EventEmitter();
-  toDoListScheduleForm: UntypedFormGroup;
-  toDoListTimespanForm: UntypedFormGroup;
-  validationErrors: string[] = [];
   dailyTasks: any;
   tasks: any;
   currentDate = new Date();
   group: boolean;
   
-  constructor(public accountService: AccountService, private toDoListServ: ToDoListService, private datePipe: DatePipe) { 
+  constructor(public accountService: AccountService, private toDoListServ: ToDoListService, private datePipe: DatePipe,
+    private location: Location, private router: Router
+  ) { 
 
     }
 
   ngOnInit(): void {
     this.getToDoListTasks();
+    if (this.router.url.includes('group')) {
+      this.group = true;
+    }
     //this.getDailyToDoListTasks();
   }
 
@@ -50,8 +49,10 @@ export class ToDoListComponent {
     this.group = !this.group;
     if (this.group === true) {
       this.getToDoListTasks();
+      this.location.replaceState("to-do-list/group");
     } else {
       this.getToDoListTasks();
+      this.location.replaceState("to-do-list");
     }
   }
 

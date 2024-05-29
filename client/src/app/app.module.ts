@@ -224,6 +224,9 @@ import { GroupTasksFilterComponent } from './toDoList/group-tasks-filter/group-t
     {provide: NavComponent, useClass: NavComponent, multi: true},
     {provide: IndividualTasksComponent, useClass: IndividualTasksComponent, multi: true},
     {provide: GroupTaskCardComponent, useClass: GroupTaskCardComponent, multi: true},
+    {provide: ExpenseFormComponent, useClass: ExpenseFormComponent, multi: true},
+    {provide: TableComponent, useClass: TableComponent, multi: true},
+    {provide: SpendingsModalComponent, useClass: SpendingsModalComponent, multi: true},
     {provide: LOCALE_ID, useValue: "pl", useFactory: (sessionService) => sessionService.getLocale()},
     {
       provide: RECAPTCHA_SETTINGS,

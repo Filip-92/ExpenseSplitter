@@ -61,6 +61,13 @@ namespace API.Data
                         .ToListAsync();
         }
 
+        public async Task<Expenses> GetExpenseById(int id)
+        {
+            return await _context.Expenses
+                .IgnoreQueryFilters()
+                .SingleOrDefaultAsync(x => x.Id == id);
+        }
+
         public async Task<IEnumerable<Contributors>> GetCategoryContributors(int id)
         {
             return await _context.Contributors

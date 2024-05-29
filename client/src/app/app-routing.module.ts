@@ -31,6 +31,7 @@ const routes: Routes = [
     children: [
       {path: 'expenses', component: ExpensesComponent},
       {path: 'to-do-list', component: ToDoListComponent},
+      {path: 'to-do-list/group', component: ToDoListComponent},
       {path: 'to-do-list/:id/:groupName', component: GroupTaskCardComponent},
       {path: 'uzytkownicy', component: MemberListComponent},
       {path: 'uzytkownicy/:username', component: MemberDetailComponent, resolve: {member: MemberDetailedResolver}},

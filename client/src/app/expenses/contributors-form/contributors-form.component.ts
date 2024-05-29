@@ -5,6 +5,7 @@ import { ExpensesService } from '../../_services/expenses.service';
 import { take } from 'rxjs/operators';
 import { User } from '../../_models/user';
 import { AccountService } from '../../_services/account.service';
+import { ExpenseFormComponent } from '../expense-form/expense-form.component';
 
 @Component({
   selector: 'app-contributors-form',
@@ -22,7 +23,7 @@ export class ContributorsFormComponent {
   alreadyAdded: boolean;
 
   constructor(private fb: UntypedFormBuilder, private toastr: ToastrService, private expensesServ: ExpensesService,
-    private accountService: AccountService) {
+    private accountService: AccountService, private expenseForm: ExpenseFormComponent) {
     this.accountService.currentUser$.pipe(take(1)).subscribe(user => this.user = user);
    }
 

@@ -21,3 +21,9 @@
     color: red;
     border: 1px solid white;
 }
+
+#goBack:hover {
+    width: 150px !important;
+    cursor: pointer;
+    color: green;
+}

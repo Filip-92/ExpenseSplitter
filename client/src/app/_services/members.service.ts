@@ -104,16 +104,16 @@ export class MembersService {
     return this.http.delete(this.baseUrl + 'users/delete-meme/' + memeId);
   }
 
-  getUserPhoto(id: number) {
-    return this.http.get<Photo>(this.baseUrl + 'memes/get-user-photo/' + id);
+  getUserPhoto(username: string) {
+    return this.http.get<Photo>(this.baseUrl + 'account/get-user-photo/' + username);
   }
 
   getUserPhotoByName() {
     return this.http.get<Photo>(this.baseUrl + 'memes/get-user-photo-by-name');
   }
 
-  getNewUserPhoto(id: number) {
-    return this.http.get<Photo>(this.baseUrl + 'memes/get-new-user-photo/' + id);
+  getNewUserPhoto(username: string) {
+    return this.http.get<Photo>(this.baseUrl + 'memes/get-new-user-photo/' + username);
   }
 
   searchForMember(searchString: string, page?: number, itemsPerPage?: number) {

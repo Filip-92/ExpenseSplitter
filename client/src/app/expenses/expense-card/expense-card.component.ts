@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { ExpensesService } from '../../_services/expenses.service';
+import { TableComponent } from '../table/table.component';
 
 @Component({
   selector: 'app-expense-card',
@@ -19,7 +20,7 @@ export class ExpenseCardComponent {
     this.getExpenseSpendings(this.expense.id);
   }
 
-  constructor(private expensesServ: ExpensesService) { }
+  constructor(private expensesServ: ExpensesService, private tableComp: TableComponent) { }
 
 
   getExpenseSpendings(expenseId: number) {
@@ -38,6 +39,13 @@ export class ExpenseCardComponent {
 
   round(priceToPay: number) {
     return Math.round(priceToPay);
+  }
+
+  removeExpense(expenseId: number) {
+    this.expensesServ.removeExpense(expenseId).subscribe(() => {
+      this.tableComp.expenses.splice(this.tableComp.expenses.findIndex(p => p.id === expenseId), 1);
+    })
+    this.tableComp.getCategoryExpenses(this.category.id);
   }
 
 }

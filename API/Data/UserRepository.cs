@@ -214,10 +214,22 @@ namespace API.Data
                 .SingleOrDefaultAsync(x => x.Id == id);
         }
 
+        public async Task<Photo> GetUserPhoto(int id)
+        {
+            return await _context.Photos
+                .IgnoreQueryFilters()
+                .SingleOrDefaultAsync(x => x.AppUserId == id);
+        }
+
         // Expense category
         public void RemoveCategory(Category category)
         {
             _context.Category.Remove(category);
+        }
+
+        public void RemoveExpense(Expenses expense)
+        {
+            _context.Expenses.Remove(expense);
         }
 
         public void RemoveSpending(Spendings spending)

@@ -1,7 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ExpensesService } from '../../_services/expenses.service';
 import { ToastrService } from 'ngx-toastr';
+import { TableComponent } from '../table/table.component';
 
 @Component({
   selector: 'app-expense-form',
@@ -12,6 +13,7 @@ export class ExpenseFormComponent {
   expensesForm: UntypedFormGroup;
   validationErrors: string[] = [];
   @Input() category: any;
+  @ViewChild(TableComponent) table;
   expenses: any;
   contributors: any;
 
@@ -21,7 +23,7 @@ export class ExpenseFormComponent {
     this.getCategoryContributors(this.category.id);
   }
 
-  constructor(private fb: UntypedFormBuilder, private toastr: ToastrService, private expensesServ: ExpensesService) { }
+  constructor(private fb: UntypedFormBuilder, private toastr: ToastrService, private expensesServ: ExpensesService, private tableComp: TableComponent) { }
 
   initializeForm() {
     this.expensesForm = this.fb.group({
@@ -45,7 +47,7 @@ export class ExpenseFormComponent {
 
   getCategoryExpenses(id: number) {
     this.expensesServ.getCategoryExpenses(id).subscribe(expenses => {
-      this.expenses = expenses;
+      this.tableComp.expenses = expenses;
     })
   }
 

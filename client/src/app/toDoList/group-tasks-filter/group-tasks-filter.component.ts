@@ -6,6 +6,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { AccountService } from '../../_services/account.service';
 import { ToDoListService } from '../../_services/to-do-list.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-group-tasks-filter',
@@ -23,13 +24,16 @@ export class GroupTasksFilterComponent {
   group: boolean;
   filter: boolean;
   filterTasksBool: boolean;
+  protected from: string;
+  protected to: string;
 
   constructor(public accountService: AccountService, private toastr: ToastrService, 
-    private fb: UntypedFormBuilder, private router: Router, private toDoListServ: ToDoListService,
-    private datePipe: DatePipe, private modalServ: NgbModal) { }
+    private fb: UntypedFormBuilder, private toDoListServ: ToDoListService,
+    private datePipe: DatePipe, private cookieService: CookieService) { }
 
   ngOnInit(): void {
     this.initializeForm();
+    this.initializeFormTimespan();
     //this.getToDoListGroupTasks(this.id);
   }
 
@@ -38,11 +42,23 @@ export class GroupTasksFilterComponent {
       taskDate: ['', Validators.required],
       name: ['', Validators.required],
       groupdId: [this.id]
-    }),
-    this.toDoListTimespanForm = this.fb.group({
-      from: [this.currentDate],
-      to: [this.currentDate]
     })
+  }
+
+  initializeFormTimespan() {
+    this.from = this.cookieService.get('from');
+    this.to = this.cookieService.get('to');
+    if (this.from === undefined || this.to === undefined) {
+      this.toDoListTimespanForm = this.fb.group({
+        from: [this.currentDate],
+        to: [this.currentDate]
+      })
+    } else {
+      this.toDoListTimespanForm = this.fb.group({
+        from: [new Date(this.from)],
+        to: [new Date(this.to)]
+      })
+    }
   }
 
   cancel() {

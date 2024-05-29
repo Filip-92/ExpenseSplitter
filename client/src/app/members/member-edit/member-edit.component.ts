@@ -82,8 +82,8 @@ export class MemberEditComponent implements OnInit {
     console.log("hey")
  }
 
-  getUserPhoto(id: number) {
-    this.memberService?.getUserPhoto(id)?.subscribe(photo => {
+  getUserPhoto(username: string) {
+    this.memberService?.getUserPhoto(username)?.subscribe(photo => {
       this.url = photo?.url;
     })
   }

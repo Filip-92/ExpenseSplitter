@@ -478,6 +478,7 @@ namespace API.Controllers
         }
 
         [HttpGet("who-owes-who/{categoryId}/{whoPaid}/{whoOwes}")]
+        [AllowAnonymous]
         public async Task<ActionResult> WhoOwesWho(int categoryId, string whoPaid, string whoOwes)
         {
             var debts = await _unitOfWork.ExpensesRepository.WhoOwesWho(categoryId, whoPaid, whoOwes);
@@ -498,10 +499,9 @@ namespace API.Controllers
 
             foreach(var debt2 in debts2)
             {
-                debts2Array[i] = debt2.Amount;
+                debts2Array[j] = debt2.Amount;
                 j++;
             }
-
 
             return Ok(debtsArray.Sum() - debts2Array.Sum());
         }

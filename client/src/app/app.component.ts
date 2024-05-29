@@ -13,11 +13,10 @@ import { TimeagoIntl } from 'ngx-timeago';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'Daily Dose of Memes';
+  title = 'Expense Splitter';
   users: any;
 
-  constructor(private accountService: AccountService, private presence: PresenceService,
-    private http: HttpClient, private intl: TimeagoIntl) {
+  constructor(private accountService: AccountService, private presence: PresenceService, private intl: TimeagoIntl) {
       intl.strings = stringsPL;
       intl.changes.next();
     }

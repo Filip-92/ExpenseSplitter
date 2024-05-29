@@ -199,6 +199,20 @@ namespace API.Controllers
             return BadRequest("Problem z dodawaniem wydatku");
         }
 
+        [HttpPost("remove-expense/{expenseId}")]
+        public async Task<ActionResult> RemoveExpense(int expenseId)
+        {
+            var expense = await _unitOfWork.ExpensesRepository.GetExpenseById(expenseId);
+
+            if (expense == null) return NotFound("Could not find expense");
+
+            _unitOfWork.UserRepository.RemoveExpense(expense);
+
+            await _unitOfWork.Complete();
+
+            return Ok();
+        }
+
         [HttpPut("update-category-name/{categoryId}")]
         public async Task<ActionResult> UpdateCategoryName(CategoryUpdateDto categoryUpdateDto, int categoryId)
         {

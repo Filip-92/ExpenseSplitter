@@ -2,6 +2,7 @@ import { Component, HostListener, Input, ViewChild } from '@angular/core';
 import { ExpensesService } from '../../_services/expenses.service';
 import { ToastrService } from 'ngx-toastr';
 import { FormArray, FormControl, FormGroup, NgForm, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { TableComponent } from '../../expenses/table/table.component';
 
 @Component({
   selector: 'app-spendings-modal',

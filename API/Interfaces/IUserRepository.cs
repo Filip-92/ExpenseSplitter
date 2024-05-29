@@ -27,7 +27,9 @@ namespace API.Interfaces
         Task<ContactForm> GetMessageById(int id);
         void RemoveMessage(ContactForm message);
         Task<AppUser> CheckIfBanned(int id);
+        Task<Photo> GetUserPhoto(int id);
         void RemoveCategory(Category category);
+        void RemoveExpense(Expenses expense);
         void RemoveSpending(Spendings spending);
         void RemoveTask(ToDoListTasks task);
         void RemoveGroup(TasksGroup group);

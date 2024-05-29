@@ -89,8 +89,8 @@ export class MemberDetailComponent implements OnInit, OnDestroy {
     }
   }
 
-  getUserPhoto(id: number) {
-    this.memberService.getUserPhoto(id).subscribe(photo => {
+  getUserPhoto(username: string) {
+    this.memberService.getUserPhoto(username).subscribe(photo => {
       this.url = photo?.url;
     })
   }
@@ -100,7 +100,7 @@ export class MemberDetailComponent implements OnInit, OnDestroy {
     this.getUsers();
     this.loadLikes();
     if (this.member.id !== 11) {
-      this.getUserPhoto(this.member.id);
+      this.getUserPhoto(this.member.username);
     } else {
       this.url = '././assets/LogoImage.png';
     }
