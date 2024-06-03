@@ -13,8 +13,6 @@ import { take } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
 import { Pagination } from 'src/app/_models/pagination';
 import { DatePipe } from '@angular/common';
-import { Meme } from 'src/app/_models/meme';
-import { MemeService } from 'src/app/_services/meme.service';
 import { HttpClient } from '@angular/common/http';
 import { Reply } from 'src/app/_models/reply';
 import { environment } from 'src/environments/environment';
@@ -28,7 +26,6 @@ import { AdminService } from 'src/app/_services/admin.service';
 
 export class MemberDetailComponent implements OnInit, OnDestroy {
   member: Member = {
-    memes: [],
     memeUrl: '',
     id: 0,
     username: '',
@@ -55,7 +52,6 @@ export class MemberDetailComponent implements OnInit, OnDestroy {
   pagination: Pagination;
   @ViewChild('scrollMe') meme : ElementRef;
   scrolltop: number=null;
-  memes: Meme[];
   userId: number;
   comments: Comment[];
   replies: Reply[];
@@ -68,8 +64,7 @@ export class MemberDetailComponent implements OnInit, OnDestroy {
   constructor(public presence: PresenceService, private route: ActivatedRoute, 
     private messageService: MessageService, private accountService: AccountService,
     private router: Router, private memberService: MembersService, private http: HttpClient, 
-    private toastr: ToastrService, public datepipe: DatePipe, private memeService: MemeService,
-    private adminService: AdminService) { 
+    private toastr: ToastrService, public datepipe: DatePipe, private adminService: AdminService) { 
       this.accountService.currentUser$.pipe(take(1)).subscribe(user => this.user = user);
       this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     }
@@ -106,11 +101,7 @@ export class MemberDetailComponent implements OnInit, OnDestroy {
     }
 
     this.galleryImages = this.getImages();
-    this.getMemberMemes(this.member.username);
-    this.getMemberComments(this.member.username);
-    this.getMemberReplies(this.member.username);
     this.getMemberNumberOfLikes(this.member.username);
-    this.getMemberMainMemes(this.member.username);
     this.loading = false;
   }
 
@@ -179,22 +170,11 @@ export class MemberDetailComponent implements OnInit, OnDestroy {
     })
   }
 
-  getMemberMemes(username: string) {
-    this.memeService.getMemberMemes(username, this.pageNumber, this.pageSize).subscribe(response => {
-      this.memes = response.result;
-      this.pagination = response.pagination;
-    });
-  }
 
-  getMemberMainMemes(username: string) {
-    this.memeService.getMemberMainMemes(username).subscribe(memes => {
-      this.mainMemes = memes;
-    })
-  }
+
 
   pageChanged(event: any) {
     this.pageNumber = event.page;
-    this.getMemberMemes(this.member.username);
     window.scrollTo(0, 500);
     this.scrolltop = 0;
     this.meme.nativeElement.scrollTo(0, 0);
@@ -213,17 +193,6 @@ export class MemberDetailComponent implements OnInit, OnDestroy {
     })
   }
 
-  getMemberComments(username: string) {
-    this.memeService.getMemberComments(username).subscribe(comments => {
-      this.comments = comments;
-    });
-  }
-
-  getMemberReplies(username: string) {
-    this.memeService.getMemberReplies(username).subscribe(replies => {
-      this.replies = replies;
-    });
-  }
 
   getMemberNumberOfLikes(username: string) {
     this.memberService.getAllUserLikesNumber(username).subscribe(numberOfLikes => {
@@ -241,9 +210,4 @@ export class MemberDetailComponent implements OnInit, OnDestroy {
     }
   }
 
-  rejectMeme(memeId: number) {
-    this.adminService.rejectMeme(memeId).subscribe(() => {
-      this.memes?.splice(this.memes?.findIndex(p => p.id === memeId), 1);
-    })
-  }
 }

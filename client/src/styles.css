@@ -39,7 +39,7 @@ body.light-mode .card {
 }
 
 body.light-mode .sidebar {
-  background-color: #6c757d !important;
+  background-color: #595f63 !important;
 }
 
 body.light-mode .sidemenu-item {
@@ -104,10 +104,6 @@ body.light-mode a:hover {
 
 body.light-mode i {
   color: black !important;
-}
-
-body.light-mode #logo {
-  background-image: url('././assets/resources-512.webp');
 }
 
 body:not(.dark-mode-preloading) {

@@ -41,9 +41,6 @@
                 <i class="fa fa-user-plus mr-2" aria-hidden="true"></i><strong>Dołączył: </strong><span style="color: greenyellow">{{changeDateFormat(member.created)}}</span>
             </div>
             <div class="mb-3">
-                <i class="fa fa-photo mr-2"></i>Ilość wrzut: <span style="color: greenyellow">{{ member.memes?.length || '0' }} / {{ mainMemes || '0' }}</span>
-            </div>
-            <div class="mb-3">
                 <i class="fa fa-plus mr-2"></i>Ilość plusów: <span style="color: greenyellow">{{ numberOfLikes }}</span>
                 <button id="likeButton" (click)="addLike(member)" class="btn btn-success mb-3" [ngStyle]="!liked ? { 'color': 'white' } : { 'background-color': 'green !important', 'color': 'green' }"><i class="fa fa-plus"></i></button>
             </div>
@@ -62,12 +59,6 @@
             [scrollTop]="scrolltop"
         >
         <div *ngIf="memes?.length > 0">
-            <div *ngFor="let meme of memes">
-                <app-meme-card [meme]="meme"></app-meme-card>
-                <div *appHasRole='["Admin", "Moderator"]'  class="text-center">
-                    <button class="btn btn-danger mb-2" id="reject" (click)='rejectMeme(meme.id)'><i class="fa fa-trash"></i> Usuń</button>
-                </div>
-            </div>
             <div class="d-flex justify-content-center" *ngIf="memes?.length !== 0 && pagination">
                 <pagination
                     [boundaryLinks]="true" 

@@ -8,8 +8,6 @@ import { ToastrService } from 'ngx-toastr';
 import { NgForm } from '@angular/forms';
 import { Pagination } from 'src/app/_models/pagination';
 import { Router } from '@angular/router';
-import { Meme } from 'src/app/_models/meme';
-import { MemeService } from 'src/app/_services/meme.service';
 import { Reply } from 'src/app/_models/reply';
 import { HelperService } from 'src/app/_services/helper.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -33,7 +31,6 @@ export class MemberEditComponent implements OnInit {
   pageNumber = 0;
   pageSize = 8;
   pagination: Pagination;
-  memes: Meme[];
   comments: Comment[];
   replies: Reply[];
   numberOfLikes: number = 0;
@@ -44,8 +41,7 @@ export class MemberEditComponent implements OnInit {
   loadingMember: boolean = false;
 
   constructor(private accountService: AccountService, private memberService: MembersService, 
-    private toastr: ToastrService, private router: Router, private memeService: MemeService,
-    private helperService: HelperService, private modalServ: NgbModal, private titleService: Title) { 
+    private toastr: ToastrService, private router: Router, private helperService: HelperService, private modalServ: NgbModal, private titleService: Title) { 
       this.accountService.currentUser$.pipe(take(1)).subscribe(user => this.user = user);
   }
 
@@ -56,7 +52,6 @@ export class MemberEditComponent implements OnInit {
     if ("user" in localStorage) {
       this.loadMember();
       this.getMemberDetails();
-      this.getMemberMemes(this?.user?.username);
     } else {
       this.toastr.warning("Zaloguj się aby mieć dostęp");
       this.router.navigateByUrl('/');
@@ -69,9 +64,6 @@ export class MemberEditComponent implements OnInit {
   getMemberDetails() {
     this.loading = true;
     this.getMemberNumberOfLikes(this?.user?.username);
-    this.getMemberMainMemes(this?.user?.username);
-    this.getMemberComments(this?.user?.username);
-    this.getMemberReplies(this?.user?.username);
     this.titleService.setTitle("Profil użytkownika " + this?.user?.username);
     this.loadLikes();
     this.loading = false;
@@ -93,19 +85,6 @@ export class MemberEditComponent implements OnInit {
         this.memberService?.deletePhoto(p.id).subscribe(() => {
           this.member.photos = this?.member?.photos?.filter(x => x.id !== p.id);
         })
-    })
-  }
-
-  getMemberMemes(username: string) {
-    this.memeService.getMemberMemes(username, this.pageNumber, this.pageSize).subscribe(response => {
-      this.memes = response?.result;
-      this.pagination = response?.pagination;
-    });
-  }
-
-  getMemberMainMemes(username: string) {
-    this.memeService.getMemberMainMemes(username).subscribe(memes => {
-      this.mainMemes = memes;
     })
   }
 
@@ -136,11 +115,6 @@ export class MemberEditComponent implements OnInit {
     return newDate;
   }
 
-  removeMeme(memeId) {
-    this.memeService?.removeMeme(memeId)?.subscribe(() => {
-      this.memes?.splice(this?.memes?.findIndex(p => p.id === memeId), 1);
-    })
-  }
 
   deletePhoto(photoId: number) {
     this.memberService.deletePhoto(photoId).subscribe(() => {
@@ -150,19 +124,6 @@ export class MemberEditComponent implements OnInit {
 
   pageChanged(event: any) {
     this.pageNumber = event.page;
-    this.getMemberMemes(this.user.username);
-  }
-
-  getMemberComments(username: string) {
-    this.memeService.getMemberComments(username).subscribe(comments => {
-      this.comments = comments;
-    });
-  }
-
-  getMemberReplies(username: string) {
-    this.memeService.getMemberReplies(username).subscribe(replies => {
-      this.replies = replies;
-    });
   }
 
   getMemberNumberOfLikes(username: string) {

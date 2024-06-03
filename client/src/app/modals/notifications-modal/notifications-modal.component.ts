@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NavComponent } from 'src/app/nav/nav.component';
 import { AccountService } from 'src/app/_services/account.service';
-import { MemeService } from 'src/app/_services/meme.service';
 
 @Component({
   selector: 'app-notifications-modal',
@@ -15,7 +14,7 @@ export class NotificationsModalComponent implements OnInit {
   loading: boolean = false;
   meme: any;
 
-  constructor(private accountService: AccountService, private memeService: MemeService) { }
+  constructor(private accountService: AccountService) { }
 
   notifications: any;
 

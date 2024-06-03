@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { MemeService } from 'src/app/_services/meme.service';
 
 @Component({
   selector: 'app-meme-thumbnail',
@@ -13,21 +12,9 @@ export class MemeThumbnailComponent implements OnInit {
   youtubeThumbnail: string;
   loading: boolean;
 
-  constructor(private memeService: MemeService) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.getMeme(this.memeId);
-  }
-
-  getMeme(memeId: number) {
-    this.loading = true;
-    this.memeService.getMeme(memeId).subscribe(meme => {
-      this.meme = meme;
-      if (this.meme?.url.includes("youtube-nocookie")) {
-        this.extractYoutubeVideoId(this.meme?.url);
-      }
-      this.loading = false;
-    });
   }
 
   checkURL(url: string) {

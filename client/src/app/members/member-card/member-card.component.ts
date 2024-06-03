@@ -5,7 +5,6 @@ import { Pagination } from 'src/app/_models/pagination';
 import { Photo } from 'src/app/_models/photo';
 import { Reply } from 'src/app/_models/reply';
 import { MembersService } from 'src/app/_services/members.service';
-import { MemeService } from 'src/app/_services/meme.service';
 import { PresenceService } from 'src/app/_services/presence.service';
 
 @Component({
@@ -31,7 +30,7 @@ export class MemberCardComponent implements OnInit {
   memes: any;
 
   constructor(private memberService: MembersService, private toastr: ToastrService, 
-    public presence: PresenceService, private memeService: MemeService) { }
+    public presence: PresenceService) { }
 
   ngOnInit(): void {
     //     if (this.member.id !== 11) {

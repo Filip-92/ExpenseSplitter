@@ -7,7 +7,6 @@ import { Pagination } from '../_models/pagination';
 import { MessageService } from '../_services/message.service';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { Division } from '../_models/division';
-import { MemeService } from '../_services/meme.service';
 import { catchError, take } from 'rxjs/operators';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NotificationsModalComponent } from '../modals/notifications-modal/notifications-modal.component';
@@ -69,7 +68,7 @@ export class NavComponent implements OnInit {
 
   constructor(public accountService: AccountService, public router: Router, 
     private messageService: MessageService, private deviceService: DeviceDetectorService, 
-    private memeService: MemeService, private modalServ: NgbModal, private toastr: ToastrService) {
+    private modalServ: NgbModal, private toastr: ToastrService) {
       this.accountService.currentUser$.pipe(take(1)).subscribe(user => this.user = user);
      };
 
@@ -136,12 +135,6 @@ export class NavComponent implements OnInit {
   cancelRegisterMode(event: boolean) {
     this.registerMode = event;
     this.loginMode = true;
-  }
-
-  getDivisions() {
-    this.memeService.getDivisions().subscribe(divisions => {
-      this.divisions = divisions;
-    });
   }
 
   openNotificationsModal(username: string) {

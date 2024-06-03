@@ -2,7 +2,6 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { Meme } from '../_models/meme';
 import { ContactFormMessages } from '../_models/contactFormMessages';
 import { PaginatedResult } from '../_models/pagination';
 import { Photo } from '../_models/photo';
@@ -16,7 +15,6 @@ import { Member } from '../_models/member';
 export class AdminService {
   baseUrl = environment.apiUrl;
   divisions: any;
-  paginatedResult: PaginatedResult<Meme[]> = new PaginatedResult<Meme[]>();
   paginatedResultMembers: PaginatedResult<Member[]> = new PaginatedResult<Member[]>();
   memberCache = new Map();
 
@@ -70,23 +68,6 @@ export class AdminService {
     return this.http.post(this.baseUrl + 'admin/edit-roles/' + username + '?roles=' + roles, {});
   }
 
-  getMemesForApproval(page?: number, itemsPerPage?: number) {
-  let params = new HttpParams();
-
-    if (page !== null && itemsPerPage !== null) {
-      params = params.append('pageNumber', page.toString());
-      params = params.append('pageSize', itemsPerPage.toString());
-    }
-    return this.http.get<Meme[]>(this.baseUrl + 'admin/memes-to-moderate', {observe: 'response', params}).pipe(
-      map(response => {
-        this.paginatedResult.result = response.body;
-        if (response.headers.get('Pagination') !== null) {
-          this.paginatedResult.pagination = JSON.parse(response.headers.get('Pagination'));
-        }
-        return this.paginatedResult;
-      })
-    );
-  }
 
   searchForUser(searchString: string) {
     return this.http.get<Photo>(this.baseUrl + 'admin/search-users/' + searchString);

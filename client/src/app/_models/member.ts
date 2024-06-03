@@ -1,4 +1,3 @@
-import { Meme } from './meme';
 import { Photo } from './photo';
 
 export interface Member {
@@ -11,7 +10,6 @@ export interface Member {
     lastActive: Date;
     gender: string;
     photos: Photo[];
-    memes: Meme[];
     comments: Comment[];
     numberOflikes: number;
   }

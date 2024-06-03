@@ -55,7 +55,6 @@ import { UserCardComponent } from './admin/user-card/user-card.component';
 import { SiteManagementComponent } from './admin/site-management/site-management.component';
 import { NotificationsModalComponent } from './modals/notifications-modal/notifications-modal.component';
 import { ChangePasswordComponent } from './members/change-password/change-password.component';
-import { MemberRepliesComponent } from './members/member-replies/member-replies.component';
 import { MessageComponent } from './members/message/message.component';
 import { RemoveUserComponent } from './modals/remove-user/remove-user.component';
 import { RemoveAccountComponent } from './modals/remove-account/remove-account.component';
@@ -142,7 +141,6 @@ import { CommentsComponent } from './toDoList/comments/comments.component';
     SiteManagementComponent,
     NotificationsModalComponent,
     ChangePasswordComponent,
-    MemberRepliesComponent,
     MessageComponent,
     RemoveUserComponent,
     RemoveAccountComponent,
