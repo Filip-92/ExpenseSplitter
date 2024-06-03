@@ -1,7 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { UntypedFormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { AccountService } from '../../_services/account.service';
@@ -17,6 +17,7 @@ export class GroupTasksFilterComponent {
   @Output() cancelRegister = new EventEmitter();
   @Input() tasks: any;
   @Input() id: number;
+  dailyTasks: any;
   toDoListScheduleForm: UntypedFormGroup;
   toDoListTimespanForm: UntypedFormGroup;
   validationErrors: string[] = [];
@@ -27,14 +28,14 @@ export class GroupTasksFilterComponent {
   protected from: string;
   protected to: string;
 
-  constructor(public accountService: AccountService, private toastr: ToastrService, 
-    private fb: UntypedFormBuilder, private toDoListServ: ToDoListService,
-    private datePipe: DatePipe, private cookieService: CookieService) { }
+  constructor(public accountService: AccountService, private toastr: ToastrService, private fb: UntypedFormBuilder, private toDoListServ: ToDoListService,
+    private datePipe: DatePipe, private cookieService: CookieService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.initializeForm();
     this.initializeFormTimespan();
     //this.getToDoListGroupTasks(this.id);
+    this.getDailyGroupToDoListTasks();
   }
 
   initializeForm() {
@@ -85,5 +86,12 @@ export class GroupTasksFilterComponent {
     })
   }
 
+  getDailyGroupToDoListTasks() {
+    var id = +this.route?.snapshot?.paramMap?.get('id');
+
+    this.toDoListServ.getDailyGroupToDoListTasks(id).subscribe(dailyTasks => {
+      this.dailyTasks = dailyTasks;
+    })
+  }
 
 }

@@ -10,9 +10,10 @@
             <app-text-input [formControl]='toDoListScheduleForm.controls["name"]' 
             [label]='"Zadanie"' [type]='"text"' autocomplete="off"></app-text-input>
         </div>
-    </div>
-    <div class="form-group text-center mt-3">
-        <button [disabled]='!toDoListScheduleForm.valid' class="btn btn-success mr-2" type="submit">Dodaj</button>
-        <button class="btn btn-default mr-2" id="cancel" (click)="cancel()" type="button">Anuluj</button>
+        <div class="col-4 form-group text-center">
+            <button [disabled]='!toDoListScheduleForm.valid' class="btn btn-success mr-2" type="submit">Dodaj</button>
+            <button class="btn btn-default mr-2" id="cancel" (click)="cancel()" type="button">Anuluj</button>
+        </div>
     </div>
 </form>
+

@@ -37,11 +37,21 @@ namespace API.Data
                         .ToListAsync();
         }
 
-        public async Task<IEnumerable<ToDoListTasks>> GetDailyToDoListTasks(string username, DateTime currentDate)
+        public async Task<IEnumerable<ToDoListTasks>> GetDailyToDoListTasks(string username)
         {
+            DateTime currentTime = DateTime.Now;
             return await _context.ToDoListTasks
                         .IgnoreQueryFilters()
-                        .Where(m => m.Username == username && (m.GroupId == null || m.GroupId == 0) && m.TaskDate.Date == currentDate.Date.Date)
+                        .Where(m => m.Username == username && (m.GroupId == null || m.GroupId == 0) && m.TaskDate.Date == currentTime.Date.Date)
+                        .ToListAsync();
+        }
+
+        public async Task<IEnumerable<ToDoListTasks>> GetDailyGroupToDoListTasks(int groupId)
+        {
+            DateTime currentTime = DateTime.Now;
+            return await _context.ToDoListTasks
+                        .IgnoreQueryFilters()
+                        .Where(m => m.GroupId == groupId && m.TaskDate.Date == currentTime.Date.Date)
                         .ToListAsync();
         }
 
@@ -104,6 +114,13 @@ namespace API.Data
             return await _context.ToDoListContributors
                         .IgnoreQueryFilters()
                         .Where(m => m.GroupId == id)
+                        .ToListAsync();
+        }
+
+        public async Task<IEnumerable<ToDoListContributors>> GetContributors()
+        {
+            return await _context.ToDoListContributors
+                        .IgnoreQueryFilters()
                         .ToListAsync();
         }
 

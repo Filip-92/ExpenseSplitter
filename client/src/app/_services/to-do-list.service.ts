@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient} from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { DatePipe } from '@angular/common';
+import {formatDate} from '@angular/common';
+
+
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +12,7 @@ import { environment } from 'src/environments/environment';
 export class ToDoListService {
   baseUrl = environment.apiUrl;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private datePipe: DatePipe) { }
 
   addToDoListTask(model: any) {
     return this.http.post(this.baseUrl + 'toDoList/add-to-do-list-task', model);
@@ -18,8 +22,12 @@ export class ToDoListService {
     return this.http.get<any>(this.baseUrl + 'users/get-to-do-list');
   }
 
-  getDailyToDoListTasks(currentDate: any) {
-    return this.http.get<any>(this.baseUrl + 'users/get-daily-to-do-list/' + currentDate.replace('T', ' '), {});
+  getDailyToDoListTasks() {
+    return this.http.get<any>(this.baseUrl + 'users/get-daily-to-do-list', {});
+  }
+
+  getDailyGroupToDoListTasks(groupId: number) {
+    return this.http.get<any>(this.baseUrl + 'users/get-daily-group-to-do-list/' + groupId, {});
   }
 
   filterTasks(from: any, to: any) {

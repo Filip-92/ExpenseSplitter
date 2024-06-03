@@ -1,18 +1,40 @@
 <div *ngIf="!filterTasksBool">
     <h3>Zadania na dzisiaj - {{currentDate | date: 'dd MMMM yyyy'}}</h3>
-    <div *ngIf="tasks?.length > 0" class="mt-5">
-        <div *ngFor="let task of tasks">
-            <div *ngIf="(task.taskDate | date:'yyyy-MM-dd') === (currentDate | date:'yyyy-MM-dd')">
-                <app-task-card [task]="task"></app-task-card>
-            </div>
+    <div *ngIf="dailyTasks?.length > 0" class="mt-5">
+        <div *ngFor="let task of dailyTasks">
+            <app-task-card [task]="task"></app-task-card>
         </div>  
+    </div>
+    <div *ngIf="dailyTasks?.length <= 0" class="mt-5">
+        <h4 class="mb-5">Brak zadań na dziś</h4>
     </div>
 </div>
 
-<h3 class="mt-5">Wszystkie zadania</h3>
-<div *ngIf="tasks?.length > 0" class="mt-5">
+<hr style="border: 1px solid white;">
+
+
+<div class="row">
+    <div class="col-4"><h3 class="mt-3" (click)="allTasks()">Wszystkie zadania</h3></div>
+    <div class="col-3 mt-4 text-center" id="tabs" (click)="toggleToDo()" [ngStyle]="toDo ? { 'background-color': 'black', 'color': 'red' } : { }">Do zrobienia</div>
+    <div class="col-3 mt-4 text-center" id="tabs" (click)="toggleDone()" [ngStyle]="done ? { 'background-color': 'black', 'color': 'red' } : { }">Zrobione</div>
+</div>
+<div *ngIf="tasks?.length > 0 && !done && !toDo" class="mt-5">
     <div *ngFor="let task of tasks">
         <app-task-card [task]="task"></app-task-card>
+    </div>  
+</div>
+<div *ngIf="tasks?.length > 0 && done" class="mt-5">
+    <div *ngFor="let task of tasks">
+        <div *ngIf="task.isDone">
+            <app-task-card [task]="task"></app-task-card>
+        </div>
+    </div>  
+</div>
+<div *ngIf="tasks?.length > 0 && toDo" class="mt-5">
+    <div *ngFor="let task of tasks">
+        <div *ngIf="!task.isDone">
+            <app-task-card [task]="task"></app-task-card>
+        </div>
     </div>  
 </div>
 <div *ngIf="tasks?.length <= 0 || tasks === null" class="text-center">

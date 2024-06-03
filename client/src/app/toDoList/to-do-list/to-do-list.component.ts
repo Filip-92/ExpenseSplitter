@@ -29,7 +29,7 @@ export class ToDoListComponent {
     if (this.router.url.includes('group')) {
       this.group = true;
     }
-    //this.getDailyToDoListTasks();
+    this.getDailyToDoListTasks();
   }
 
 
@@ -38,12 +38,12 @@ export class ToDoListComponent {
       this.tasks = tasks;
     })
   }
-
-  // getDailyToDoListTasks() {
-  //   this.toDoListServ.getDailyToDoListTasks(this.datePipe.transform(this.currentDate, 'yyyy-MM-dd')).subscribe(tasks => {
-  //     this.dailyTasks = tasks;
-  //   })
-  // }
+  
+  getDailyToDoListTasks() {
+    this.toDoListServ.getDailyToDoListTasks().subscribe(dailyTasks => {
+      this.dailyTasks = dailyTasks;
+    })
+  }
 
   changeTab() {
     this.group = !this.group;

@@ -10,21 +10,15 @@
         </div>
     </div>
     <div *ngIf="commentField" class="text-center mt-3">
-        <form [formGroup]='commentForm' (ngSubmit)="commentForm.valid && addComment(task?.id)" autocomplete="off" class="mb-4">
+        <div *ngFor="let comment of comments">
+            <app-comments [comment]="comment"></app-comments>
+        </div>
+        <form [formGroup]='commentForm' (ngSubmit)="commentForm.valid && addComment(task?.id)" autocomplete="off" class="mt-4">
             <input type="text" placeholder="Dodaj komentarz" [formControl]='commentForm.controls["content"]' >
             <div class="form-group text-center mt-3">
                 <button [disabled]='!commentForm.valid' class="btn btn-success mr-2" type="submit"><i class="fa fa-comment mr-2"></i>Dodaj</button>
                 <button class="btn btn-default mr-2" id="cancel" (click)="cancel()" type="button">Anuluj</button>
             </div>
         </form>
-        <div *ngFor="let comment of comments">
-            <div class="card" id="comment">
-                <div class="row" id="details">
-                    <div class="col-6 text-left">{{comment.username}}</div>
-                    <div class="col-6 text-right">{{comment.uploaded | date : 'dd-MM-yyyy HH:mm'}}</div>
-                </div>
-                <div class="text-left">{{comment.content}}</div>
-            </div>
-        </div>
     </div>
 </div> 

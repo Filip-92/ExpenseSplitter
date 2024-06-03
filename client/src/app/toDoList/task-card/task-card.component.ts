@@ -79,10 +79,10 @@ export class TaskCardComponent {
       this.toDoListServ.addComment(this.commentForm.value, taskId).subscribe(response => {
         this.toastr.success('Pomyślnie dodano komentarz');
         this.commentForm.reset();
+        this.getTaskComments(taskId);
       }, error => {
         this.validationErrors = error;
       })
-
   }
 
   getTaskComments(id: number) {

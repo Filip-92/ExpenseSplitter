@@ -553,12 +553,21 @@ namespace API.Controllers
             return Ok(tasks);
         }
 
-        [HttpGet("get-daily-to-do-list/{currentDate}")]
-        public async Task<ActionResult> GetDailyToDoListTasks(DateTime currentDate)
+        [HttpGet("get-daily-to-do-list")]
+        public async Task<ActionResult> GetDailyToDoListTasks()
         {
             var user = await _unitOfWork.UserRepository.GetUserByUsernameAsync(User.GetUsername());
 
-            var tasks = await _unitOfWork.ToDoListRepository.GetDailyToDoListTasks(user.UserName, currentDate);
+            var tasks = await _unitOfWork.ToDoListRepository.GetDailyToDoListTasks(user.UserName);
+
+            return Ok(tasks);
+        }
+
+        
+        [HttpGet("get-daily-group-to-do-list/{groupId}")]
+        public async Task<ActionResult> GetDailyGroupToDoListTasks(int groupId)
+        {
+            var tasks = await _unitOfWork.ToDoListRepository.GetDailyGroupToDoListTasks(groupId);
 
             return Ok(tasks);
         }
@@ -582,49 +591,49 @@ namespace API.Controllers
             return Ok(tasks);
         }
 
+        // [HttpGet("get-groups")]
+        // public async Task<ActionResult> GetUserGroups()
+        // {
+        //     var user = await _unitOfWork.UserRepository.GetUserByUsernameAsync(User.GetUsername());
+
+        //     var groups = await _unitOfWork.ToDoListRepository.GetGroups(user.UserName);
+
+        //     return Ok(groups);
+        // }
+
         [HttpGet("get-groups")]
         public async Task<ActionResult> GetUserGroups()
         {
             var user = await _unitOfWork.UserRepository.GetUserByUsernameAsync(User.GetUsername());
+            var group = new TasksGroup();
 
-            var groups = await _unitOfWork.ToDoListRepository.GetGroups(user.UserName);
+            // var categories = await _unitOfWork.ExpensesRepository.GetCategories(username);
 
-            return Ok(groups);
+            var contributors = await _unitOfWork.ToDoListRepository.GetContributors();
+            ToDoListContributors[] contributorsArray = new ToDoListContributors[100];
+            var i = 0;
+
+            foreach(var contributor in contributors)
+            {
+                if (contributor.Username == user.UserName)
+                {
+                    contributorsArray[i] = contributor;
+                    i++;
+                }
+            }
+
+            TasksGroup[] groupArray = new TasksGroup[100];
+            var j = 0;
+
+            foreach(var contributor in contributorsArray?.Where(o => o != null))
+            {
+                group = await _unitOfWork.ToDoListRepository.GetGroupById(contributor.GroupId);
+                groupArray[j] = group;
+                j++;
+            }
+
+            return Ok(groupArray?.Where(o => o != null));
         }
-
-        // [HttpGet("get-categories")]v2
-        // public async Task<ActionResult> GetUserCategories()
-        // {
-        //     var user = await _unitOfWork.UserRepository.GetUserByUsernameAsync(User.GetUsername());
-        //     var category = new Category();
-
-        //     // var categories = await _unitOfWork.ExpensesRepository.GetCategories(username);
-
-        //     var contributors = await _unitOfWork.ExpensesRepository.GetContributors();
-        //     Contributors[] contributorsArray = new Contributors[100];
-        //     var i = 0;
-
-        //     foreach(var contributor in contributors)
-        //     {
-        //         if (contributor.Username == user.UserName)
-        //         {
-        //             contributorsArray[i] = contributor;
-        //             i++;
-        //         }
-        //     }
-
-        //     Category[] categoryArray = new Category[100];
-        //     var j = 0;
-
-        //     foreach(var contributor in contributorsArray?.Where(o => o != null))
-        //     {
-        //         category = await _unitOfWork.ExpensesRepository.GetCategoryById(contributor.CategoryId);
-        //         categoryArray[j] = category;
-        //         j++;
-        //     }
-
-        //     return Ok(categoryArray?.Where(o => o != null));
-        // }
 
         [HttpGet("get-group-contributors/{groupId}")]
         public async Task<ActionResult> GetGroupContributors(int groupId)

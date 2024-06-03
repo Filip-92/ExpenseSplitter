@@ -17,10 +17,13 @@ import { IndividualTasksComponent } from '../individual-tasks/individual-tasks.c
 })
 export class TasksListCardComponent {
   @Input() tasks: any;
+  @Input() dailyTasks: any;
   @Input() id: number;
   @Input() filterTasksBool: boolean;
   validationErrors: string[] = [];
   currentDate = new Date();
+  done: boolean;
+  toDo: boolean;
 
   constructor(public accountService: AccountService, private toDoListServ: ToDoListService,
     private modalServ: NgbModal, private indivTaskComp: IndividualTasksComponent,
@@ -52,4 +55,18 @@ export class TasksListCardComponent {
     modalRef.componentInstance.modalRef = modalRef;
   }
 
+  toggleDone() {
+    this.done = !this.done;
+    this.toDo = false;
+  }
+
+  toggleToDo() {
+    this.toDo = !this.toDo;
+    this.done = false;
+  }
+
+  allTasks() {
+    this.toDo = false;
+    this.done = false;
+  }
 }

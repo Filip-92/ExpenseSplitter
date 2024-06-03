@@ -17,6 +17,7 @@ import { CookieService } from 'ngx-cookie-service';
 export class IndividualTasksComponent {
   @Output() cancelRegister = new EventEmitter();
   @Input() tasks: any;
+  @Input() dailyTasks: any;
   toDoListScheduleForm: UntypedFormGroup;
   toDoListTimespanForm: UntypedFormGroup;
   validationErrors: string[] = [];

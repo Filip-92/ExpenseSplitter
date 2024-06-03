@@ -1,12 +1,12 @@
-input[type=text] {
+input[type=text], input[type=email], input[type=password] {
     background-color: gray;
     color: white !important;
 }
 
-input::placeholder {
+input[type=text]::placeholder, input[type=email]::placeholder, input[type=password]::placeholder {
     color: white;
 }
 
-input:focus {
+input[type=text]:focus, input[type=email]:focus, input[type=password]:focus {
     background-color: gray;
 }
