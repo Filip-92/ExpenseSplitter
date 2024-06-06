@@ -1,7 +1,10 @@
 <div class="card" id="comment">
     <div class="row" id="details">
         <div class="col-6 text-left">{{comment.username}}</div>
-        <div class="col-6 text-right">{{comment.uploaded | date : 'dd-MM-yyyy HH:mm'}}</div>
+        <div class="col-6 text-right">
+            {{comment.uploaded | date : 'dd-MM-yyyy HH:mm'}}<span *ngIf="comment.username === user.username"><i class="fa fa-pencil ml-3 mr-2"></i><i class="fa fa-trash"></i></span>
+        </div>
     </div>
     <div class="text-left">{{comment.content}}</div>
+    <a *ngIf="member" class="text-right" href="to-do-list/{{group?.id}}/{{convertText(group?.name)}}">Idź do <i class="fa fa-comment ml-2"></i></a>
 </div>

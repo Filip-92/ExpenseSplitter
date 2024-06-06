@@ -1,13 +1,15 @@
 <div class="card">
     <div class="row">
-        <div class="col-4 text-left">
-            <a id="goTo" routerLink="/to-do-list/{{group.id}}/{{convertText(group.name)}}" class="ml-3 mr-5">Idź do</a>
-            <span id="group" (click)="showMore()">{{group.name}}<i *ngIf="more" class="fa fa-arrow-up ml-2"></i><i *ngIf="!more" class="fa fa-arrow-down ml-2"></i></span>
+        <div class="text-left">
+            <a id="goTo" routerLink="/to-do-list/{{group.id}}/{{convertText(group.name)}}" class="ml-4 mr-5">Idź do</a>
+            <span id="group" (click)="showMore()">{{group.name}}
+                <i *ngIf="more" class="fa fa-arrow-up ml-2"></i><i *ngIf="!more" class="fa fa-arrow-down ml-2"></i>
+            </span>
         </div>
-        <div class="col-3">
+        <div class="col-md-5 col-2">
             <!-- <img src="{{cat.photoUrl}}" alt=""> -->
         </div>
-        <div class="col-4 text-right">
+        <div class="col-md-3 col-3 text-right" *ngIf="group.username === user.username">
             <!-- <i class="fa fa-photo mr-3" (click)="openCategoryPhotoModal(cat)"> Photo</i> -->
             <i class="fa fa-trash mr-3" (click)="removeGroup(group.id)"> Usuń</i>
             <i class="fa fa-pencil mr-3" (click)="openGroupNameUpdateModal(group)" [attr.data-target]="'#'+group?.id"> Edytuj</i>

@@ -9,3 +9,18 @@
   #details {
     font-size: 10px;
   }
+
+  a {
+    color: white;
+  }
+
+  a:hover {
+    cursor: pointer;
+    color: green;
+  }
+
+  .fa-comment:hover {
+    cursor: pointer;
+    color: orange;
+  }
+

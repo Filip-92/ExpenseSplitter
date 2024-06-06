@@ -1,4 +1,3 @@
-<div class="mt-4 mb-4" style="border-top: 1px solid white;"></div>
 <div class="text-center"> 
     <p>Dodaj do grupy:</p>
     <form *ngIf="!alreadyAdded" [formGroup]='addYourselfForm' (ngSubmit)="addContributor(addYourselfForm.value)">
@@ -28,15 +27,19 @@
 </div>
 
 <div *ngFor="let contributor of contributors">
-    <div class="row text-center">
-        <div class="col-4"></div>
-        <div class="card col-4">
-            <div>
+    <div class="card">
+        <div class="row">
+            <div class="col-5 text-left ml-3">
                 {{contributor.username}}
-                <i class="fa fa-trash ml-3" (click)="removeContributor(contributor.id)" title="Usuń"></i>
-                <app-group-contributor-card [contributor]="contributor"></app-group-contributor-card>
+            </div>
+            <div class="col-6 text-right">
+                <span *ngIf="group.username === user.username && contributor.username !== user.username">
+                    <i class="fa fa-trash ml-3 text-right" (click)="removeContributor(contributor.id)" title="Usuń"></i>
+                    <app-group-contributor-card [contributor]="contributor" [group]="group" [user]="user"></app-group-contributor-card>
+                </span>
             </div>
         </div>
     </div>
 </div>
 
+<br/>

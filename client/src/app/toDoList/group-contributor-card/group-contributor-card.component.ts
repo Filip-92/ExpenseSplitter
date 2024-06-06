@@ -3,6 +3,7 @@ import { NgForm, UntypedFormBuilder } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { AccountService } from '../../_services/account.service';
 import { ToDoListService } from '../../_services/to-do-list.service';
+import { User } from '../../_models/user';
 
 @Component({
   selector: 'app-group-contributor-card',
@@ -12,6 +13,8 @@ import { ToDoListService } from '../../_services/to-do-list.service';
 export class GroupContributorCardComponent {
   @Input() contributor: any;
   @Input() contributors: any;
+  @Input() user: User;
+  @Input() group: any;
   edit: boolean;
   validationErrors: string[] = [];
   @ViewChild('editContributorForm') editContributorForm: NgForm;

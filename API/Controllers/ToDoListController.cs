@@ -258,5 +258,25 @@ namespace API.Controllers
             return Ok(comments);
         }
 
+        [HttpGet("get-user-comments/{username}")]
+        [AllowAnonymous]
+        public async Task<ActionResult> GetUserComments(string username)
+        {
+            var comments = await _unitOfWork.ToDoListRepository.GetUserComments(username);
+
+            return Ok(comments);
+        }
+
+        [HttpGet("get-group-by-taskId/{taskId}")]
+        public async Task<ActionResult> GetGroupByTaskId(int taskId)
+        {
+            var task = await _unitOfWork.ToDoListRepository.GetTaskById(taskId);
+
+            var group = await _unitOfWork.ToDoListRepository.GetGroupById((int)task.GroupId);
+
+            if (group == null) return NotFound("Could not find group");
+
+            return Ok(group);
+        }
     }
 }

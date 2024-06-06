@@ -29,6 +29,9 @@ input {
 .card {
     background-color: black;
     margin-bottom: 5px;
+    width: 40%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .fa-pencil:hover {

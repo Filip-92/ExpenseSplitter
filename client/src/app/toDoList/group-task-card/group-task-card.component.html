@@ -7,7 +7,9 @@
     <button (click)="addToGroupToggle()" id="add" class="btn btn-info">Dodaj do grupy</button>
 </div>
 
-<app-group-contributors-form *ngIf="addToGroup" [group]="group"></app-group-contributors-form>
+<div class="card mt-3" *ngIf="addToGroup">
+    <app-group-contributors-form  [group]="group"></app-group-contributors-form>
+</div>
 
 <hr style="border: 1px solid white;">
 

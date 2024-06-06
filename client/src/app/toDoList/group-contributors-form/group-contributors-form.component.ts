@@ -68,6 +68,13 @@ export class GroupContributorsFormComponent {
     })
   }
 
+  removeContributor(contributorId: number) {
+    this.toDoListServ.removeContributor(contributorId).subscribe(() => {
+      this.contributors.splice(this.contributors.findIndex(p => p.id === contributorId), 1);
+    })
+    this.getGroupContributors(this.group?.id);
+  }
+
 
 }
 

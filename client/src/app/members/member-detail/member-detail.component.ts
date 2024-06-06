@@ -17,6 +17,7 @@ import { HttpClient } from '@angular/common/http';
 import { Reply } from 'src/app/_models/reply';
 import { environment } from 'src/environments/environment';
 import { AdminService } from 'src/app/_services/admin.service';
+import { ToDoListService } from '../../_services/to-do-list.service';
 
 @Component({
   selector: 'app-member-detail',
@@ -38,9 +39,6 @@ export class MemberDetailComponent implements OnInit, OnDestroy {
     comments: [],
     numberOflikes: 0
   };
-  userWithLikes: User;
-  galleryOptions: NgxGalleryOptions[];
-  galleryImages: NgxGalleryImage[];
   activeTab: TabDirective;
   messages: Message[] = [];
   user: User;
@@ -53,18 +51,14 @@ export class MemberDetailComponent implements OnInit, OnDestroy {
   @ViewChild('scrollMe') meme : ElementRef;
   scrolltop: number=null;
   userId: number;
-  comments: Comment[];
-  replies: Reply[];
-  numberOfLikes: number = 0;
-  liked: boolean = false;
-  mainMemes: number = 0;
+  comments: any;
   url: string;
   loading: boolean = false;
 
   constructor(public presence: PresenceService, private route: ActivatedRoute, 
     private messageService: MessageService, private accountService: AccountService,
     private router: Router, private memberService: MembersService, private http: HttpClient, 
-    private toastr: ToastrService, public datepipe: DatePipe, private adminService: AdminService) { 
+    private toastr: ToastrService, public datepipe: DatePipe, private toDoListServ: ToDoListService) { 
       this.accountService.currentUser$.pipe(take(1)).subscribe(user => this.user = user);
       this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     }
@@ -93,28 +87,13 @@ export class MemberDetailComponent implements OnInit, OnDestroy {
   getMemberDetails() {
     this.loading = true;
     this.getUsers();
-    this.loadLikes();
+    this.getUserComments(this.member.username);
     if (this.member.id !== 11) {
       this.getUserPhoto(this.member.username);
     } else {
       this.url = '././assets/LogoImage.png';
     }
-
-    this.galleryImages = this.getImages();
-    this.getMemberNumberOfLikes(this.member.username);
     this.loading = false;
-  }
-
-  getImages(): NgxGalleryImage[] {
-    const imageUrls = [];
-    for (const photo of this.member.photos) {
-      imageUrls.push({
-        small: photo?.url,
-        medium: photo?.url,
-        big: photo?.url
-      })
-    }
-    return imageUrls;
   }
   
   loadMessages() {
@@ -141,38 +120,6 @@ export class MemberDetailComponent implements OnInit, OnDestroy {
     this.messageService.stopHubConnection();
   }
 
-  addLike(member: Member) {
-    this.memberService.addLike(member.username).subscribe(() => {
-      this.liked = !this.liked;
-      if(this.liked) {
-        this.numberOfLikes++;
-        this.liked = true;
-      } else {
-        this.numberOfLikes--;
-        this.liked = false;
-      }
-    })
-  }
-
-  checkIfUserLiked(members: Partial<Member[]>) {
-    for (var user of members) {
-      if (user.id === this.member.id) {
-        this.liked = true;
-      }
-    }
-  }
-
-  loadLikes() {
-    this.memberService.getLikes(this.predicate, this.pageNumber, this.pageSize).subscribe(response => {
-      this.members = response.result;
-      this.checkIfUserLiked(this.members);
-      this.pagination = response.pagination;
-    })
-  }
-
-
-
-
   pageChanged(event: any) {
     this.pageNumber = event.page;
     window.scrollTo(0, 500);
@@ -193,13 +140,6 @@ export class MemberDetailComponent implements OnInit, OnDestroy {
     })
   }
 
-
-  getMemberNumberOfLikes(username: string) {
-    this.memberService.getAllUserLikesNumber(username).subscribe(numberOfLikes => {
-      this.numberOfLikes = numberOfLikes;
-    })
-  }
-
   genderToPolish(gender: string) {
     if (gender === 'male') {
       return 'Mężczyzna';
@@ -208,6 +148,12 @@ export class MemberDetailComponent implements OnInit, OnDestroy {
     } else {
       return 'Helikopter bojowy';
     }
+  }
+
+  getUserComments(username: string) {
+    this.toDoListServ.getUserComments(username).subscribe(comments => {
+      this.comments = comments;
+    })
   }
 
 }

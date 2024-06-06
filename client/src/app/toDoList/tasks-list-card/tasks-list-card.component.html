@@ -13,8 +13,8 @@
 <hr style="border: 1px solid white;">
 
 
-<div class="row">
-    <div class="col-4"><h3 class="mt-3" (click)="allTasks()">Wszystkie zadania</h3></div>
+<div class="row mb-4">
+    <div class="col-4"><h3 class="mt-3" id="allTasks" (click)="allTasks()">Wszystkie zadania</h3></div>
     <div class="col-3 mt-4 text-center" id="tabs" (click)="toggleToDo()" [ngStyle]="toDo ? { 'background-color': 'black', 'color': 'red' } : { }">Do zrobienia</div>
     <div class="col-3 mt-4 text-center" id="tabs" (click)="toggleDone()" [ngStyle]="done ? { 'background-color': 'black', 'color': 'red' } : { }">Zrobione</div>
 </div>
@@ -35,7 +35,10 @@
         <div *ngIf="!task.isDone">
             <app-task-card [task]="task"></app-task-card>
         </div>
-    </div>  
+    </div>
+</div>
+<div *ngIf="tasks?.length <= 0 || done">
+    <h4 class="mb-4">Brak zrobionych zadań</h4>
 </div>
 <div *ngIf="tasks?.length <= 0 || tasks === null" class="text-center">
     <h4 class="mb-4">Brak zadań w danym zakresie czasu</h4>

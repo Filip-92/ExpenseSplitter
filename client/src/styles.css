@@ -114,3 +114,13 @@ body:not(.dark-mode-preloading) {
   cursor: pointer;
   color: yellow;
 }
+
+.fa-trash:hover {
+  cursor: pointer;
+  color: red;
+}
+
+.fa-pencil:hover {
+  cursor: pointer;
+  color: green;
+}

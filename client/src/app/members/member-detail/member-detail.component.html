@@ -11,15 +11,6 @@
         <h4 style="color: rgb(170, 139, 37);" *ngIf="member?.username?.length > 8 && member?.username?.length <= 16">{{member.username}}</h4>
         <h5 style="color: rgb(170, 139, 37);" *ngIf="member?.username?.length > 16">{{member.username}}</h5>
         <hr>
-        <h4 class="mt-2">Odznaki</h4>
-        <div class="mt-4 text-left" id="badges">
-            <span *ngIf="(comments?.length + replies?.length) > 10" class="mr-3">
-                <img src="./assets/silver-pepe.png" alt="silver badge" id="silver" title="Srebrny pepe za ponad 10 komentarzy">
-            </span>
-            <span  *ngIf="mainMemes > 5" class="mr-3">
-                <img src="./assets/golden-pepe.png" alt="goldn badge" id="golden" title="Złoty pepe za ponad 5 memów na głównej - dodaje możliwość wrzucania zdjęć do komentarzy">
-            </span>
-        </div>
     </div>
     <div class="col-6" id="attributes" style="margin-top: 50px;">
         <div class="card-body text-left ml-5">
@@ -41,11 +32,7 @@
                 <i class="fa fa-user-plus mr-2" aria-hidden="true"></i><strong>Dołączył: </strong><span style="color: greenyellow">{{changeDateFormat(member.created)}}</span>
             </div>
             <div class="mb-3">
-                <i class="fa fa-plus mr-2"></i>Ilość plusów: <span style="color: greenyellow">{{ numberOfLikes }}</span>
-                <button id="likeButton" (click)="addLike(member)" class="btn btn-success mb-3" [ngStyle]="!liked ? { 'color': 'white' } : { 'background-color': 'green !important', 'color': 'green' }"><i class="fa fa-plus"></i></button>
-            </div>
-            <div class="mb-3">
-                <i class="fa fa-comment mr-2"></i>Ilość komentarzy: <span style="color: greenyellow">{{ comments?.length + replies?.length || '0' }}</span>
+                <i class="fa fa-comment mr-2"></i>Ilość komentarzy: <span style="color: greenyellow">{{ comments?.length || '0' }}</span>
             </div>
         </div>
     </div>
@@ -53,7 +40,7 @@
 
 <div class="row mb-3 no-gutters mt-4" id="background" style="border: 3px solid rgb(104, 95, 95);" *ngIf="!loading" style="margin-left: -10px !important; margin-right: -10px !important;">
     <tabset id="tabs">
-        <tab heading='Memy {{member?.username}}' class="text-center"
+        <tab heading='Zadania {{member?.username}}' class="text-center"
             #scrollMe
             style="overflow-y: auto; height: auto; max-height: 1000px;"
             [scrollTop]="scrolltop"
@@ -83,18 +70,18 @@
         </tab>
 
         <tab heading='Komentarze'>
-            <div class="mt-3" *ngFor="let reply of replies">
-                <div>
-                    <app-member-replies [reply]="reply"></app-member-replies>
-                </div>
-            </div>
             <div *ngIf="comments?.length <= 0" class="text-center mt-3" style="min-height: 200px;">
                 <h3 id="comments" class="mt-5">Brak komentarzy użytkownika</h3>
             </div>
+            <div *ngFor="let comment of comments">
+                <div class="mt-4"></div>
+                <app-comments [comment]="comment"></app-comments>
+                <div class="mb-3"></div>
+            </div>
         </tab>
 
-        <tab heading='Wiadomości'>
+        <!-- <tab heading='Wiadomości'>
             <app-member-messages [username]="member.username"></app-member-messages>
-        </tab>
+        </tab> -->
     </tabset>
 </div>

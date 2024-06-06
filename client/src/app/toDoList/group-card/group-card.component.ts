@@ -8,6 +8,8 @@ import { AccountService } from '../../_services/account.service';
 import { ToDoListService } from '../../_services/to-do-list.service';
 import { GroupTasksComponent } from '../group-tasks/group-tasks.component';
 import { GroupEditModalComponent } from '../../modals/group-edit-modal/group-edit-modal.component';
+import { take } from 'rxjs/operators';
+import { User } from '../../_models/user';
 
 @Component({
   selector: 'app-group-card',
@@ -17,10 +19,11 @@ import { GroupEditModalComponent } from '../../modals/group-edit-modal/group-edi
 export class GroupCardComponent {
   @Input() group: any;
   more: boolean;
+  user: User;
 
-  constructor(public accountService: AccountService, private fb: UntypedFormBuilder, private toDoListServ: ToDoListService,
-    private datePipe: DatePipe, private groupTasksComp: GroupTasksComponent, private modalServ: NgbModal) { 
-
+  constructor(public accountService: AccountService, private toDoListServ: ToDoListService,
+    private groupTasksComp: GroupTasksComponent, private modalServ: NgbModal) { 
+      this.accountService.currentUser$.pipe(take(1)).subscribe(user => this.user = user);
     }
 
   showMore() {

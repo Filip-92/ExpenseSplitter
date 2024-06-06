@@ -98,4 +98,11 @@ export class ToDoListService {
     return this.http.get<any>(this.baseUrl + 'toDoList/get-comments/' + taskId, {});
   }
 
+  getUserComments(username: string) {
+    return this.http.get<any>(this.baseUrl + 'toDoList/get-user-comments/' + username, {});
+  }
+
+  getGroupByTaskId(taskId: number) {
+    return this.http.get<any>(this.baseUrl + 'toDoList/get-group-by-taskId/' + taskId, {});
+  }
 }

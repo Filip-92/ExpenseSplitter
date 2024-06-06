@@ -4,7 +4,7 @@
     </div>
     <div class="row">
         <div class="col-4 text-center">
-            <span id="category" (click)="showMore()">{{category.name}}</span>
+            <span id="category" (click)="showMore()">{{category.name}}<i class="ml-2 fa fa-arrow-down" *ngIf="!more"></i><i class="ml-2 fa fa-arrow-up" *ngIf="more"></i></span>
         </div>
         <div class="col-3"></div>
         <div class="col-4 text-right">

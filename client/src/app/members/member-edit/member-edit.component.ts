@@ -63,9 +63,7 @@ export class MemberEditComponent implements OnInit {
 
   getMemberDetails() {
     this.loading = true;
-    this.getMemberNumberOfLikes(this?.user?.username);
     this.titleService.setTitle("Profil użytkownika " + this?.user?.username);
-    this.loadLikes();
     this.loading = false;
   }
 

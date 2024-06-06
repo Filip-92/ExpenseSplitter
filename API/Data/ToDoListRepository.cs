@@ -155,5 +155,21 @@ namespace API.Data
                         .ToListAsync();
         }
 
+        public async Task<IEnumerable<CommentDto>> GetUserComments(string username)
+        {
+            return await _context.Comments
+                        .IgnoreQueryFilters()
+                        .Where(m => m.Username == username)
+                        .Select(u => new CommentDto
+                        {
+                            Id = u.Id,
+                            TaskId = u.TaskId,
+                            Username = u.Username,
+                            Content = u.Content,
+                            Uploaded = u.Uploaded,
+                        })
+                        .ToListAsync();
+        }
+
     }
 }
