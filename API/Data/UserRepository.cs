@@ -79,20 +79,10 @@ namespace API.Data
                 .FirstOrDefaultAsync();
         }
 
-        public async Task<AppUser> GetUserByMemeId(int memeId)
-        {
-            return await _context.Users
-                .Include(m => m.Memes)
-                .IgnoreQueryFilters()
-                .Where(m => m.Memes.Any(m => m.Id == memeId))
-                .FirstOrDefaultAsync();
-        }
-
         public async Task<AppUser> GetUserByUsernameAsync(string username)
         {
             return await _context.Users
                 .Include(p => p.Photos)
-                .Include(p => p.Memes)
                 .SingleOrDefaultAsync(x => x.UserName == username);
         }
 
@@ -107,7 +97,6 @@ namespace API.Data
         {
             return await _context.Users
                 .Include(p => p.Photos)
-                .Include(p => p.Memes)
                 .ToListAsync();
         }
 
@@ -118,7 +107,6 @@ namespace API.Data
         public async Task<PagedList<MemberDto>> SearchForMembers(UserParams userParams, string searchString)
         {
             var query = _context.Users
-                .Include(m => m.Memes)
                 .IgnoreQueryFilters()
                 .Where(m => m.UserName.ToLower().Contains(searchString))
                 .Select(u => new MemberDto
@@ -160,7 +148,7 @@ namespace API.Data
                 {
                     Id = u.Id,
                     Content = u.Content,
-                    MemeId = u.MemeId,
+                    GroupId = u.GroupId,
                     SentTime = u.SentTime,
                     IsRead = u.IsRead
                 }).OrderByDescending(u => u.Id)
@@ -188,7 +176,7 @@ namespace API.Data
                 {
                     Id = u.Id,
                     Content = u.Content,
-                    MemeId = u.MemeId,
+                    GroupId = u.GroupId,
                     SentTime = u.SentTime,
                     IsRead = u.IsRead
                 }).OrderByDescending(u => u.Id)

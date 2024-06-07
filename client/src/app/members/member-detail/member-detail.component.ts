@@ -56,26 +56,26 @@ export class MemberDetailComponent implements OnInit, OnDestroy {
   loading: boolean = false;
 
   constructor(public presence: PresenceService, private route: ActivatedRoute, 
-    private messageService: MessageService, private accountService: AccountService,
+    private messageService: MessageService, protected accountService: AccountService,
     private router: Router, private memberService: MembersService, private http: HttpClient, 
     private toastr: ToastrService, public datepipe: DatePipe, private toDoListServ: ToDoListService) { 
       this.accountService.currentUser$.pipe(take(1)).subscribe(user => this.user = user);
-      this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     }
 
   ngOnInit(): void {
-    this.route.data.subscribe(data => {
-      this.member = data.member;
-      if (this.member.username === this.user.username) {
-        window.location.replace('uzytkownik/edycja');
-      }
-    })
     if ("user" in localStorage) {
+      this.route.data.subscribe(data => {
+        this.member = data.member;
+        if (this.member.username === this.user.username) {
+          window.location.replace('uzytkownik/edycja');
+        }
+      })
       this.getMemberDetails();
     } else {
-      this.toastr.warning("Zaloguj się aby mieć dostęp");
-      this.router.navigateByUrl('/');
+      this.toastr.error('Zaloguj się aby mieć dostęp')
+      this.router.navigateByUrl('/')
     }
+
   }
 
   getUserPhoto(username: string) {
@@ -88,11 +88,11 @@ export class MemberDetailComponent implements OnInit, OnDestroy {
     this.loading = true;
     this.getUsers();
     this.getUserComments(this.member.username);
-    if (this.member.id !== 11) {
-      this.getUserPhoto(this.member.username);
-    } else {
-      this.url = '././assets/LogoImage.png';
-    }
+    // if (this.member.id !== 11) {
+    //   this.getUserPhoto(this.member.username);
+    // } else {
+    //   this.url = '././assets/LogoImage.png';
+    // }
     this.loading = false;
   }
   

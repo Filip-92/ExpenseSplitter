@@ -600,6 +600,7 @@ namespace API.Controllers
 
         //     return Ok(groups);
         // }
+        
 
         [HttpGet("get-groups")]
         public async Task<ActionResult> GetUserGroups()
@@ -607,7 +608,7 @@ namespace API.Controllers
             var user = await _unitOfWork.UserRepository.GetUserByUsernameAsync(User.GetUsername());
             var group = new TasksGroup();
 
-            // var categories = await _unitOfWork.ExpensesRepository.GetCategories(username);
+            var groups = await _unitOfWork.ToDoListRepository.GetGroups(user.UserName);
 
             var contributors = await _unitOfWork.ToDoListRepository.GetContributors();
             ToDoListContributors[] contributorsArray = new ToDoListContributors[100];
@@ -632,7 +633,9 @@ namespace API.Controllers
                 j++;
             }
 
-            return Ok(groupArray?.Where(o => o != null));
+            groups = groups.Concat(groupArray?.Where(o => o != null));
+
+            return Ok(groups.Distinct());
         }
 
         [HttpGet("get-group-contributors/{groupId}")]

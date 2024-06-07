@@ -15,7 +15,6 @@ namespace API.DTOs
         public DateTime LastActive { get; set; }
         public string Gender { get; set; }
         public ICollection<PhotoDto> Photos { get; set; }
-        public ICollection<MemeDto> Memes { get; set; }
         public bool IsBanned { get; set; }
         public DateTime BanExpiration { get; set; }
         public string BanReason { get; set; }

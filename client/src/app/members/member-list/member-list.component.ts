@@ -26,18 +26,21 @@ export class MemberListComponent implements OnInit {
   genderList = [{ value: 'male', display: 'Mężczyźni' }, { value: 'female', display: 'Kobiety' }, { value: 'other', display: 'Helikoptery bojowe'}];
   account: AccountService;
 
-  constructor(private memberService: MembersService, private accountService: AccountService, private router: Router, 
+  constructor(private memberService: MembersService, protected accountService: AccountService, private router: Router, 
     private toastr: ToastrService, private titleService: Title) {
-    this.userParams = this.memberService.getUserParams();
     this.accountService.currentUser$.pipe(take(1)).subscribe(user => this.user = user);
+    if ("user" in localStorage) {
+      this.userParams = this.memberService.getUserParams();
+    } 
   }
 
   ngOnInit(): void {
     if ("user" in localStorage) {
       this.loadMembers();
-      this.titleService.setTitle("DDM - Użytkownicy")
+      this.titleService.setTitle("Użytkownicy")
     } else {
       this.router.navigateByUrl('/');
+      this.toastr.error('Zaloguj się, żeby mieć dostęp!')
     }
   }
 

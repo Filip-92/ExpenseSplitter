@@ -46,14 +46,14 @@ namespace API.Controllers
             return BadRequest("Nie można otworzyć notyfikacji");
         }
 
-        public async Task<ActionResult<NotificationDto>> SendNotification(int memeId, AppUser user, string message)
+        public async Task<ActionResult<NotificationDto>> SendNotification(int groupId, AppUser user, string message)
         {
             BadRequest(user);
 
             var notification = new Notifications
             {
                 Content = message,
-                MemeId = memeId,
+                GroupId = groupId,
                 AppUserId = user.Id
             };
 

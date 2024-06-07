@@ -37,6 +37,8 @@ namespace API.Controllers
         {
             var user = await _unitOfWork.UserRepository.GetUserByUsernameAsync(User.GetUsername());
 
+            var contributors = await _unitOfWork.ToDoListRepository.GetGroupContributors((int)toDoListTasksDto.GroupId);
+
             var toDoListTask = new ToDoListTasks
             {
                 Id = toDoListTasksDto.Id,
@@ -50,6 +52,17 @@ namespace API.Controllers
 
             if (await _unitOfWork.Complete())
             {
+                foreach(var cont in contributors)
+                {
+                    if (cont.Username != user.UserName)
+                    {
+                        var notifiedUser = await _unitOfWork.UserRepository.GetUserByUsernameAsync(cont.Username);
+                        if (notifiedUser != null)
+                        {
+                            await SendNotification((int)toDoListTask.GroupId, notifiedUser, "Pojawiło się nowe zadanie w grupie, w której jesteś");
+                        }
+                    }
+                }
                 return CreatedAtRoute("GetUser", new { username = user.UserName }, _mapper.Map<ToDoListTasksDto>(toDoListTask));
             }
 
@@ -182,6 +195,17 @@ namespace API.Controllers
 
             if (await _unitOfWork.Complete())
             {
+                foreach(var cont in contributors)
+                {
+                    if (cont.Username != user.UserName)
+                    {
+                        var notifiedUser = await _unitOfWork.UserRepository.GetUserByUsernameAsync(cont.Username);
+                        if (notifiedUser != null)
+                        {
+                            await SendNotification(toDoListContributorsDto.GroupId, notifiedUser, "Zostałeś dodany do nowej grupy");
+                        }
+                    }
+                }
                 return CreatedAtRoute("GetUser", new { username = user.UserName }, _mapper.Map<ToDoListContributorsDto>(contributor));
             }
 
@@ -230,6 +254,12 @@ namespace API.Controllers
         {
             var user = await _unitOfWork.UserRepository.GetUserByUsernameAsync(User.GetUsername());
 
+            var task = await _unitOfWork.ToDoListRepository.GetTaskById(taskId);
+
+            var group = await _unitOfWork.ToDoListRepository.GetGroupById((int)task.GroupId);
+
+            var contributors = await _unitOfWork.ToDoListRepository.GetGroupContributors(group.Id);
+
             var comment = new Comment
             {
                 Id = commentDto.Id,
@@ -243,6 +273,17 @@ namespace API.Controllers
 
             if (await _unitOfWork.Complete())
             {
+                foreach(var cont in contributors)
+                {
+                    if (cont.Username != user.UserName)
+                    {
+                        var notifiedUser = await _unitOfWork.UserRepository.GetUserByUsernameAsync(cont.Username);
+                        if (notifiedUser != null)
+                        {
+                            await SendNotification(group.Id, notifiedUser, "Pojawił się nowy komentarz w grupie, w której jesteś");
+                        }
+                    }
+                }
                 return CreatedAtRoute("GetUser", new { username = user.UserName }, _mapper.Map<CommentDto>(comment));
             }
 
@@ -250,7 +291,6 @@ namespace API.Controllers
         }
 
         [HttpGet("get-comments/{taskId}")]
-        [AllowAnonymous]
         public async Task<ActionResult> GetComments(int taskId)
         {
             var comments = await _unitOfWork.ToDoListRepository.GetComments(taskId);
@@ -259,7 +299,6 @@ namespace API.Controllers
         }
 
         [HttpGet("get-user-comments/{username}")]
-        [AllowAnonymous]
         public async Task<ActionResult> GetUserComments(string username)
         {
             var comments = await _unitOfWork.ToDoListRepository.GetUserComments(username);
@@ -277,6 +316,45 @@ namespace API.Controllers
             if (group == null) return NotFound("Could not find group");
 
             return Ok(group);
+        }
+
+        public async Task<ActionResult<NotificationDto>> SendNotification(int groupId, AppUser user, string message)
+        {
+            BadRequest(user);
+
+            var notification = new Notifications
+            {
+                Content = message,
+                GroupId = groupId,
+                AppUserId = user.Id
+            };
+
+            user.Notifications.Add(notification);
+
+            if (await _unitOfWork.Complete())
+            {
+                return CreatedAtRoute("GetUser", new { username = user.UserName }, _mapper.Map<NotificationDto>(notification));
+            }
+
+            return BadRequest("Problem z wysłaniem powiadomienia");
+        }
+
+        [HttpGet("check-if-user-in-contributors/{groupId}")]
+        public async Task<Boolean> CheckIfUserInContributors(int groupId)
+        {
+            var user = await _unitOfWork.UserRepository.GetUserByUsernameAsync(User.GetUsername());
+
+            var contributors = await _unitOfWork.ToDoListRepository.GetGroupContributors(groupId);
+
+            foreach(var cont in contributors)
+            {
+                if (cont.Username == user.UserName)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }

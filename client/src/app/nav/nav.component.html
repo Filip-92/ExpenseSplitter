@@ -73,12 +73,12 @@
                             <i class="fa fa-exclamation-triangle mr-2"></i>Errors
                         </a>
                     </button>
-                    <button class="sidemenu-item col-8" [ngStyle]="!display ? { 'cursor': 'default' } : { 'cursor': 'default' }" [disabled]="!display" *ngIf="!display">
+                    <button class="sidemenu-item col-8 mb-5" [ngStyle]="!display ? { 'cursor': 'default' } : { 'cursor': 'default' }" [disabled]="!display" *ngIf="!display">
                         <a [ngStyle]="!display ? { 'cursor': 'pointer' } : { 'cursor': 'default'}" (click)="logout()" style="color: white;" [disabled]="!display">
                             <i class="fa fa-sign-out mr-2"></i>Wyloguj
                         </a>
                     </button>
-                    <button class="sidemenu-item col-8" [ngStyle]="!display ? { 'cursor': 'default' } : { 'cursor': 'default' }" [disabled]="!display" *ngIf="!display">
+                    <button class="sidemenu-item col-8 mt-5" [ngStyle]="!display ? { 'cursor': 'default' } : { 'cursor': 'default' }" [disabled]="!display" *ngIf="!display">
                         <a [ngStyle]="!display ? { 'cursor': 'pointer' } : { 'cursor': 'default'}" style="color: white;" [disabled]="!display">
                             <app-dark-mode-toggle style="color: white;"></app-dark-mode-toggle>
                         </a>

@@ -209,12 +209,12 @@ namespace API.Controllers
             return Ok();
         }
 
-        public async Task<ActionResult<NotificationDto>> SendNotification(int memeId, AppUser user)
+        public async Task<ActionResult<NotificationDto>> SendNotification(int groupId, AppUser user)
         {
             var notification = new Notifications
             {
                 Content = "Twój mem został dodany na stronę główną",
-                MemeId = memeId,
+                GroupId = groupId,
                 AppUserId = user.Id
             };
 

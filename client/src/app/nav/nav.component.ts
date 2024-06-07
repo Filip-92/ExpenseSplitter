@@ -74,8 +74,8 @@ export class NavComponent implements OnInit {
 
   ngOnInit(): void {
     if ("user" in localStorage) {
-      //this.getUnreadMessages(this.user?.username);
-      //this.getUnreadNotifications(this.user?.username);
+      this.getUnreadMessages(this.user?.username);
+      this.getUnreadNotifications(this.user?.username);
     }
     if (this.displayBoolean) {
       this.displayNavbar();
@@ -97,10 +97,16 @@ export class NavComponent implements OnInit {
     this.displayNavbar();
     this.accountService.login(this.model).subscribe(response => {
       this.router.navigateByUrl('/');
+      if (this.router.url === '/') {
+        this.reloadCurrentPage();
+      }
       setTimeout(() => {
         this.getUnreadMessages(this.user.username);
         this.getUnreadNotifications(this.user.username);
       }, 1000)
+    },
+    error => {
+      this.toastr.warning('Błędny login lub hasło');
     })
     this.registerMode = false;
   }

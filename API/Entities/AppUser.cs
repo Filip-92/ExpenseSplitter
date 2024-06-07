@@ -18,7 +18,6 @@ namespace API.Entities
             Messages = new List<ContactForm>();
             Notifications = new List<Notifications>();
             Categories = new List<Category>();
-            Memes = new List<Memes>();
             Expenses = new List<Expenses>();
             Contributors = new List<Contributors>();
             Spendings = new List<Spendings>();
@@ -33,7 +32,6 @@ namespace API.Entities
         public DateTime LastActive { get; set; } = DateTime.Now.AddHours(8);
         public string Gender { get; set; }
         public ICollection<Photo> Photos { get; set; }
-        public ICollection<Memes> Memes { get; set; }
         public ICollection<ContactForm> Messages { get; set; }
         public ICollection<Category> Categories { get; set; }
         public ICollection<Expenses> Expenses { get; set; }
