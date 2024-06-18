@@ -67,4 +67,15 @@ export class ContributorsFormComponent {
     })
   }
 
+  removeContributor(contributorId: number) {
+    if (this.category.username === this.user.username) {
+      this.expensesServ.removeContributor(contributorId).subscribe(() => {
+        this.contributors.splice(this.contributors.findIndex(p => p.id === contributorId), 1);
+      })
+      this.getCategoryContributors(this.category?.id);
+    } else {
+      this.toastr.error('Musisz być administratorem grupy, żeby to zrobić')
+    }
+  } 
+
 }

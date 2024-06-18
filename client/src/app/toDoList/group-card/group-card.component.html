@@ -9,7 +9,7 @@
         <div class="col-md-5 col-2">
             <!-- <img src="{{cat.photoUrl}}" alt=""> -->
         </div>
-        <div class="col-md-3 col-3 text-right" *ngIf="group.username === user.username">
+        <div class="col-md-3 col-3 text-right">
             <!-- <i class="fa fa-photo mr-3" (click)="openCategoryPhotoModal(cat)"> Photo</i> -->
             <i class="fa fa-trash mr-3" (click)="removeGroup(group.id)"> Usuń</i>
             <i class="fa fa-pencil mr-3" (click)="openGroupNameUpdateModal(group)" [attr.data-target]="'#'+group?.id"> Edytuj</i>

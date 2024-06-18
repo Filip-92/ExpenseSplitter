@@ -22,7 +22,7 @@ export class GroupCardComponent {
   user: User;
 
   constructor(public accountService: AccountService, private toDoListServ: ToDoListService,
-    private groupTasksComp: GroupTasksComponent, private modalServ: NgbModal) { 
+    private groupTasksComp: GroupTasksComponent, private modalServ: NgbModal, private toastr: ToastrService) { 
       this.accountService.currentUser$.pipe(take(1)).subscribe(user => this.user = user);
     }
 
@@ -31,16 +31,25 @@ export class GroupCardComponent {
   }
 
   removeGroup(groupId: number) {
-    this.toDoListServ.removeGroup(groupId).subscribe(() => {
-      this.groupTasksComp.groups.splice(this.groupTasksComp.groups.findIndex(p => p.id === groupId), 1);
-    })
-    this.groupTasksComp.getGroups();
+    if (this.group.username === this.user.username) {
+      this.toDoListServ.removeGroup(groupId).subscribe(() => {
+        this.groupTasksComp.groups.splice(this.groupTasksComp.groups.findIndex(p => p.id === groupId), 1);
+      })
+      this.groupTasksComp.getGroups();
+    } else {
+      this.toastr.error('Musisz być administratorem grupy, żeby to zrobić')
+    }
+
   }
 
   openGroupNameUpdateModal(group: any) {
-    const modalRef = this.modalServ.open(GroupEditModalComponent);
-    modalRef.componentInstance.group = group;
-    modalRef.componentInstance.modalRef = modalRef;
+    if (this.group.username === this.user.username) {
+      const modalRef = this.modalServ.open(GroupEditModalComponent);
+      modalRef.componentInstance.group = group;
+      modalRef.componentInstance.modalRef = modalRef;
+    } else {
+      this.toastr.error('Musisz być administratorem grupy, żeby to zrobić')
+    }
   }
 
   convertText(title: string) {

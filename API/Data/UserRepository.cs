@@ -236,9 +236,14 @@ namespace API.Data
             _context.TasksGroups.Remove(group);
         }
 
-        public void RemoveContributor(ToDoListContributors contributor)
+        public void RemoveToDoListContributor(ToDoListContributors contributor)
         {
             _context.ToDoListContributors.Remove(contributor);
+        }
+
+        public void RemoveExpensesContributor(Contributors contributor)
+        {
+            _context.Contributors.Remove(contributor);
         }
     }
 }

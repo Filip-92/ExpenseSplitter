@@ -231,10 +231,20 @@ namespace API.Controllers
         {
             var user = await _unitOfWork.UserRepository.GetUserByUsernameAsync(User.GetUsername());
 
+            var contributors = await _unitOfWork.ExpensesRepository.GetCategoryContributors(contributorsDto.CategoryId);
+
+            foreach(var cont in contributors)
+            {
+                if (cont.Email == contributorsDto.Email)
+                {
+                    return BadRequest("Istnieje już użytkownik o takiej nazwie w danej grupie");
+                }
+            }
+
             var contributor = new Contributors
             {
                 Id = contributorsDto.Id,
-                Username = contributorsDto.Username.ToLower(),
+                Username = contributorsDto.Username,
                 Email = contributorsDto.Email,
                 CategoryId = contributorsDto.CategoryId
             };
@@ -247,6 +257,65 @@ namespace API.Controllers
             }
 
             return BadRequest("Problem z dodawaniem użytkownika");
+        }
+
+        [HttpPost("remove-contributor/{contributorId}")]
+        public async Task<ActionResult> RemoveContributor(int contributorId)
+        {
+            var contributor = await _unitOfWork.ExpensesRepository.GetContributorById(contributorId);
+
+            if (contributor == null) return NotFound("Could not find contributor");
+
+            _unitOfWork.UserRepository.RemoveExpensesContributor(contributor);
+
+            await _unitOfWork.Complete();
+
+            return Ok();
+        }
+
+        [HttpPut("update-contributor/{contributorId}")]
+        public async Task<ActionResult> UpdateContributor(UpdateExpensesContributorDto updateContributorDto, int contributorId)
+        {
+            var contributor = await _unitOfWork.ExpensesRepository.GetContributorById(contributorId);
+
+            var contributors = await _unitOfWork.ExpensesRepository.GetCategoryContributors(updateContributorDto.CategoryId);
+
+            foreach(var cont in contributors)
+            {
+                if (cont.Username == updateContributorDto.Username.ToLower())
+                {
+                    return BadRequest("Istnieje już użytkownik o takiej nazwie w danej kategorii");
+                }
+            }
+
+            var expenses = await _unitOfWork.ExpensesRepository.GetCategoryExpenses(updateContributorDto.CategoryId);
+
+            foreach(var expense in expenses)
+            {
+                var spendings = await _unitOfWork.ExpensesRepository.GetExpenseSpendings(expense.Id);
+                foreach(var spending in spendings)
+                {
+                    if(spending.WhoPaid == contributor.Username)
+                    {
+                        spending.WhoPaid = updateContributorDto.Username;
+                    }
+                    if (spending.WhoOwes == contributor.Username)
+                    {
+                        spending.WhoOwes = updateContributorDto.Username;
+                    }
+                }
+                if (expense.WhoPaid == contributor.Username)
+                {
+                    expense.WhoPaid = updateContributorDto.Username;
+                }
+            }
+
+            // _unitOfWork.ToDoListRepository.Update(comment);
+            contributor.Username = updateContributorDto.Username;
+
+            if (await _unitOfWork.Complete()) return NoContent();
+
+            return BadRequest("Nie udało się edytować wariata");
         }
 
         [HttpPost("add-spending")]

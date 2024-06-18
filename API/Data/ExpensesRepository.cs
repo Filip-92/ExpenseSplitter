@@ -38,6 +38,13 @@ namespace API.Data
                         .ToListAsync();
         }
 
+        public async Task<Contributors> GetContributorById(int id)
+        {
+            return await _context.Contributors
+                .IgnoreQueryFilters()
+                .SingleOrDefaultAsync(x => x.Id == id);
+        }
+
         public async Task<IEnumerable<Category>> GetClosedCategories(string username)
         {
             return await _context.Category

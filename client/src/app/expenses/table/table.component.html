@@ -1,13 +1,15 @@
 <div class="mb-4" style="border-top: 1px solid white;"></div>
-<div class="text-left">
+<div *ngIf="!summary" class="text-left">
     <i class="fa fa-refresh ml-5" (click)="refresh()"></i>
 </div>
 
 <div *ngIf="expenses?.length > 0">
-    <div *ngFor="let expense of expenses" class="mt-3">
-        <app-expense-card [expense]="expense" [contributors]="contributors" [category]="category"></app-expense-card> 
+    <div *ngIf="!summary">
+        <div *ngFor="let expense of expenses" class="mt-3 mb-3">
+            <app-expense-card [expense]="expense" [contributors]="contributors" [category]="category"></app-expense-card> 
+        </div>
     </div>
-    <div>
+    <div *ngIf="summary" class="mb-3">
         <app-summary-card [expensesSum]="expensesSum" [expenses]="expenses" [category]="category" [contributors]="contributors"></app-summary-card>
     </div>
 </div>

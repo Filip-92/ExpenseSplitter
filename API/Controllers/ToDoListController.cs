@@ -186,7 +186,7 @@ namespace API.Controllers
             var contributor = new ToDoListContributors
             {
                 Id = toDoListContributorsDto.Id,
-                Username = toDoListContributorsDto.Username.ToLower(),
+                Username = toDoListContributorsDto.Username,
                 Email = toDoListContributorsDto.Email,
                 GroupId = toDoListContributorsDto.GroupId
             };
@@ -219,7 +219,7 @@ namespace API.Controllers
 
             if (contributor == null) return NotFound("Could not find contributor");
 
-            _unitOfWork.UserRepository.RemoveContributor(contributor);
+            _unitOfWork.UserRepository.RemoveToDoListContributor(contributor);
 
             await _unitOfWork.Complete();
 
@@ -264,7 +264,7 @@ namespace API.Controllers
             {
                 Id = commentDto.Id,
                 Content = commentDto.Content,
-                Username = user.UserName.ToLower(),
+                Username = user.UserName,
                 Uploaded = commentDto.Uploaded,
                 TaskId = taskId
             };

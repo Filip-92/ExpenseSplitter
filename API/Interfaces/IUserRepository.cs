@@ -32,6 +32,7 @@ namespace API.Interfaces
         void RemoveSpending(Spendings spending);
         void RemoveTask(ToDoListTasks task);
         void RemoveGroup(TasksGroup group);
-        void RemoveContributor(ToDoListContributors contributor);
+        void RemoveToDoListContributor(ToDoListContributors contributor);
+        void RemoveExpensesContributor(Contributors contributor);
     }
 }

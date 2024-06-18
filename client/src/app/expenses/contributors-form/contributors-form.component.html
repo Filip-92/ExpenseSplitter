@@ -28,3 +28,22 @@
     </div>
 </div>
 
+<div *ngFor="let contributor of contributors" class="mb-2">
+    <div class="card">
+        <div class="row">
+            <div class="col-1">
+                <app-user-photo [email]="contributor.email"></app-user-photo>
+            </div>
+            <div class="col-4 text-left ml-3 center">
+                {{contributor.username}}
+            </div>
+            <div class="col-6 text-right center">
+                <span *ngIf="contributor.username !== user.username">
+                    <i class="fa fa-trash ml-3 text-right" (click)="removeContributor(contributor.id)" title="Usuń"></i>
+                    <app-contributor-update [contributor]="contributor" [category]="category" [user]="user"></app-contributor-update>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+

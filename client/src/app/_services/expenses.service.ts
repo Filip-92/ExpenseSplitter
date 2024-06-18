@@ -50,8 +50,20 @@ export class ExpensesService {
     return this.http.post(this.baseUrl + 'expenses/add-contributor', model);
   }
 
+  removeContributor(contributorId: number) {
+    return this.http.post(this.baseUrl + 'expenses/remove-contributor/' + contributorId, {});
+  }
+
+  updateContributor(contributor: any) {
+    return this.http.put(this.baseUrl + 'expenses/update-contributor/' + contributor.id, contributor, {});
+  }
+
   getCategoryContributors(categoryId: number) {
     return this.http.get<Contributor>(this.baseUrl + 'users/get-contributors/' + categoryId, {});
+  }
+
+  getUserPhoto(email: string) {
+    return this.http.get<any>(this.baseUrl + 'users/get-user-photo/' + email, {});
   }
 
   getUserExpenses(categoryId: number, username: string) {
@@ -111,8 +123,9 @@ export class ExpensesService {
   }
 
   addCategoryPhoto(model: any, categoryId: number) {
-    return this.http.put(this.baseUrl + 'users/add-category-photo/' + categoryId, model);
+    return this.http.post(this.baseUrl + 'users/add-category-photo/' + categoryId, model);
   }
+
   deletePhoto(photoId: number) {
     return this.http.delete(this.baseUrl + 'users/delete-photo/' + photoId);
   }

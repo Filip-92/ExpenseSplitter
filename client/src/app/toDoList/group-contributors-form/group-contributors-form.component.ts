@@ -69,10 +69,18 @@ export class GroupContributorsFormComponent {
   }
 
   removeContributor(contributorId: number) {
-    this.toDoListServ.removeContributor(contributorId).subscribe(() => {
-      this.contributors.splice(this.contributors.findIndex(p => p.id === contributorId), 1);
-    })
-    this.getGroupContributors(this.group?.id);
+    if (this.group.username === this.user.username) {
+      this.toDoListServ.removeContributor(contributorId).subscribe(() => {
+        this.contributors.splice(this.contributors.findIndex(p => p.id === contributorId), 1);
+      })
+      this.getGroupContributors(this.group?.id);
+    } else {
+      this.toastr.error('Musisz być administratorem grupy, żeby to zrobić')
+    }
+  }
+
+  editToggle() {
+    this.edit = !this.edit;
   }
 
 

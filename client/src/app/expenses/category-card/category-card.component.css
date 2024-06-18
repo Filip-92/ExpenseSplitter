@@ -10,6 +10,10 @@ input[type=text] {
     padding-bottom: 10px;
 }
 
+.center {
+    margin: auto !important;
+}
+
 ::placeholder {
     color: whitesmoke;
 }
@@ -17,6 +21,7 @@ input[type=text] {
 img {
     max-height: 200px;
     padding-top: 20px;
+    padding-bottom: 10px;
 }
 
 input {
@@ -79,4 +84,14 @@ i:hover {
     cursor: pointer;
     border: 1px solid red;
     color: red;
+}
+
+.activeTab {
+    border: 1px solid white;
+}
+
+.activeTab:hover {
+    cursor: pointer;
+    color: red;
+    border: 1px solid red;
 }

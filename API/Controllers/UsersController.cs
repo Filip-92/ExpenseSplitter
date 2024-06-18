@@ -291,7 +291,7 @@ namespace API.Controllers
 
             foreach(var contributor in contributors)
             {
-                if (contributor.Username == user.UserName)
+                if (contributor.Email == user.Email)
                 {
                     contributorsArray[i] = contributor;
                     i++;
@@ -616,7 +616,7 @@ namespace API.Controllers
 
             foreach(var contributor in contributors)
             {
-                if (contributor.Username == user.UserName)
+                if (contributor.Email == user.Email)
                 {
                     contributorsArray[i] = contributor;
                     i++;
@@ -652,6 +652,21 @@ namespace API.Controllers
             var tasks = await _unitOfWork.ToDoListRepository.GetToDoListGroupTasks(groupId);
 
             return Ok(tasks);
+        }
+
+        [HttpGet("get-user-photo/{email}")]
+        [AllowAnonymous]
+        public async Task<ActionResult<PhotoDto>> GetUserPhoto(string email)
+        {
+            var user = await _unitOfWork.UserRepository.GetUserByEmailAsync(email);
+
+            if (user == null) return Ok();
+
+            var photo = await _unitOfWork.PhotoRepository.GetUserPhoto(user.Id);
+
+            if (photo == null) return Ok();
+
+            return Ok(photo);
         }
 
     }

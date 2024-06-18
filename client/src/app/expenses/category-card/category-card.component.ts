@@ -16,6 +16,10 @@ import { ExpensesComponent } from '../expenses.component';
 export class CategoryCardComponent {
   @Input() category: Category;
   more: boolean;
+  addToGroup: boolean = true;
+  addExpense: boolean;
+  splitExpenses: boolean;
+  summary: boolean;
 
   constructor(private fb: UntypedFormBuilder, private toastr: ToastrService, 
     private modalServ: NgbModal, private expensesServ: ExpensesService, private expensesComp: ExpensesComponent) { }
@@ -42,6 +46,34 @@ export class CategoryCardComponent {
 
   showMore() {
     this.more = !this.more;
+  }
+
+  addToGroupToggle() {
+    this.addToGroup = !this.addToGroup;
+    this.addExpense = false;
+    this.splitExpenses = false;
+    this.summary = false;
+  }
+
+  addExpenseToggle() {
+    this.addExpense =!this.addExpense;
+    this.addToGroup = false;
+    this.splitExpenses = false;
+    this.summary = false;
+  }
+
+  splitExpensesToggle() {
+    this.splitExpenses = !this.splitExpenses;
+    this.addToGroup = false;
+    this.addExpense = false;
+    this.summary = false;
+  } 
+
+  summaryToggle() {
+    this.summary = !this.summary;
+    this.splitExpenses = false;
+    this.addToGroup = false;
+    this.addExpense = false;
   }
 
 }

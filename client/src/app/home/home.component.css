@@ -64,3 +64,7 @@ a:hover {
   cursor: pointer;
   color: red;
 }
+
+#weather {
+  width: 120px;
+}

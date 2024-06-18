@@ -11,6 +11,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class TableComponent {
   @Input() category: any;
+  @Input() summary: boolean;
   contributors: any;
   expenses: any;
   spendings: any;

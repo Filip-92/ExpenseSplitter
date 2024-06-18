@@ -1,21 +1,28 @@
 <div class="card">
-    <div class="text-center">
-        <img src="{{category.photoUrl || '././assets/money.png'}}" alt="">
-    </div>
     <div class="row">
-        <div class="col-4 text-center">
+        <div class="col-4">
+            <img src="{{category.photoUrl || '././assets/money.png'}}" alt="">
+        </div>
+        <div class="col-3 text-center center">
             <span id="category" (click)="showMore()">{{category.name}}<i class="ml-2 fa fa-arrow-down" *ngIf="!more"></i><i class="ml-2 fa fa-arrow-up" *ngIf="more"></i></span>
         </div>
-        <div class="col-3"></div>
-        <div class="col-4 text-right">
+        <div class="col-4 text-right center">
             <i class="fa fa-photo mr-3" (click)="openCategoryPhotoModal(category)"> Photo</i>
             <i class="fa fa-trash mr-3" (click)="removeCategory(category.id)"> Usuń</i>
             <i class="fa fa-pencil mr-3" (click)="openCategoryNameUpdateModal(category)" [attr.data-target]="'#'+category?.id"> Edytuj</i>
         </div>
     </div>
     <div *ngIf="more">
-        <app-contributors-form [category]="category" [user]="user"></app-contributors-form>
-        <app-expense-form [category]="category"></app-expense-form>
-        <app-table [category]="category"></app-table>
+        <div class="row mb-2">
+            <div class="col-md-2"></div>
+            <div class="activeTab col-2 mr-2" (click)="addToGroupToggle()" [ngStyle]="addToGroup ? { 'background-color': '#696969', 'border': '1px solid red', 'color': 'black' } : { }">Dodaj do grupy</div>
+            <div class="activeTab col-2 mr-2" (click)="addExpenseToggle()" [ngStyle]="addExpense ? { 'background-color': '#696969', 'border': '1px solid red', 'color': 'black' } : { }">Dodaj wydatek</div>
+            <div class="activeTab col-2 mr-2" (click)="splitExpensesToggle()" [ngStyle]="splitExpenses ? { 'background-color': '#696969', 'border': '1px solid red', 'color': 'black' } : { }">Podziel wydatki</div>
+            <div class="activeTab col-2 mr-2" (click)="summaryToggle()" [ngStyle]="summary ? { 'background-color': '#696969', 'border': '1px solid red', 'color': 'black' } : { }">Podsumowanie</div>
+        </div>
+        <app-contributors-form [category]="category" [user]="user" *ngIf="addToGroup"></app-contributors-form>
+        <app-expense-form [category]="category" *ngIf="addExpense"></app-expense-form>
+        <app-table [category]="category" *ngIf="splitExpenses || summary" [summary]="summary"></app-table>
     </div>
+
 </div>

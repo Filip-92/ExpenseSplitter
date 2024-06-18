@@ -33,7 +33,7 @@
                 {{contributor.username}}
             </div>
             <div class="col-6 text-right">
-                <span *ngIf="group.username === user.username && contributor.username !== user.username">
+                <span *ngIf="contributor.username !== user.username">
                     <i class="fa fa-trash ml-3 text-right" (click)="removeContributor(contributor.id)" title="Usuń"></i>
                     <app-group-contributor-card [contributor]="contributor" [group]="group" [user]="user"></app-group-contributor-card>
                 </span>

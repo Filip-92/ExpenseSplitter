@@ -105,7 +105,6 @@ export class ToDoListService {
   getGroupByTaskId(taskId: number) {
     return this.http.get<any>(this.baseUrl + 'toDoList/get-group-by-taskId/' + taskId, {});
   }
-
   
   checkIfUserInContributors(groupId: number) {
     return this.http.get<any>(this.baseUrl + 'toDoList/check-if-user-in-contributors/' + groupId, {});

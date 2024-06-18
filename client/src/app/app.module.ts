@@ -104,6 +104,8 @@ import { GroupTaskCardFormComponent } from './toDoList/task-card-form/task-card-
 import { TasksListCardComponent } from './toDoList/tasks-list-card/tasks-list-card.component';
 import { GroupTasksFilterComponent } from './toDoList/group-tasks-filter/group-tasks-filter.component';
 import { CommentsComponent } from './toDoList/comments/comments.component';
+import { ContributorUpdateComponent } from './expenses/contributor-update/contributor-update.component';
+import { UserPhotoComponent } from './user-photo/user-photo.component';
 
 @NgModule({
   declarations: [
@@ -177,7 +179,9 @@ import { CommentsComponent } from './toDoList/comments/comments.component';
     GroupTaskCardFormComponent,
     TasksListCardComponent,
     GroupTasksFilterComponent,
-    CommentsComponent
+    CommentsComponent,
+    ContributorUpdateComponent,
+    UserPhotoComponent
   ],
   imports: [
     BrowserModule,
