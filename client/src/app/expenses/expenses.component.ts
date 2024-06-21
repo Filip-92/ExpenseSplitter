@@ -52,7 +52,8 @@ export class ExpensesComponent {
       content: ['', [Validators.required, Validators.maxLength(200)]]
     })
     this.categoryForm = this.fb.group({
-      name: ['', [Validators.required, Validators.maxLength(20)]]
+      name: ['', [Validators.required, Validators.maxLength(20)]],
+      currency: ['PLN']
     })
   }
 

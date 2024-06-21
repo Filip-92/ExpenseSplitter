@@ -129,4 +129,8 @@ export class ExpensesService {
   deletePhoto(photoId: number) {
     return this.http.delete(this.baseUrl + 'users/delete-photo/' + photoId);
   }
+
+  changeCurrency(expenses: number, baseCurrency: string, newCurrency: string) {
+    return this.http.get('https://api.freecurrencyapi.com/v1/latest?apikey=fca_live_h53xjC0iSInFKx8bgjNULbJ9T60gkZrtyuHkuT1L&currencies=' + newCurrency + '&base_currency=' + baseCurrency, {})
+  }
 }

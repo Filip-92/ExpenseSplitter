@@ -4,7 +4,7 @@
     <form [formGroup]='expensesForm' (ngSubmit)="expensesForm.valid && addExpense()" class="text-center row p-3">
         <div class="col-9">
             <input type="text" class="mb-2" [formControl]='expensesForm?.controls["name"]' placeholder="Wpisz rodzaj wydatku"/>
-            <input type="number" [formControl]='expensesForm?.controls["amount"]' placeholder="Wpisz wysokość wydatku"/>
+            <input type="number" class="text-left" [formControl]='expensesForm?.controls["amount"]' placeholder="Wpisz wysokość wydatku"/>
         </div>
         <button class="btn btn-success ml-2 col-2" type="submit" [disabled]="!expensesForm?.valid">Dodaj wydatek</button>
         <div *ngIf="expensesForm?.controls['name'].errors?.maxlength" class="text-danger">

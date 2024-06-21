@@ -68,6 +68,10 @@ i:hover {
     #tags {
         width: 500px !important;
     }
+
+    .card {
+        min-width: 700px !important;
+    }
 }
 
 .fa-pencil:hover {

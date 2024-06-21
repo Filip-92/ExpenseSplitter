@@ -1,6 +1,6 @@
 <div class="card">
     <div class="row">
-        <div class="text-left">
+        <div class="col-md-4 col-5 text-left">
             <a id="goTo" routerLink="/to-do-list/{{group.id}}/{{convertText(group.name)}}" class="ml-4 mr-5">Idź do</a>
             <span id="group" (click)="showMore()">{{group.name}}
                 <i *ngIf="more" class="fa fa-arrow-up ml-2"></i><i *ngIf="!more" class="fa fa-arrow-down ml-2"></i>

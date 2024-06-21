@@ -36,6 +36,7 @@ export class ExpenseFormComponent {
 
   addExpense() {
     this.expensesServ.addExpense(this.expensesForm.value).subscribe(response => {
+      console.log(this.expensesForm.value)
       this.toastr.success('Pomyślnie dodano wydatek');
       this.expensesForm.reset();
       this.getCategoryExpenses(this.category.id);

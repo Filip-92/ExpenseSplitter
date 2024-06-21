@@ -6,6 +6,13 @@
             <form [formGroup]='categoryForm' (ngSubmit)="categoryForm.valid && addCategory()" class="text-center column">
                 <div>
                     <input type="text" [formControl]='categoryForm.controls["name"]' placeholder="Wpisz nazwę tagu" class="col-7"/>
+                    <select formControlName='currency' class="mt-2 text-center">
+                        <option value='' disabled>Waluta</option>
+                        <option value='PLN'>PLN</option>
+                        <option value='EUR'>EUR</option>
+                        <option value='USD'>USD</option>
+                        <option value='GBP'>GBP</option>
+                    </select> 
                     <button class="btn btn-success ml-2 col-2" id="addAnnoun" type="submit" [disabled]="!categoryForm.valid">Dodaj kategorię</button>
                 </div>
                 <div *ngIf="categoryForm.controls['name'].errors?.maxlength" class="text-danger">

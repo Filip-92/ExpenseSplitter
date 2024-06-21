@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { Category } from '../../_models/category';
 import { UntypedFormBuilder } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -15,6 +15,7 @@ import { ExpensesComponent } from '../expenses.component';
 })
 export class CategoryCardComponent {
   @Input() category: Category;
+  @ViewChild('scroll', { read: ElementRef }) public scroll: ElementRef<any>;
   more: boolean;
   addToGroup: boolean = true;
   addExpense: boolean;
@@ -46,6 +47,7 @@ export class CategoryCardComponent {
 
   showMore() {
     this.more = !this.more;
+    this.scrollBottom();
   }
 
   addToGroupToggle() {
@@ -74,6 +76,10 @@ export class CategoryCardComponent {
     this.splitExpenses = false;
     this.addToGroup = false;
     this.addExpense = false;
+  }
+
+  public scrollBottom() {
+    this.scroll.nativeElement.scrollTop = this.scroll.nativeElement.scrollHeight;
   }
 
 }

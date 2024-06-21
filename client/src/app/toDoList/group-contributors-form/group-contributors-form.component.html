@@ -29,10 +29,13 @@
 <div *ngFor="let contributor of contributors">
     <div class="card">
         <div class="row">
+            <div class="col-1">
+                <app-user-photo [email]="contributor.email"></app-user-photo>
+            </div>
             <div class="col-5 text-left ml-3">
                 {{contributor.username}}
             </div>
-            <div class="col-6 text-right">
+            <div class="col-5 text-right">
                 <span *ngIf="contributor.username !== user.username">
                     <i class="fa fa-trash ml-3 text-right" (click)="removeContributor(contributor.id)" title="Usuń"></i>
                     <app-group-contributor-card [contributor]="contributor" [group]="group" [user]="user"></app-group-contributor-card>

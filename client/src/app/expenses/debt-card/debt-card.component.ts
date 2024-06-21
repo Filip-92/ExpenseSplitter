@@ -10,6 +10,8 @@ export class DebtCardComponent {
   @Input() category: any;
   @Input() whoPaid: any;
   @Input() whoOwes: any;
+  @Input() currencyValue: number;
+  @Input() currencyName: string;
   debt: any;
 
   ngOnInit(): void {

@@ -145,6 +145,7 @@ namespace API.Controllers
             {
                 Id = categoryDto.Id,
                 Name = categoryDto.Name,
+                Currency = categoryDto.Currency,
                 Username = user.UserName
             };
 
@@ -220,6 +221,7 @@ namespace API.Controllers
 
             // _unitOfWork.ExpensesRepository.Update(comment);
             category.Name = categoryUpdateDto.Name;
+            category.Currency = categoryUpdateDto.Currency;
 
             if (await _unitOfWork.Complete()) return NoContent();
 
@@ -265,6 +267,29 @@ namespace API.Controllers
             var contributor = await _unitOfWork.ExpensesRepository.GetContributorById(contributorId);
 
             if (contributor == null) return NotFound("Could not find contributor");
+
+            var expenses = await _unitOfWork.ExpensesRepository.GetCategoryExpenses(contributor.CategoryId);
+
+            foreach(var expense in expenses)
+            {
+                var spendings = await _unitOfWork.ExpensesRepository.GetExpenseSpendings(expense.Id);
+                foreach(var spending in spendings)
+                {
+                    if(spending.WhoPaid == contributor.Username)
+                    {
+                        await RemoveExpense(expense.Id);
+                        await RemoveSpending(spending.Id);
+                    }
+                    if (spending.WhoOwes == contributor.Username)
+                    {
+                        await RemoveSpending(spending.Id);
+                    }
+                }
+                if (expense.WhoPaid == contributor.Username)
+                {
+                    await RemoveExpense(expense.Id);
+                }
+            }
 
             _unitOfWork.UserRepository.RemoveExpensesContributor(contributor);
 

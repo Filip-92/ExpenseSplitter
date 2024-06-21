@@ -21,3 +21,10 @@ input {
    cursor: pointer;
    color: black; 
 }
+
+select {
+    height: 40px;
+    margin-left: 5px;
+    background-color: gray;
+    border: solid 1px black;
+}

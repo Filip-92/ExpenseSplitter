@@ -90,6 +90,7 @@ import { DebtCardComponent } from './expenses/debt-card/debt-card.component';
 import { AddCategoryPhotoComponent } from './modals/add-category-photo/add-category-photo.component';
 import { ToDoListComponent } from './toDoList/to-do-list/to-do-list.component';
 import '@angular/common/locales/global/pl';
+import { ScrollableDirective } from './expenses/scrollable.directive';
 import { TaskCardComponent } from './toDoList/task-card/task-card.component';
 import { EditTaskModalComponent } from './modals/edit-task-modal/edit-task-modal.component';
 import { IndividualTasksComponent } from './toDoList/individual-tasks/individual-tasks.component';
@@ -115,6 +116,7 @@ import { UserPhotoComponent } from './user-photo/user-photo.component';
     RegisterComponent,
     MemberListComponent,
     MemberDetailComponent,
+    ScrollableDirective,
     MessagesComponent,
     TestErrorsComponent,
     NotFoundComponent,

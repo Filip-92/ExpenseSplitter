@@ -5,3 +5,92 @@
     margin-right: auto;
     border: 1px solid white;
 }
+
+.cahgne-list-btn{
+    margin: 15px;
+    padding: 8px 16px;
+  }
+  
+  .list-with-scroll {
+    display: flex;
+    margin: 5px;
+  }
+  
+  .list{
+    flex-grow: 1;
+    display: flex;
+    overflow-x: scroll;
+  }
+  
+  .list::-webkit-scrollbar{
+    display: none;
+  }
+  
+  .item{
+    min-width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: lightgray;
+    margin: 10px;
+    border-radius: 5px;
+  }
+  
+  .scroll-button {
+    min-width: 50px;
+    font-size: 28px;
+    box-shadow: none;
+    border: none;
+    border-radius: 5px;
+    background-color: transparent;
+    color: #fff;
+  }
+
+  .scroll-button:hover {
+    color: red;
+  }
+  
+  .disable,
+  .disable:hover {
+    background-color: rgba(0,0,0,.12);
+    color: rgba(0,0,0,.26);
+    border: none;
+  }
+  
+  #scroll-left{
+    order: -1; /* To pevent ExpressionChangedAfterItHasBeenCheckedError */
+  }
+
+  #summary {
+    width: 250px !important;
+  }
+
+  .center {
+    margin: auto;
+  }
+
+  #summaryValue {
+    font-size: 18px; 
+    font-weight: 800;
+  }
+
+  @media screen and (max-width: 1000px) {
+
+    .card {
+        width: 95% !important;
+    }
+
+    #summaryValue {
+      font-size: 12px !important;
+      font-weight: 600 !important;
+    }
+
+}
+
+select {
+  height: 40px;
+  margin-left: 5px;
+  background-color: gray;
+  border: solid 1px black;
+}

@@ -7,6 +7,7 @@ namespace API.DTOs
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public string Currency { get; set; }
         public string Username { get; set; }
         public string PhotoUrl { get; set; }
         public bool IsClosed { get; set; }

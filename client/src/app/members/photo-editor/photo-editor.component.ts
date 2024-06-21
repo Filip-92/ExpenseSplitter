@@ -8,8 +8,7 @@ import { take } from 'rxjs/operators';
 import { MembersService } from 'src/app/_services/members.service';
 import { Photo } from 'src/app/_models/photo';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
-import { ExpensesService } from '../../_services/expenses.service';
-import { Category } from '../../_models/category';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-photo-editor',
@@ -17,7 +16,7 @@ import { Category } from '../../_models/category';
   styleUrls: ['./photo-editor.component.css']
 })
 export class PhotoEditorComponent implements OnInit {
-  @Input() category: Category;
+  @Input() member: Member;
   uploader: FileUploader;
   hasBaseDropzoneOver = false;
   baseUrl = environment.apiUrl;
@@ -25,14 +24,13 @@ export class PhotoEditorComponent implements OnInit {
   previewImg: SafeUrl;
 
   constructor(private accountService: AccountService, private memberService: MembersService, private sanitizer: DomSanitizer,
-    private expensesService: ExpensesService
-  ) { 
+    private toastr: ToastrService) { 
     this.accountService.currentUser$.pipe(take(1)).subscribe(user => this.user = user);
   }
 
   ngOnInit(): void {
     this.initializeUploader();
-    if (this.category?.photos?.length > 0) {
+    if (this.member?.photos?.length > 0) {
       this.deletePhotos();
     }
   }
@@ -42,27 +40,27 @@ export class PhotoEditorComponent implements OnInit {
   }
 
   setMainPhoto(photo: Photo) {
-    // this.expensesService.setCategoryPhoto(photo.id).subscribe(() => {
-    //   this.user.photoUrl = photo.url;
-    //   this.accountService.setCurrentUser(this.user);
-    //   this.category.photoUrl = photo.url;
-    //   this.category?.photos.forEach(p => {
-    //     if (p.isMain) p.isMain = false;
-    //     if (p.id === photo.id) p.isMain = true;
-    //   })
-    // })
+    this.memberService.setMainPhoto(photo.id).subscribe(() => {
+      this.user.photoUrl = photo.url;
+      this.accountService.setCurrentUser(this.user);
+      this.member.photoUrl = photo.url;
+      this.member?.photos.forEach(p => {
+        if (p.isMain) p.isMain = false;
+        if (p.id === photo.id) p.isMain = true;
+      })
+    })
   } 
 
   deletePhoto(photoId: number) {
-    this.expensesService.deletePhoto(photoId).subscribe(() => {
-      this.category.photos = this.category.photos.filter(x => x.id !== photoId);
+    this.memberService.deletePhoto(photoId).subscribe(() => {
+      this.member.photos = this.member.photos.filter(x => x.id !== photoId);
     })
   }
 
   deletePhotos() {
-    this.category.photos.forEach(p => {
-        this.expensesService.deletePhoto(p.id).subscribe(() => {
-          this.category.photos = this.category.photos.filter(x => x.id !== p.id);
+    this.member.photos.forEach(p => {
+        this.memberService.deletePhoto(p.id).subscribe(() => {
+          this.member.photos = this.member.photos.filter(x => x.id !== p.id);
         })
     })
   }
@@ -86,15 +84,16 @@ export class PhotoEditorComponent implements OnInit {
       if (response) {
         const photo: Photo = JSON.parse(response);
         this.deletePhotos();
-        this.category.photos.forEach(p => {
+        this.member.photos.forEach(p => {
           if (p.isMain) p.isMain = false;
           if (p.id === photo.id) p.isMain = true;
         })
-        this.category.photos.push(photo);
+        this.toastr.success('Pomyślnie dodano kategorię');
+        this.member.photos.push(photo);
         this.setMainPhoto(photo);
          if (photo.isMain) {
            this.user.photoUrl = photo.url;
-           this.category.photoUrl = photo.url;
+           this.member.photoUrl = photo.url;
            this.accountService.setCurrentUser(this.user);
          }
          this.previewImg = null; 

@@ -76,3 +76,10 @@ i:hover {
     border: 1px solid red;
     color: red;
 }
+
+select {
+    height: 40px;
+    margin-left: 5px;
+    background-color: gray;
+    border: solid 1px black;
+}

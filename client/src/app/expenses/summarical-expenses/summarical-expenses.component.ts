@@ -10,6 +10,8 @@ export class SummaricalExpensesComponent {
   @Input() username: string;
   @Input() category: any;
   @Input() contributors: any;
+  @Input() currencyValue: number;
+  @Input() currencyName: string;
   expenses: any;
   spendingsSum: any;
   expensesArray: number[] = [];
