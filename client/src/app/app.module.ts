@@ -107,6 +107,7 @@ import { GroupTasksFilterComponent } from './toDoList/group-tasks-filter/group-t
 import { CommentsComponent } from './toDoList/comments/comments.component';
 import { ContributorUpdateComponent } from './expenses/contributor-update/contributor-update.component';
 import { UserPhotoComponent } from './user-photo/user-photo.component';
+import { ExpensesHelpModalComponent } from './modals/expenses-help-modal/expenses-help-modal.component';
 
 @NgModule({
   declarations: [
@@ -183,7 +184,8 @@ import { UserPhotoComponent } from './user-photo/user-photo.component';
     GroupTasksFilterComponent,
     CommentsComponent,
     ContributorUpdateComponent,
-    UserPhotoComponent
+    UserPhotoComponent,
+    ExpensesHelpModalComponent
   ],
   imports: [
     BrowserModule,

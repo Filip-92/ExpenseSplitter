@@ -7,8 +7,7 @@ import { ContactFormMessages } from 'src/app/_models/contactFormMessages';
 import { Division } from 'src/app/_models/division';
 import { AdminService } from 'src/app/_services/admin.service';
 import { ExpensesService } from 'src/app/_services/expenses.service';
-import { CategoryEditModalComponent } from '../modals/category-edit-modal/category-edit-modal.component';
-import { AddCategoryPhotoComponent } from '../modals/add-category-photo/add-category-photo.component';
+import { ExpensesHelpModalComponent } from '../modals/expenses-help-modal/expenses-help-modal.component';
 
 @Component({
   selector: 'app-expenses',
@@ -96,5 +95,10 @@ export class ExpensesComponent {
     } else {
       this.getCategories();
     }
+  }
+
+  openExpensesHelpModal() {
+    const modalRef = this.modalServ.open(ExpensesHelpModalComponent);
+    modalRef.componentInstance.modalRef = modalRef;
   }
 }

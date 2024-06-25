@@ -1,3 +1,6 @@
+<div class="text-right">
+    Pomoc<i class="fa fa-info-circle ml-2" (click)="openExpensesHelpModal()" style="font-size: 30px;"></i>
+</div>
 <div class="text-center">
     <button class="btn btn-success mb-3" (click)="addNew()">Dodaj kategorię</button>
     <div class="row mb-3" style="border-top: 1px solid white;">
@@ -5,7 +8,7 @@
             <h3 class="mb-3 mt-3">Dodaj kategorię</h3>
             <form [formGroup]='categoryForm' (ngSubmit)="categoryForm.valid && addCategory()" class="text-center column">
                 <div>
-                    <input type="text" [formControl]='categoryForm.controls["name"]' placeholder="Wpisz nazwę tagu" class="col-7"/>
+                    <input type="text" [formControl]='categoryForm.controls["name"]' placeholder="Wpisz nazwę kategorii" class="col-7"/>
                     <select formControlName='currency' class="mt-2 text-center">
                         <option value='' disabled>Waluta</option>
                         <option value='PLN'>PLN</option>

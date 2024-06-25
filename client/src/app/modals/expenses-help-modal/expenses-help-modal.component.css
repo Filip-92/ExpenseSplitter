@@ -1,0 +1,10 @@
+#option:hover {
+    cursor: pointer;
+    color: orange;
+    margin-left: 5px;
+}
+
+#close:hover {
+    cursor: pointer;
+    color: red;
+}

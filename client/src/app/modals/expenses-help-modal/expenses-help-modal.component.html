@@ -1,0 +1,11 @@
+<div style="padding: 5px; border: 1px solid white;">
+    <div class="text-right mr-2">
+        <span id="close" (click)="close()">X</span> 
+    </div>
+    <div *ngFor="let option of options; index as i" style="padding: 5px;">
+        <h4 id="option" [ngStyle]="chosen[i] ? { 'color': 'red' } : { }" (click)="choiceToggle(i)">{{option}}</h4>
+        <div *ngIf="chosen[i]">
+            <p>{{description[i]}}</p>
+        </div>
+    </div>
+</div>
