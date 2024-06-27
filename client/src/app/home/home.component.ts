@@ -35,5 +35,13 @@ export class HomeComponent implements OnInit {
 
   openNav() {
     this.display = !this.display;
+    this.playAudioLike();
+  }
+
+  playAudioLike (){
+    let audio = new Audio();
+    audio.src = "../../../assets/audio/access-denied.mp3";
+    audio.load();
+    audio.play();
   }
 }

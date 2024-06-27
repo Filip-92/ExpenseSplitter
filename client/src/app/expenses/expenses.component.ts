@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
-import { Announcement } from 'src/app/_models/announcement';
 import { ContactFormMessages } from 'src/app/_models/contactFormMessages';
 import { Division } from 'src/app/_models/division';
 import { AdminService } from 'src/app/_services/admin.service';
