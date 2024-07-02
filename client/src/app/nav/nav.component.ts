@@ -87,6 +87,9 @@ export class NavComponent implements OnInit {
 
   displayNavbar() {
     this.display = !this.display;
+    if (!this.user.toggleSounds) {
+      this.playAudioMenu();
+    }
   }
 
   closeNavbar() {
@@ -94,11 +97,11 @@ export class NavComponent implements OnInit {
   }
 
   login() {
-    this.displayNavbar();
+    this.closeNavbar();
     this.accountService.login(this.model).subscribe(response => {
       this.router.navigateByUrl('/');
-      if (this.router.url === '/') {
-        this.reloadCurrentPage();
+      if (!this.user.toggleSounds) {
+        this.playAudioCorrect();
       }
       setTimeout(() => {
         this.getUnreadMessages(this.user.username);
@@ -107,8 +110,14 @@ export class NavComponent implements OnInit {
     },
     error => {
       this.toastr.warning('Błędny login lub hasło');
+      if (!this.user.toggleSounds) {
+        this.playAudioFailure();
+      }
     })
     this.registerMode = false;
+    if (!this.user.toggleSounds) {
+      this.playAudioCorrect();
+    }
   }
   
   refresh() {
@@ -178,5 +187,26 @@ export class NavComponent implements OnInit {
   reloadCurrentPage() {
     window.setTimeout(function(){location.reload()},100);
    }
+
+   playAudioFailure (){
+    let audio = new Audio();
+    audio.src = "../../../assets/audio/failure.mp3";
+    audio.load();
+    audio.play();
+  }
+
+  playAudioMenu (){
+    let audio = new Audio();
+    audio.src = "../../../assets/audio/menu.mp3";
+    audio.load();
+    audio.play();
+  }
+
+  playAudioCorrect (){
+    let audio = new Audio();
+    audio.src = "../../../assets/audio/correct.mp3";
+    audio.load();
+    audio.play();
+  }
 
 }

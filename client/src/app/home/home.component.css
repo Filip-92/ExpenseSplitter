@@ -21,6 +21,18 @@ img {
   }
 }
 
+.slide-right-mobile {
+  animation: 3s slide-right-mobile;
+}
+@keyframes slide-right-mobile {
+  from {
+    margin-left: -100%;
+  }
+  to {
+    margin-left: 0%;
+  }
+}
+
 .slide-left {
   animation: 3s slide-left;
 }
@@ -67,4 +79,10 @@ a:hover {
 
 #weather {
   width: 120px;
+}
+
+@media screen and (max-width: 1000px) {
+  .card {
+    width: 95% !important;
+  }
 }

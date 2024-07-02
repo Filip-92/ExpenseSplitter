@@ -11,6 +11,7 @@ export interface User {
     numberOflikes: number;
     likedByUsers: number;
     isBanned: boolean;
+    toggleSounds: boolean;
     banExpiration: Date;
     banReason: string;
     photos: Photo[];

@@ -47,6 +47,7 @@ namespace API.Entities
         public ICollection<Message> MessagesReceived { get; set; }
         public ICollection<AppUserRole> UserRoles { get; set; }
         public bool IsBanned { get; set; }
+        public bool ToggleSounds { get; set; }
         public DateTime BanExpiration { get; set; }
         public string BanReason { get; set; }
 

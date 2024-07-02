@@ -12,6 +12,7 @@ import { Reply } from 'src/app/_models/reply';
 import { HelperService } from 'src/app/_services/helper.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Title, Meta } from '@angular/platform-browser'
+import { ToDoListService } from '../../_services/to-do-list.service';
 
 @Component({
   selector: 'app-member-edit',
@@ -39,8 +40,9 @@ export class MemberEditComponent implements OnInit {
   photos: any;
   loading: boolean = false;
   loadingMember: boolean = false;
+  validationErrors: string[] = [];
 
-  constructor(private accountService: AccountService, private memberService: MembersService, 
+  constructor(private accountService: AccountService, private memberService: MembersService, private toDoListServ: ToDoListService,
     private toastr: ToastrService, private router: Router, private helperService: HelperService, private modalServ: NgbModal, private titleService: Title) { 
       this.accountService.currentUser$.pipe(take(1)).subscribe(user => this.user = user);
   }
@@ -56,15 +58,19 @@ export class MemberEditComponent implements OnInit {
       this.toastr.warning("Zaloguj się aby mieć dostęp");
       this.router.navigateByUrl('/');
     }
-    if ("photoUrl" in localStorage) {
-      this.user.photoUrl = localStorage.getItem("photoUrl");
-    }
   }
 
   getMemberDetails() {
     this.loading = true;
     this.titleService.setTitle("Profil użytkownika " + this?.user?.username);
+    this.getUserComments(this.user.username);
     this.loading = false;
+  }
+
+  getUserComments(username: string) {
+    this.toDoListServ.getUserComments(username).subscribe(comments => {
+      this.comments = comments;
+    })
   }
 
   getTab2() { 
@@ -78,13 +84,20 @@ export class MemberEditComponent implements OnInit {
     })
   }
 
-  deletePhotos() {
-    this.member?.photos?.forEach(p => {
-        this.memberService?.deletePhoto(p.id).subscribe(() => {
-          this.member.photos = this?.member?.photos?.filter(x => x.id !== p.id);
-        })
+  toggleSounds() {
+    this.accountService.toggleSounds().subscribe(() => {
+    }, error => {
+      this.validationErrors = error;
     })
   }
+
+  // deletePhotos() {
+  //   this.member?.photos?.forEach(p => {
+  //       this.memberService?.deletePhoto(p.id).subscribe(() => {
+  //         this.member.photos = this?.member?.photos?.filter(x => x.id !== p.id);
+  //       })
+  //   })
+  // }
 
   loadMember() {
     this.loadingMember = true;
@@ -138,10 +151,6 @@ export class MemberEditComponent implements OnInit {
     } else {
       return 'Helikopter bojowy';
     }
-  }
-
-  log() {
-    console.log("Hej")
   }
 
   checkIfOlderThan1Hour(date: any) {

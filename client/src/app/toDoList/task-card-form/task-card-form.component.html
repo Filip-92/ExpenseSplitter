@@ -2,15 +2,15 @@
 
 <form [formGroup]='toDoListScheduleForm' (ngSubmit)="toDoListScheduleForm.valid && addTask()" autocomplete="off">
     <div class="row mt-3">
-        <div class="col-4">
+        <div class="col-6 col-md-4">
             <app-date-input [formControl]='toDoListScheduleForm.controls["taskDate"]' 
             [label]='"Data"' autocomplete="off"></app-date-input>
         </div>
-        <div class="col-4">
+        <div class="col-6 col-md-4">
             <app-text-input [formControl]='toDoListScheduleForm.controls["name"]' 
             [label]='"Zadanie"' [type]='"text"' autocomplete="off"></app-text-input>
         </div>
-        <div class="col-4 form-group text-center">
+        <div class="col-12 col-md-4 form-group text-center">
             <button [disabled]='!toDoListScheduleForm.valid' class="btn btn-success mr-2" type="submit">Dodaj</button>
             <button class="btn btn-default mr-2" id="cancel" (click)="cancel()" type="button">Anuluj</button>
         </div>

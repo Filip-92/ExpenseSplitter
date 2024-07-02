@@ -37,9 +37,10 @@
         </div>
     </div>
 </div>
-<div *ngIf="tasks?.length <= 0 || done">
-    <h4 class="mb-4">Brak zrobionych zadań</h4>
-</div>
-<div *ngIf="tasks?.length <= 0 || tasks === null" class="text-center">
-    <h4 class="mb-4">Brak zadań w danym zakresie czasu</h4>
+<div *ngIf="tasks?.length <= 0" class="mt-5 text-center">
+    <h4 class="mb-4">Brak 
+        <span *ngIf="done">zrobionych</span> zadań 
+        <span *ngIf="toDo">do zrobienia</span>
+        <span *ngIf="!done && !toDo"> w danym okresie</span>
+    </h4>
 </div>

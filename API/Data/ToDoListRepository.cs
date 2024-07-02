@@ -29,12 +29,24 @@ namespace API.Data
                 .SingleOrDefaultAsync(x => x.Id == id);
         }
 
-        public async Task<IEnumerable<ToDoListTasks>> GetToDoListTasks(string username)
+        public async Task<IEnumerable<ToDoListTasks>> GetToDoListTasks(string username, string isDone)
         {
-            return await _context.ToDoListTasks
-                        .IgnoreQueryFilters()
-                        .Where(m => m.Username == username && (m.GroupId == null || m.GroupId == 0))
-                        .ToListAsync();
+            if (isDone != "all")
+            {
+                var isDoneBool = bool.Parse(isDone);
+                return await _context.ToDoListTasks
+                            .IgnoreQueryFilters()
+                            .Where(m => m.Username == username && m.IsDone == isDoneBool && (m.GroupId == null || m.GroupId == 0))
+                            .ToListAsync();
+            }
+            else 
+            {
+                return await _context.ToDoListTasks
+                            .IgnoreQueryFilters()
+                            .Where(m => m.Username == username && (m.GroupId == null || m.GroupId == 0))
+                            .ToListAsync();
+            }
+   
         }
 
         public async Task<IEnumerable<ToDoListTasks>> GetDailyToDoListTasks(string username)
@@ -131,12 +143,23 @@ namespace API.Data
                 .SingleOrDefaultAsync(x => x.Id == id);
         }
 
-        public async Task<IEnumerable<ToDoListTasks>> GetToDoListGroupTasks(int groupId)
+        public async Task<IEnumerable<ToDoListTasks>> GetToDoListGroupTasks(int groupId, string isDone)
         {
-            return await _context.ToDoListTasks
-                        .IgnoreQueryFilters()
-                        .Where(m => m.GroupId == groupId)
-                        .ToListAsync();
+            if (isDone != "all")
+            {
+                var isDoneBool = bool.Parse(isDone);
+                return await _context.ToDoListTasks
+                            .IgnoreQueryFilters()
+                            .Where(m => m.GroupId == groupId &&  m.IsDone == isDoneBool)
+                            .ToListAsync();
+            }
+            else 
+            {
+                return await _context.ToDoListTasks
+                            .IgnoreQueryFilters()
+                            .Where(m => m.GroupId == groupId)
+                            .ToListAsync();
+            }
         }
 
         public async Task<IEnumerable<CommentDto>> GetComments(int taskId)
@@ -170,5 +193,6 @@ namespace API.Data
                         })
                         .ToListAsync();
         }
+
     }
 }

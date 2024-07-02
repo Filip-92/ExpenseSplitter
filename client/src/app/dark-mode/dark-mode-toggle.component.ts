@@ -1,6 +1,7 @@
 import { Component } from "@angular/core";
 import { DarkModeService } from "angular-dark-mode";
 import { Observable } from "rxjs";
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
     selector: 'app-dark-mode-toggle',
@@ -11,10 +12,26 @@ import { Observable } from "rxjs";
     darkMode$: Observable<boolean> = this.darkModeService.darkMode$;
     darkMode: boolean = true;
   
-    constructor(private darkModeService: DarkModeService) {}
+    constructor(private darkModeService: DarkModeService, private cookieService: CookieService) {}
+
+    ngOnInit(): void {
+      this.darkMode = true;
+    }
   
     onToggle(): void {
       this.darkModeService.toggle();
       this.darkMode = !this.darkMode;
+      if (this.darkMode) {
+        this.setCookie(this.darkMode);
+      } else {
+        this.setCookie(!this.darkMode);
+      }
+
     }
+
+    setCookie(isDarkMode: boolean) {
+      this.cookieService.set('darkMode', String(isDarkMode), 10);
+    }
+
+
   }

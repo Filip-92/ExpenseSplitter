@@ -129,4 +129,8 @@ export class AccountService {
     return this.http.post(this.baseUrl + 'account/remove-account/' + username, {});
   }
 
+  toggleSounds() {
+    return this.http.put(this.baseUrl + 'account/toggle-sound', {});
+  }
+
 }

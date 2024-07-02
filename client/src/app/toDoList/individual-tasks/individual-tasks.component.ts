@@ -87,7 +87,7 @@ export class IndividualTasksComponent {
   }
 
   getToDoListTasks() {
-    this.toDoListServ.getToDoListTasks().subscribe(tasks => {
+    this.toDoListServ.getToDoListTasks('all').subscribe(tasks => {
       this.tasks = tasks;
     })
   }

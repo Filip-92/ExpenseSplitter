@@ -3,7 +3,7 @@
     <div class="col-12 text-center mt-2 mb-4"><h3>Twój profil</h3></div>
     <div class="col-6 text-center mb-5" style="border-right: 1px solid white; margin-left: auto; margin-right: auto;" *ngIf="member">
         <div style="margin-left: auto; margin-right: auto;">
-            <img src="{{user?.photoUrl || '././assets/LogoImage.png'}}" id="photo" alt="{{member?.username}}" class="card-img-top img-thumbnail">
+            <img src="{{user?.photoUrl || '././assets/user.png'}}" id="photo" alt="{{member?.username}}" class="card-img-top img-thumbnail">
         </div>
         <h3 style="color: rgb(170, 139, 37);" *ngIf="member?.username?.length < 8">{{member?.username}}</h3>
         <h4 style="color: rgb(170, 139, 37);" *ngIf="member?.username?.length > 8 && member?.username?.length < 16">{{member?.username}}</h4>
@@ -38,8 +38,25 @@
 <div class="text-center no-gutters mt-4" *ngIf="member && !loading" style="margin-left: -10px !important; margin-right: -10px !important;">
     <tabset class="text-center col-12" id="tabs">
         <tab heading='Ustawienia konta' class="text-center">
-            Waluta:
-            Chuj
+            <div class="mt-5">
+                <label class="switch">
+                    <input type="checkbox" [checked]="user?.toggleSounds" (click)="toggleSounds()">
+                    <span class="slider round"></span>
+                </label>
+                <div>
+                    W<span *ngIf="user?.toggleSounds">y</span>łącz dźwięki <i class="fa fa-file-audio-o"></i>
+                </div>
+            </div>
+        </tab>
+        <tab heading='Komentarze'>
+            <div *ngIf="comments?.length <= 0" class="text-center mt-3" style="min-height: 200px;">
+                <h3 id="comments" class="mt-5">Brak komentarzy użytkownika</h3>
+            </div>
+            <div *ngFor="let comment of comments">
+                <div class="mt-4"></div>
+                <app-comments [comment]="comment"></app-comments>
+                <div class="mb-3"></div>
+            </div>
         </tab>
         <tab heading='Zmiana avatara' class="text-center">
             <app-photo-editor [member]="member"></app-photo-editor>

@@ -10,7 +10,7 @@ namespace EmailService
     public class EmailSender : IEmailSender
     {
         private readonly EmailConfiguration _emailConfig;
-        private string cos = "Daily Dose of Memes";
+        private string cos = "Split 'n Share";
 
         public EmailSender(EmailConfiguration emailConfig)
         {

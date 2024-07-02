@@ -36,7 +36,7 @@
             <section>
               <header>
                 <div *ngIf="(accountService.currentUser$ | async) as user">
-                    <img src="{{user.photoUrl || '././assets/LogoImage.png'}}" alt="{{user.username}}" class="mr-2">
+                    <img src="{{user.photoUrl || '././assets/user.png'}}" alt="{{user.username}}" class="mr-2">
                     {{user.knownAs || user.username}}
                 </div>
               </header>

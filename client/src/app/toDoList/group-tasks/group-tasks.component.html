@@ -26,7 +26,7 @@
     <div class="mb-3" *ngFor="let group of groups" style="line-height: 2.5;">
         <app-group-card [group]="group"></app-group-card>
     </div>
-    <div *ngIf="groups?.length <= 0" class="mt-5">
-        Brak grup
+    <div *ngIf="groups?.length <= 0" class="mt-5 text-center">
+        <h3>Brak grup</h3>
     </div>
 </div>

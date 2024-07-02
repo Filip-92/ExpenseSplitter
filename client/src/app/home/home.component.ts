@@ -14,15 +14,23 @@ import { trigger, state, style, transition, animate, group } from '@angular/anim
   styleUrls: ['./home.component.css']
 })
 
+
 export class HomeComponent implements OnInit {
   @ViewChild('previewimage') waterMarkImage: ElementRef;
   @ViewChild("navComponent") navComponent: NavComponent;
   registerMode = false;
   display: boolean;
+  innerWidth: any;
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    this.innerWidth = window.innerWidth;
+  }
 
   constructor(public accountService: AccountService) { }
 
   ngOnInit(): void {
+    this.innerWidth = window.innerWidth;
   }
 
   registerToggle() {
@@ -35,10 +43,10 @@ export class HomeComponent implements OnInit {
 
   openNav() {
     this.display = !this.display;
-    this.playAudioLike();
+    this.playAudioAccessDenied();
   }
 
-  playAudioLike (){
+  playAudioAccessDenied (){
     let audio = new Audio();
     audio.src = "../../../assets/audio/access-denied.mp3";
     audio.load();

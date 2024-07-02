@@ -55,12 +55,6 @@ i:hover {
     background-color: red;
 }
 
-@media screen and (max-width: 1000px) {
-    #tags {
-        width: 500px !important;
-    }
-}
-
 .fa-pencil:hover {
     color: rgb(23, 161, 23) !important;
 }
@@ -83,3 +77,11 @@ select {
     background-color: gray;
     border: solid 1px black;
 }
+
+@media screen and (max-width: 1000px) {
+    h3 {
+        font-size: 15px !important;
+        margin-left: auto;
+        margin-right: auto;
+    }
+  }

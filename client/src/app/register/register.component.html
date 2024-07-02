@@ -7,7 +7,6 @@
         <select formControlName='gender' id="gender">
             <option value='male'>Mężczyzną</option>
             <option value='female'>Kobietą</option>
-            <option value='other'>Helikopterem bojowym</option>
         </select>
     </div>
 
@@ -73,12 +72,6 @@
                 <button type="button" class="btn btn-sm btn-primary" (click)="send(form)">Send</button>
             </div> -->
         </div>
-    </div>
- 
-    <div style="margin-left: 60px !important">
-        <span>
-            <input type="checkbox" [formControl]='registerForm.controls["statute"]' id="statute" name="statute" value="true" class="mr-2" style="float:left !important;">
-            Zapoznałem się z <a href="/regulamin" target="_blank" id="statuteLink" style="color: rgb(5, 95, 174);">Regulaminem</a></span>
     </div>
 
         <div class="row" *ngIf="validationErrors.length > 0">

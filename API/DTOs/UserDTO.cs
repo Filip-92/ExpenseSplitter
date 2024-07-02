@@ -13,5 +13,6 @@ namespace API.DTOs
         public string Gender { get; set; }
         public List<string> Roles { get; set; }
         public bool IsBanned { get; set; }
+        public bool ToggleSounds { get; set; }
     }
 }

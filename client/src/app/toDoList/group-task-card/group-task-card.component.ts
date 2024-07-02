@@ -67,7 +67,7 @@ export class GroupTaskCardComponent {
   }
 
   getToDoListGroupTasks(id: number) {
-    this.toDoListServ.getToDoListGroupTasks(id).subscribe(tasks => {
+    this.toDoListServ.getToDoListGroupTasks(id, 'all').subscribe(tasks => {
       this.tasks = tasks;
     })
   }

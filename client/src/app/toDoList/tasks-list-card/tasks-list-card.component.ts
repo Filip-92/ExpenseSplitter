@@ -1,7 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { UntypedFormBuilder } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { AccountService } from '../../_services/account.service';
@@ -20,21 +20,44 @@ export class TasksListCardComponent {
   @Input() dailyTasks: any;
   @Input() id: number;
   @Input() filterTasksBool: boolean;
+  @Input() taskGroup: any;
   validationErrors: string[] = [];
   currentDate = new Date();
   done: boolean;
   toDo: boolean;
+  group: any;
 
   constructor(public accountService: AccountService, private toDoListServ: ToDoListService,
     private modalServ: NgbModal, private indivTaskComp: IndividualTasksComponent,
-    private groupTaskCardComp: GroupTaskCardComponent) { 
+    private groupTaskCardComp: GroupTaskCardComponent, private router: Router, private route: ActivatedRoute) { 
 
+    }
+
+    ngOnInit(): void {
     }
 
   closeTask(task: any) {
     this.toDoListServ.closeTask(task).subscribe(() => {
     }, error => {
       this.validationErrors = error;
+    })
+  }
+
+  getGroup(id: number) {
+    this.toDoListServ.getGroup(id).subscribe(group => {
+      this.group = group;
+    })
+  }
+
+  getToDoListTasks(isDone: string) {
+    this.toDoListServ.getToDoListTasks(isDone).subscribe(tasks => {
+      this.tasks = tasks;
+    })
+  }
+
+  getToDoListGroupTasks(id: number, isDone: string) {
+    this.toDoListServ.getToDoListGroupTasks(id, isDone).subscribe(tasks => {
+      this.tasks = tasks;
     })
   }
 
@@ -58,15 +81,33 @@ export class TasksListCardComponent {
   toggleDone() {
     this.done = !this.done;
     this.toDo = false;
+    var id = +this.route?.snapshot?.paramMap?.get('id');
+    if (this.router.url.includes(this.taskGroup.toLowerCase())) {
+      this.getToDoListGroupTasks(id, 'true')
+    } else {
+      this.getToDoListTasks('true');
+    }
   }
 
   toggleToDo() {
     this.toDo = !this.toDo;
     this.done = false;
+    var id = +this.route?.snapshot?.paramMap?.get('id');
+    if (this.router.url.includes(this.taskGroup.toLowerCase())) {
+      this.getToDoListGroupTasks(id, 'false')
+    } else {
+    this.getToDoListTasks('false');
+    }
   }
 
   allTasks() {
     this.toDo = false;
     this.done = false;
+    var id = +this.route?.snapshot?.paramMap?.get('id');
+    if (this.router.url.includes(this.taskGroup.toLowerCase())) {
+      this.getToDoListGroupTasks(id, 'all')
+    } else {
+    this.getToDoListTasks('all');
+    }
   }
 }

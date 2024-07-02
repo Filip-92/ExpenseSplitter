@@ -5,7 +5,7 @@
         <h3>{{member.username}}</h3></div>
     <div class="col-6 text-center mb-5" style="border-right: 1px solid white;">
         <div>
-            <img src="{{member.photoUrl || '././assets/LogoImage.png'}}" id="avatar" alt="{{member.username}}" class="card-img-top img-thumbnail">
+            <img src="{{member.photoUrl || '././assets/user.png'}}" id="avatar" alt="{{member.username}}" class="card-img-top img-thumbnail">
         </div>
         <h3 style="color: rgb(170, 139, 37);" *ngIf="member?.username?.length <= 8">{{member.username}}</h3>
         <h4 style="color: rgb(170, 139, 37);" *ngIf="member?.username?.length > 8 && member?.username?.length <= 16">{{member.username}}</h4>

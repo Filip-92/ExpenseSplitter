@@ -36,7 +36,7 @@ export class MemberCardComponent implements OnInit {
     //     if (this.member.id !== 11) {
     //   this.getUserPhoto(this.member.username);
     // } else {
-      this.url = '././assets/LogoImage.png';
+      this.url = '././assets/user.png';
     //}
   }
 

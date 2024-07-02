@@ -15,6 +15,7 @@ using Message = EmailService.Message;
 using Microsoft.AspNetCore.WebUtilities;
 using System.Text;
 using Microsoft.AspNetCore.Authorization;
+using API.Extensions;
 
 namespace API.Controllers
 {
@@ -103,6 +104,7 @@ namespace API.Controllers
                 Username = user.UserName,
                 Token = await _tokenService.CreateToken(user),
                 PhotoUrl = user.Photos.FirstOrDefault(x => x.IsMain)?.Url,
+                ToggleSounds = user.ToggleSounds,
                 Gender = user.Gender
             };
         }
@@ -147,8 +149,8 @@ namespace API.Controllers
             var changePasswordLink = "<a style='margin-top: 10px' href=\"" + uriBuilder.ToString() + "\">Link do zmiany hasła</a><br />";
 
             var subject = "Resetowanie hasła";
-            var content = "<div style='font-size: 20px'>Aby zresetować swoje hasło, kliknij na poniższy link: </div><br />";
-            var footer = "<br /><hr style='width: 100%'><br /><div style='font-size: 16px'>Wszystkie prawa zastrzeżone &#169 2022  <span style='font-size: 22px; color: red; padding: 5px; border-radius: 3px; border: 1px solid black;'>Daily Dose of Memes</span></div><br>";
+            var content = "<div style='font-size: 20px'>Aby zresetować swoje hasło, kliknij na poniższy link: </div><div>Jeśli nie jesteś odbiorcą tej wiadomości, zignoruj ją.</div><br />";
+            var footer = "<br /><hr style='width: 100%'><br /><div style='font-size: 16px'>Wszystkie prawa zastrzeżone &#169 2022  <span style='font-size: 22px; color: red; padding: 5px; border-radius: 3px; border: 1px solid black;'>Split 'n Share</span></div><br>";
 
             var message = new Message(new string[] { user.Email }, subject, content + changePasswordLink + footer, null);
             
@@ -219,6 +221,18 @@ namespace API.Controllers
             var photo = await _unitOfWork.UserRepository.GetUserPhoto(user.Id);
 
             return Ok(photo);
+        }
+
+        [HttpPut("toggle-sound")]
+        public async Task<ActionResult> ToggleSound()
+        {
+            var user = await _unitOfWork.UserRepository.GetUserByUsernameAsync(User.GetUsername());
+
+            user.ToggleSounds = !user.ToggleSounds;
+
+            if (await _unitOfWork.Complete()) return NoContent();
+
+            return BadRequest("Nie udało się wyłączyć dźwięków");
         }
     }
 } 

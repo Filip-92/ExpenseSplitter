@@ -45,7 +45,6 @@ import { RouterModule } from '@angular/router';
 import { ResetPasswordComponent } from './authentication/reset-password/reset-password.component';
 import { TimeagoModule, TimeagoIntl, TimeagoFormatter, TimeagoCustomFormatter } from 'ngx-timeago';
 import { DatePipe, registerLocaleData } from '@angular/common';
-import { MemeTitleInputComponent } from './_forms/meme-title-input/meme-title-input.component';
 import { IsMobileDirective } from './_directives/is-mobile.directive';
 import { NgxLinkPreviewModule } from 'ngx-link-preview';
 import localePl from '@angular/common/locales/global/pl';
@@ -139,7 +138,6 @@ import { ExpensesHelpModalComponent } from './modals/expenses-help-modal/expense
     AboutModalComponent,
     ContactFormComponent,
     ResetPasswordComponent,
-    MemeTitleInputComponent,
     IsMobileDirective,
     BanModalComponent,
     UserCardComponent,

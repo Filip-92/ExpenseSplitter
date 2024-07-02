@@ -30,9 +30,9 @@ export class PhotoEditorComponent implements OnInit {
 
   ngOnInit(): void {
     this.initializeUploader();
-    if (this.member?.photos?.length > 0) {
-      this.deletePhotos();
-    }
+    // if (this.member?.photos?.length > 0) {
+    //   this.deletePhotos();
+    // }
   }
 
   fileOverBase(e: any) {

@@ -88,11 +88,6 @@ export class MemberDetailComponent implements OnInit, OnDestroy {
     this.loading = true;
     this.getUsers();
     this.getUserComments(this.member.username);
-    // if (this.member.id !== 11) {
-    //   this.getUserPhoto(this.member.username);
-    // } else {
-    //   this.url = '././assets/LogoImage.png';
-    // }
     this.loading = false;
   }
   

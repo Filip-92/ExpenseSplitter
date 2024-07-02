@@ -16,6 +16,7 @@ namespace API.DTOs
         public string Gender { get; set; }
         public ICollection<PhotoDto> Photos { get; set; }
         public bool IsBanned { get; set; }
+        public bool ToggleSounds { get; set; }
         public DateTime BanExpiration { get; set; }
         public string BanReason { get; set; }
     }

@@ -17,6 +17,7 @@ export class GroupTasksFilterComponent {
   @Output() cancelRegister = new EventEmitter();
   @Input() tasks: any;
   @Input() id: number;
+  @Input() taskGroup: any;
   dailyTasks: any;
   toDoListScheduleForm: UntypedFormGroup;
   toDoListTimespanForm: UntypedFormGroup;
@@ -81,7 +82,7 @@ export class GroupTasksFilterComponent {
   }
 
   getToDoListGroupTasks(id: number) {
-    this.toDoListServ.getToDoListGroupTasks(id).subscribe(tasks => {
+    this.toDoListServ.getToDoListGroupTasks(id, 'all').subscribe(tasks => {
       this.tasks = tasks;
     })
   }
@@ -93,5 +94,4 @@ export class GroupTasksFilterComponent {
       this.dailyTasks = dailyTasks;
     })
   }
-
 }

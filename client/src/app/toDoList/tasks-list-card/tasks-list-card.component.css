@@ -16,3 +16,13 @@
     cursor: pointer;
     color: red;
 }
+
+@media screen and (max-width: 1000px) {
+    h3 {
+        font-size: 15px !important;
+    }
+
+    div {
+        font-size: 12px !important;
+    }
+  }

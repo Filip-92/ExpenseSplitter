@@ -559,12 +559,12 @@ namespace API.Controllers
         }
 
         // ToDoList
-        [HttpGet("get-to-do-list")]
-        public async Task<ActionResult> GetToDoListTasks()
+        [HttpGet("get-to-do-list/{isDone}")]
+        public async Task<ActionResult> GetToDoListTasks(string isDone)
         {
             var user = await _unitOfWork.UserRepository.GetUserByUsernameAsync(User.GetUsername());
 
-            var tasks = await _unitOfWork.ToDoListRepository.GetToDoListTasks(user.UserName);
+            var tasks = await _unitOfWork.ToDoListRepository.GetToDoListTasks(user.UserName, isDone);
 
             return Ok(tasks);
         }
@@ -662,10 +662,10 @@ namespace API.Controllers
             return Ok(contributors);
         }
 
-        [HttpGet("get-to-do-list-group-tasks/{groupId}")]
-        public async Task<ActionResult> GetToDoListGroupTasks(int groupId)
+        [HttpGet("get-to-do-list-group-tasks/{groupId}/{isDone}")]
+        public async Task<ActionResult> GetToDoListGroupTasks(int groupId, string isDone)
         {
-            var tasks = await _unitOfWork.ToDoListRepository.GetToDoListGroupTasks(groupId);
+            var tasks = await _unitOfWork.ToDoListRepository.GetToDoListGroupTasks(groupId, isDone);
 
             return Ok(tasks);
         }
